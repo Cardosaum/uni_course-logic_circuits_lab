@@ -23,12 +23,15 @@
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{array}
 
 \sloppy
 
 
-\title{Experimento X\\ 
-Circuitos Combinacionais: Multiplexadores}
+\title{Experimento 1\\
+Portas Lógicas AND, OR e NOT}
 
 \author{Matheus Cardoso de Souza, 202033507\\
         Ualiton Ventura da Silva, 202033580\\
@@ -46,122 +49,201 @@ Circuitos Combinacionais: Multiplexadores}
 
 \selectlanguage{american}
  \begin{abstract}
-   Write here a short summary of the report in English. This corresponds to the Experiment 7 report on combinational circuits, specifically the multiplexers.
+   This report corresponds to the Experiment 1 on ``Logical Gates \textbf{AND}, \textbf{OR} and \textbf{NOT}''.
  \end{abstract}
 \selectlanguage{brazil}     
     
  \begin{resumo} 
-  Escreva aqui um pequeno resumo do relatório. Este corresponde ao relatório do Experimento 7 sobre circuitos combinacionais, especificamente os multiplexadores.
+  O presente relatório corresponde ao Experimento 1 sobre ``Portas Lógicas \textbf{AND}, \textbf{OR} e \textbf{NOT}''.
  \end{resumo}
 
 
 \section{Introdução}
 \label{sec:Introducao}
 
-Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
+% Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
+
+Neste experimento abordaremos construções de circuitos lógicos em protoboard, bem como seus respectivos funcionamentos.
 
 \subsection{Objetivos}
 \label{sec:Objetivos}
 
-Descrever aqui os objetivos do experimento.
+Os objetivos do presente conjunto de experimentos foram de familiarizar o aluno
+com a montagem de circuitos lógicos básicos em protoboard, de permitir
+mensuração de valores de tensão em diferentes pontos do circuito e também de
+fonecer uma visão prática de como um determinado circuito se comporta quando
+recebe diferentes valores de input.
 
 \subsection{Materiais} 
 \label{sec:Materiais}
-Neste experimento foram utilizados os seguintes materiais e equipamentos:
+Em função da natureza do ensino a distância, os presentes experimentos não foram
+realizados usando-se materiais e equipamentos físicos, mas sim emulados por meio
+da simulador online \href{https://www.tinkercad.com/}{Tinkercad}.
+
+A seguir estão enumerados os materiais simulados:
 \begin{itemize}
     \item Painel Digital
-
     \item \textit{Protoboard}
-    
     \item Fios
-    
-    \item Portas Lógicas AND e NAND
+    \item Seletores de estado lógico
+    \item LEDs
+    \item Resistores
+    \item Multímetros
+    \item Portas Lógicas \textbf{AND}, \textbf{OR} e \textbf{NOT}
 \end{itemize}
 
 \section{Procedimentos}
 \label{sec:Procedimentos}
 
-Escreva nesta seção os diversos itens pedidos no experimentos.
+Passaremos a apresentar os experimentos requeridos.
 
-\subsection{Multiplexador de 4 entradas}
-\label{sec:Mux}
+\subsection{LED ligado a uma chave, e sua tensão}
+\label{sec:led_chave}
 
-Descrever o experimento realizado. Sempre  que colocar uma figura deve-se explicar o que se pretende que o leitor veja, ou uma análise logo após a figura. 
+Nesse experimento o objetivo era que ligássemos um LED a uma chave, e depois
+verificássemos se ele acende e apaga corretamente quando a chave é acionada.
+Também deveríamos medir o valor da tensão de alimentação com um multímetro o
+valor da tensão de alimentação.\\
+Para conferir o vídeo deste experimento, acessse o seguinte link:
+\href{https://youtu.be/raLr9IothuI}{https://youtu.be/raLr9IothuI}.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.5\textwidth]{fig1.jpg}
-    \caption{Exemplo de como colocar a legenda em uma figura.}
-    \label{fig:exemplo}
+    \includegraphics[width=.9\textwidth]{exp1_2.1_f1.png}
+    \caption{Chave aberta, LED desligado.}
+    \label{fig:exp1_2.1_f1}
 \end{figure}
 
-A Figura~\ref{fig:exemplo} apresenta um exemplo de como usar e citar uma figura. Sempre comente cada figura no texto.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{exp1_2.1_f2.png}
+    \caption{Chave fechada, LED ligado.}
+    \label{fig:exp1_2.1_f2}
+\end{figure}
 
-Aqui temos um exemplo de como citar uma URL na bibliografia~\cite{systemverilog}.
+Como podemos notar com a figura \ref{fig:exp1_2.1_f1}, quando a chave \textbf{A}
+está desligada temos que o LED \textbf{L0} está apagado, e também podemos ver
+que o multímetro afere uma voltagem de \( 0.00V \). Agora, quando acionamos a
+chave \textbf{A}, o LED \textbf{L0} acende, e a tensão de alimentação é de
+\( 3.85V \). Logo, podemos concluir que o valor pedido no enunciado deste
+experimento é \( VCC = 3.85V \).
+\\[2em]
 
-Aqui temos um exemplo de como criar um hiperlink. Veja neste
-\href{https://www.youtube.com/watch?v=itWbXy0Qzw0}{link} um exemplo de vídeo publicado. Ao contrário do vídeo deste exemplo, sempre inicie o vídeo apresentando o grupo (nome e semestre), narrando o que é o experimento, os objetivos e descreva o que está sendo feito no vídeo. Termine concluindo se o objetivo foi cumprido ou não.
+\subsection{Diferença entre portas lógicas \textbf{AND} e \textbf{OR}}
+\label{sec:and_e_or}
 
-Sempre identifique no site do vídeo:
-\begin{itemize}
-    \item o experimento: Experimento 7;
-    \item o semestre: 2020/1;
-    \item a disciplina: CIC0231 - Laboratório de Circuitos Lógicos;
-    \item a universidade: Universidade de Brasília (UnB);
-    \item o grupo: Grupo B1;
-    \item os nomes dos componentes do grupo.
-\end{itemize}
-
-Desta forma se facilita uma busca pelo vídeo. É apresentado acima como fazer uma listagem não numerada.
-
-\subsection{Demultiplexador}
-\label{sec:Demux}
-
-Este é outro item do experimento. Aqui temos um exemplo de como construir e citar uma tabela, conforme mostrado na Tabela~\ref{tab:resultados}.
+Este experimento tinha como objetivo verificarmos a diferença de comportamento
+entre circuitos criados com portas lógicas \textbf{AND} e \textbf{OR}.\\
+Para conferir o vídeo deste experimento, acesse o seguinte link:
+\href{https://youtu.be/DRLLBkMOeeA}{https://youtu.be/DRLLBkMOeeA}.
 
 \begin{table}[H]
     \centering
-    \caption{Exemplo de como construir uma tabela.}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \cline{2-7}
-    \multicolumn{1}{c}{} & \multicolumn{3}{|c|}{Fase 1} & \multicolumn{3}{c|}{Fase 2} & \multicolumn{1}{c}{} \\
+    \caption{Tabela para a porta lógica \textbf{AND}}
+    \begin{tabular}{|c|c|c|c|c|c|}
     \hline
-    Experimento & $n_g$ & $n_l$ & $n_t$ & $n_g$ & $n_l$ & $n_t$ & $t(s)$ \\
+    \textbf{B} & \textbf{A} & \textbf{L3}=S4 & \textbf{L2}=S3 & \textbf{L1}=S2 & \textbf{L0}=S1 \\
     \hline
-    1 bit full adder & 8.16 & 3.8 & 47.6 & 5.03 & 3.0 & 25.93 & 99.13 \\
-    2 bits full adder & 18.06 & 5.16 & 107.13 & 11.06 & 4.9 & 60.06 & 709.56 \\
-    2 bits multiplier & 14.2 & 4.03 & 74.33 & 7.7 & 2.2 & 37.53 & 357.76 \\
-    7 segment decoder & 47.53 & 5.83 & 270.46 & 32.86 & 5.0 & 176.4 & 740.63 \\
-    Karnaugh 1 bit full adder & 19.0 & 6.0 & 102.0 & 5.03 & 3.0 & 24.8 & 130.73 \\
+    0  & 0 & \(0 = 0V\) & \(0 = 0V\) & \(0 = 0V\) & \(0 = 0V\) \\
+    \hline
+    0  & 1 & \(0 = 0V\) & \(0 = 0V\) & \(0 = 0V\) & \(0 = 0V\) \\
+    \hline
+    1  & 0 & \(0 = 0V\) & \(0 = 0V\) & \(0 = 0V\) & \(0 = 0V\) \\
+    \hline
+    1  & 1 & \(1 = 4.77V\) & \(1 = 4.77V\) & \(1 = 4.77V\) & \(1 = 4.77V\) \\
     \hline
     \end{tabular}
-    \label{tab:resultados}
+    \label{tab:tabela_and}
 \end{table}
 
-Aqui devemos colocar uma apresentação e análise da tabela, explicando ao leitor o que se pretende mostrar.
+\begin{table}[H]
+    \centering
+    \caption{Tabela para a porta lógica \textbf{OR}}
+    \begin{tabular}{|c|c|c|c|c|c|}
+    \hline
+    \textbf{B} & \textbf{A} & \textbf{L3}=S4 & \textbf{L2}=S3 & \textbf{L1}=S2 & \textbf{L0}=S1 \\
+    \hline
+    0  & 0 & \(0 = 0V\) & \(0 = 0V\) & \(0 = 0V\) & \(0 = 0V\) \\
+    \hline
+    0  & 1 & \(1 = 4.77V\) & \(1 = 4.77V\) & \(1 = 4.77V\) & \(1 = 4.77V\) \\
+    \hline
+    1  & 0 & \(1 = 4.77V\) & \(1 = 4.77V\) & \(1 = 4.77V\) & \(1 = 4.77V\) \\
+    \hline
+    1  & 1 & \(1 = 4.77V\) & \(1 = 4.77V\) & \(1 = 4.77V\) & \(1 = 4.77V\) \\
+    \hline
+    \end{tabular}
+    \label{tab:tabela_or}
+\end{table}
 
-As equações devem fazer parte do texto, como 
+Como podemos notar pelo vídeo e também com o resultado da tabela, o
+funcionamento das portas lógicas \textbf{AND} e \textbf{OR} é como o esperado.
+\\[2em]
 
-\begin{equation}
-\label{eq:logica}
-    Y=AB+\bar{B}\bar{A}
-\end{equation}
+\subsection{Porta lógica \textbf{AND} apenas com portas \textbf{OR} e \textbf{NOT}}
+\label{sec:and_with_only_or_and_not}
 
-\noindent onde $A$ e $B$ são as variáveis de entrada. $Y$ a variável de saída. Podemos citar como Equação~\ref{eq:logica}.
+Nesse experimento, o objetivo foi planejarmos e implementarmos uma porta lógica
+\textbf{AND} usando apenas portas \textbf{OR} e \textbf{NOT}.\\
+Para conferir o vídeo deste experimento, acesse o seguinte link:
+\href{https://youtu.be/PZo3VhjNYEg}{https://youtu.be/PZo3VhjNYEg}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{exp1_2.3_f1.png}
+    \caption{Esquema de uma porta \textbf{AND} apenas com portas \textbf{OR} e \textbf{NOT}}
+    \label{fig:exp1_2.3_f1}
+\end{figure}
+
+Temos que a figura \ref{fig:exp1_2.3_f1} representa corretamente a emulação de
+uma porta \textbf{AND}, mesmo sendo construida apenas com portas \textbf{OR} e
+\textbf{NOT}. Esse comportamento pode ser explicado pela seguinte equação
+lógica:
+
+\begin{align}
+\lnot (\lnot A \lor \lnot B) &\equiv \\
+\lnot (\lnot A) \land \lnot (\lnot B) &\equiv \\
+A \land B \label{eq:and1}
+\end{align}
+
+Dessa forma, pela equação \ref{eq:and1}, temos que nosso esquema representado na figura
+\ref{fig:exp1_2.3_f1} é equivalente a uma porta lógica \textbf{AND}.
+
+\begin{table}[H]
+    \centering
+    \caption{Tabela para a porta lógica \textbf{AND}}
+    \begin{tabular}{|c|c|c|c|}
+    \hline
+    \textbf{B} & \textbf{A} & \textbf{L0}=A.B & \textbf{Esquema} \\
+    \hline
+    0 & 0 & 0 & \multirow{}{}{\includegraphics[width=.7\textwidth]{exp1_2.3_f1.png}} \\ \cline{1-3}
+    0 & 1 & 0 &  \\ \cline{1-3}
+    1 & 0 & 0 &  \\ \cline{1-3}
+    1 & 1 & 1 &  \\ \hline
+    \end{tabular}
+    \label{tab:tabela_and}
+\end{table}
+
+Foi-nos requerido que preenchêssemos uma tabela contendo todos os estados
+lógicos da combinação de valores para \textbf{A} e \textbf{B}. A tabela
+\ref{tab:tabela_and} nos fornece todos os valores possíveis para tais
+combinações.
 
 \section{Análise dos Resultados}
 \label{sec:Resultados}
 
-Faça uma análise crítica dos resultados obtidos nos experimentos. Esta análise pode ser feita item a item ou de uma forma geral.
-
-Dica: Use pesquisa na Internet para tirar as dúvidas sobre edição em \LaTeX .
+Como pudemos notar com os experimentos realizados, é possível criarmos circuitos
+lógicos que seguem a lógica booleana, realizando operações de \textbf{AND},
+\textbf{NOT} e \textbf{OR} usando circuitos elétricos.
 
 \section{Conclusão}
 \label{sec:Conclusao}
 
-Concluir o relatório explanando rapidamente o que foi feito e os resultados obtidos, sempre correlacionando com os objetivos do experimento apresentados na Seção~\ref{sec:Objetivos}. 
+Pudemos observar o comportamento correto e esperado dos circuitos lógicos
+montados. Entretanto, devido ao fato de utilizarmos uma ferramenta de simulação,
+não pudemos observar os fenômenos esperados de leves variações de voltagem no
+circuito elétrico, pois todo o circuito é considerado ideal no Tinkercad.
 
-
+\nocite{*}
 \bibliographystyle{sbc}
 \bibliography{relatorio}  %Aqui é a definição do arquivo .bib a ser usado pelas referências
 
@@ -170,12 +252,39 @@ Concluir o relatório explanando rapidamente o que foi feito e os resultados obt
 % Colocar aqui apenas as respostas dos itens da Auto-Avaliação
 \section*{Auto-Avaliação}
 
-\begin{enumerate}
-    \item a
-    \item c
-    \item b
-    \item d
-\end{enumerate}
+\subsection{Com relação aos níveis lógicos TTL de entrada e saída, assinale a
+  alternativa correta}
+Resposta: Item \textbf{B}.
+
+\subsection{Assinale os conjuntos universais dentre os conjuntos abaixo}
+Resposta: Item \textbf{A}.
+
+\subsection{Preencha a tabela verdade do circuito abaixo}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{exp1_4.3_f1.png}
+    \caption{Circuito da questão}
+    \label{fig:exp1_4.3_f1}
+\end{figure}
+
+Resposta:
+
+\begin{table}[H]
+    \centering
+    \caption{Tabela com a resposta para a questão}
+    \begin{tabular}{|c|c|c|c|} \hline
+    \textbf{A} & \textbf{B} & \textbf{C} & \textbf{S} \\ \hline
+    0 & 0 & 0 & 1 \\ \hline
+    0 & 0 & 1 & 1 \\ \hline
+    0 & 1 & 0 & 1 \\ \hline
+    0 & 1 & 1 & 1 \\ \hline
+    1 & 0 & 0 & 1 \\ \hline
+    1 & 0 & 1 & 1 \\ \hline
+    1 & 1 & 0 & 0 \\ \hline
+    1 & 1 & 1 & 1 \\ \hline
+    \end{tabular}
+    \label{tab:tabela_verdade}
+\end{table}
 
 
 \end{document}
