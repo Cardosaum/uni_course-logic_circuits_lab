@@ -44,16 +44,16 @@ Portas Lógicas AND, OR e NOT}
   \email{matheus-cardoso.mc@aluno.unb.br, 202033580@aluno.unb.br}
 }
 
-\begin{document} 
+\begin{document}
 \maketitle
 
 \selectlanguage{american}
  \begin{abstract}
    This report corresponds to the Experiment 1 on ``Logical Gates \textbf{AND}, \textbf{OR} and \textbf{NOT}''.
  \end{abstract}
-\selectlanguage{brazil}     
-    
- \begin{resumo} 
+\selectlanguage{brazil}
+
+ \begin{resumo}
   O presente relatório corresponde ao Experimento 1 sobre ``Portas Lógicas \textbf{AND}, \textbf{OR} e \textbf{NOT}''.
  \end{resumo}
 
@@ -71,10 +71,12 @@ Neste experimento abordaremos construções de circuitos lógicos em protoboard,
 Os objetivos do presente conjunto de experimentos foram de familiarizar o aluno
 com a montagem de circuitos lógicos básicos em protoboard, de permitir
 mensuração de valores de tensão em diferentes pontos do circuito e também de
-fonecer uma visão prática de como um determinado circuito se comporta quando
-recebe diferentes valores de input.
+fornecer uma visão prática de como um determinado circuito se comporta quando
+recebe diferentes valores de input, mediante ao uso das portas lógicas
+\textbf{AND}, \textbf{NOT} e \textbf{OR}, assim como a combinação das mesmas
+para formar diferentes tipos de comportamentos.
 
-\subsection{Materiais} 
+\subsection{Materiais}
 \label{sec:Materiais}
 Em função da natureza do ensino a distância, os presentes experimentos não foram
 realizados usando-se materiais e equipamentos físicos, mas sim emulados por meio
@@ -177,7 +179,11 @@ Para conferir o vídeo deste experimento, acesse o seguinte link:
 
 Como podemos notar pelo vídeo e também com o resultado da tabela, o
 funcionamento das portas lógicas \textbf{AND} e \textbf{OR} é como o esperado.
-\\[2em]
+
+Em relação a obtermos valores ligeiramente diferentes, isto ocorre por fatores mecânicos, elétricos e termodinâmicos. Temos que a energia elétrica se dissipa como energia térmica, e isso é dependente da resistência do fio utilizado bem como de seu comprimento. Dessa forma, é seguro afirmar que existirão diferenças entre cada uma das portas, por não possuirem perdas energéticas iguais.
+
+Alguns detalhes como imperfeições nos fios também contribuem para essa variância de tensão na posição de mensuração. Por utilizarmos um simulador simplificado
+ele não considera todos esses fatores que são obtidos no mundo real.\\[2em]
 
 \subsection{Porta lógica \textbf{AND} apenas com portas \textbf{OR} e \textbf{NOT}}
 \label{sec:and_with_only_or_and_not}
@@ -211,14 +217,14 @@ Dessa forma, pela equação \ref{eq:and1}, temos que nosso esquema representado 
 \begin{table}[H]
     \centering
     \caption{Tabela para a porta lógica \textbf{AND}}
-    \begin{tabular}{|c|c|c|c|}
+    \begin{tabular}{|c|c|c|}
     \hline
-    \textbf{B} & \textbf{A} & \textbf{L0}=A.B & \textbf{Esquema} \\
+    \textbf{B} & \textbf{A} & \textbf{L0}=A.B \\
     \hline
-    0 & 0 & 0 & \multirow{}{}{\includegraphics[width=.7\textwidth]{exp1_2.3_f1.png}} \\ \cline{1-3}
-    0 & 1 & 0 &  \\ \cline{1-3}
-    1 & 0 & 0 &  \\ \cline{1-3}
-    1 & 1 & 1 &  \\ \hline
+    0 & 0 & 0 \\ \cline{1-3}
+    0 & 1 & 0 \\ \cline{1-3}
+    1 & 0 & 0 \\ \cline{1-3}
+    1 & 1 & 1 \\ \hline
     \end{tabular}
     \label{tab:tabela_and}
 \end{table}
@@ -248,7 +254,7 @@ circuito elétrico, pois todo o circuito é considerado ideal no Tinkercad.
 \bibliography{relatorio}  %Aqui é a definição do arquivo .bib a ser usado pelas referências
 
 
-\newpage 
+\newpage
 % Colocar aqui apenas as respostas dos itens da Auto-Avaliação
 \section*{Auto-Avaliação}
 
