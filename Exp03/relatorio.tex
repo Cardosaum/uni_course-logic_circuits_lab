@@ -239,7 +239,7 @@ Observando o mapa de Karnaugh, vemos que, por \textit{Soma de Produtos}, temos a
 seguinte equação para \(Y_{2}\):
 
 \begin{equation}
-  Y_{2} = (\overline{ABC}) + (\overline{ABD}) + (\overline{ACD}) + (\overline{BCD})
+  Y_{2} = (\overline{A} \cdot \overline{B} \cdot \overline{C}) + (\overline{A} \cdot \overline{B} \cdot \overline{D}) + (\overline{A} \cdot \overline{C} \cdot \overline{D}) + (\overline{B} \cdot \overline{C} \cdot \overline{D})
 \end{equation}
 
 Entretanto, como devemos representar essa fórmula apenas em termos de portas
@@ -250,11 +250,11 @@ enunciado. Por isso, também realizaremos alguns passos para minimização da
 função booleana.
 
 \begin{align}
-  Y_{2} &= (\overline{ABC}) + (\overline{ABD}) + (\overline{ACD}) + (\overline{BCD})\\
+  Y_{2} &= (\overline{A} \cdot \overline{B} \cdot \overline{C}) + (\overline{A} \cdot \overline{B} \cdot \overline{D}) + (\overline{A} \cdot \overline{C} \cdot \overline{D}) + (\overline{B} \cdot \overline{C} \cdot \overline{D})\\
   Y_{2} &= \overline{AB} \cdot (\overline{C} + \overline{D}) + \overline{CD} \cdot (\overline{A} + \overline{B})\\
   Y_{2} &= \overline{AB} \cdot \overline{(CD)} + \overline{CD} \cdot \overline{(AB)}\\
   Y_{2} &= \overline{\overline{ \left[ \overline{AB} \cdot \overline{(CD)} \right] }} + \overline{\overline{ \left[ \overline{CD} \cdot \overline{(AB)} \right] }}\\
-  Y_{2} &= \overline{ \left( \overline{ \left[ \overline{AB} \cdot \overline{(CD)} \right] } \cdot \left[ \overline{CD} \cdot \overline{(AB)} \right] \right)} + \\\label{eq:2.2_NAND}
+  Y_{2} &= \overline{ \left( \overline{ \left[ \overline{AB} \cdot \overline{(CD)} \right] } \cdot  \overline{ \left[ \overline{CD} \cdot \overline{(AB)} \right] } \right)} \label{eq:2.2_NAND}
 \end{align}
 
 Possuindo a fórmula final \ref{eq:2.2_NAND} para o resultado \(Y_{2}\) desejado,
@@ -276,76 +276,62 @@ Para conferir o vídeo deste experimento, acesse o seguinte link:
 \href{https://youtu.be/lwS4AKuvgps}{https://youtu.be/lwS4AKuvgps}.
 \\[2em]
 
-\subsection{Implementação de uma porta \textbf{XOR} de 4 entradas usando portas \textbf{XOR} de 2 entradas}
-O atual experimento realiza a implementação de uma porta \textbf{XOR} de quatro entradas com o uso de portas \textbf{XOR} de duas entradas, assim, esquematicamente temos que poderá ser descrito como:
+\subsection{Circuito para \textit{``Decisão de Igualdade''} utilizando apenas portas \textbf{NAND}}\label{sec:decisao_igualdade}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.9\textwidth]{Exp02/Esquema_2.3.png}
-    \caption{Esquema de uma porta \textbf{XOR} de 4 entradas}\label{fig:Esquema_Experimento2_2.3}
-\end{figure}
+O atual experimento visa implementar um circuito para \textit{Decisão de
+Igualdade} utilizando somente portas \textbf{NAND}. O circuito deve ter 4 inputs
+(\textbf{A}, \textbf{B}, \textbf{C} e \textbf{D}) e ter como output uma saída em
+LED (\(Y_{3}\) \( = \) \textbf{L2}).
 
-Expressando através do Thinkercad e com o uso do circuito 74HC86 teremos:
+Esse experimento é muito semelhante aos anteriores, e fará uso dos circuitos
+combinacionais já montados para produzir seu output.
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.9\textwidth]{Exp02/Experimento_2.3.png}
-    \caption{Circuito \textbf{XOR} de 4 entradas}\label{fig:Esquema_Experimento2_2.3}
-\end{figure}
-
-\\
-\\
-Para conferir o vídeo deste experimento, acesse o seguinte link:
-\href{https://youtu.be/CHNdltWfVFs}{https://youtu.be/CHNdltWfVFs}.
-
-Assim, sua tabela verdade será:
+Como desejamos fazer uma decisão de igualdade, e dado que já dispomos de um
+circuito para decisão de maioria e outro para minoria, podemos lançar mão desses
+circuitos para construir o desejado. Tal utilização dos já criados se dará da
+seguinte forma: Sejam \textbf{S1} e \textbf{S2} as saídas lógicas dos circuitos
+de maioria e minoria, respectivamente, temos que a saída do circuito de
+igualdade, dado por \textbf{S3} deverá ser:
 
 \begin{table}[H]
     \centering
-    \caption{Tabela para a porta lógica \textbf{XOR 4 Entradas}}
-    \begin{tabular}{|c|c|c|c|c|}
-    \hline
-        \multicolumn{4}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saídas}\\
-    \hline
-    \textbf{D} & \textbf{C} & \textbf{B} & \textbf{A} & L0\\
-    \hline
-    0 & 0 & 0 & 0 & \(0\) \\
-    \hline
-    0 & 0 & 0 & 1 & \(1\) \\
-    \hline
-    0 & 0 & 1 & 0 & \(1\) \\
-    \hline
-    0 & 0 & 1 & 1 & \(0\) \\
-    \hline
-    0 & 1 & 0 & 0 & \(1\) \\
-    \hline
-    0 & 1 & 0 & 1 & \(0\) \\
-    \hline
-    0 & 1 & 1 & 0 & \(0\) \\
-    \hline
-    0 & 1 & 1 & 1 & \(1\) \\
-    \hline
-    1 & 0 & 0 & 0 & \(0\) \\
-    \hline
-    1 & 0 & 0 & 1 & \(0\) \\
-    \hline
-    1 & 0 & 1 & 0 & \(0\) \\
-    \hline
-    1 & 0 & 1 & 1 & \(1\) \\
-    \hline
-    1 & 1 & 0 & 0 & \(0\) \\
-    \hline
-    1 & 1 & 0 & 1 & \(1\) \\
-    \hline
-    1 & 1 & 1 & 0 & \(1\) \\
-    \hline
-    1 & 1 & 1 & 1 & \(0\) \\
-    \hline
-    \end{tabular}
-    \label{tab:tabela_and}
+    \caption{Decisão de Igualdade, baseado nos circuitos de Maioria e Minoria}
+    \begin{tabular}{|c|c|c|}\hline
+    \multicolumn{2}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
+    \textbf{S1} & \textbf{S2} & \textbf{S3} \\\hline
+    0 & 0 & 1 \\\hline
+    0 & 1 & 0 \\\hline
+    1 & 0 & 0 \\\hline
+    1 & 1 & 0 \\\hline
+    \end{tabular}\label{tab:decisao_igualdade}
 \end{table}
 
-Através da tabela e vídeo apresentado é possível notar que uma porta \textbf{XOR} de 4 entradas possui valor lógico 1 quando o número de bits é ímpar, caso contrário será 0, este comportamento não é constante, mas de maneira geral tem-se que para uma porta \textbf{XOR} de N entradas, se N é par, então quando o seu número de bits de entrada que assumem valor lógico 1 for ímpar, seu resultado será 1, contrariamente temos que se N é ímpar, então quando o número de bits de entrada assumir valor lógico 1 for par, assim teremos valor lógico 1.
+Como desejamos fazer uma decisão de igualdade, basta pegarmos o resultado da
+\textit{Soma de Produtos} da tabela \ref{tab:decisao_igualdade} acima.
+
+Dessa forma, concluímos que a saída \(Y_{3}\) desejada pode ser expressa da
+seguinte forma:
+
+\begin{equation}
+  Y_{3} = S3 = \overline{S1} \cdot \overline{S2} \label{eq:2.3_NAND}
+\end{equation}
+
+Esquematicamente, teremos o seguinte diagrama:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp03/2.3.png}
+    \caption{Decisão de Igualdade, utilizando circuitos para Decisão de Maioria e Minoria}
+    \label{fig:decisao_igualdade}
+\end{figure}
+
+É possível concluir através da tabela, do diagrama, e da fórmula em
+\ref{eq:2.3_NAND}, que de fato o circuito lógico final descreve uma decisão de
+minoria com \(4\) entradas utilizando apenas portas \textbf{NAND}.
+
+Para conferir o vídeo deste experimento, acesse o seguinte link:
+\href{https://youtu.be/lwS4AKuvgps}{https://youtu.be/lwS4AKuvgps}.
+\\[2em]
 
 \section{Análise dos Resultados}
 \label{sec:Resultados}

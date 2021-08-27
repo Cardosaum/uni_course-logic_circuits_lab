@@ -49,7 +49,10 @@
     "fig:2_2_karnaugh_map.png"
     "eq:2.2_NAND"
     "fig:decisao_minoria"
-    "fig:Esquema_Experimento2_2.3"
+    "sec:decisao_igualdade"
+    "tab:decisao_igualdade"
+    "eq:2.3_NAND"
+    "fig:decisao_igualdade"
     "sec:Resultados"
     "sec:Conclusao")
    (LaTeX-add-bibliographies))
