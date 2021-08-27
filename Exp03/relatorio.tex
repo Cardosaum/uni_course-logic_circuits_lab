@@ -162,9 +162,9 @@ alguns passos para minimização da função booleana.
   Y_{1} &= (ABC) + (ABD) + (ACD) + (BCD)\\
   Y_{1} &= AB \cdot (C + D) + CD \cdot (A + B)\\
   Y_{1} &= AB \cdot (\overline{\overline{C}} + \overline{\overline{D}}) + CD \cdot (\overline{\overline{A}} + \overline{\overline{B}})\\
-  Y_{1} &= AB \cdot \overline{ \left( \overline{CD} \right) } + CD \cdot \overline{ \left( \overline{AB} \right) }\\
-  Y_{1} &= \overline{ \overline{ \left[ AB \cdot \overline{ \left( \overline{C} + \overline{D} \right) } \right] } } + \overline{ \overline{ \left[ CD \cdot \overline{ \left( \overline{A} + \overline{B} \right) } \right] } } \\
-  Y_{1} &= \overline{ \left\{ \overline{ \left[AB \cdot \overline{ \left( \overline{C} + \overline{D} \right) } \right] } \cdot \overline{ \left[ CD \cdot \overline{ \left( \overline{A} + \overline{B} \right) } \right] } \right\} } \label{eq:2.1_NAND}
+  Y_{1} &= AB \cdot \overline{ \left( \overline{C} \cdot \overline{D} \right) } + CD \cdot \overline{ \left( \overline{A} \cdot \overline{B} \right) }\\
+  Y_{1} &= \overline{ \overline{ \left[ AB \cdot \overline{ \left( \overline{C} \cdot \overline{D} \right) } \right] } } + \overline{ \overline{ \left[ CD \cdot \overline{ \left( \overline{A} \cdot \overline{B} \right) } \right] } } \\
+  Y_{1} &= \overline{ \left\{ \overline{ \left[AB \cdot \overline{ \left( \overline{C} \cdot \overline{D} \right) } \right] } \cdot \overline{ \left[ CD \cdot \overline{ \left( \overline{A} \cdot \overline{B} \right) } \right] } \right\} } \label{eq:2.1_NAND}
 \end{align}
 
 Possuindo a fórmula final \ref{eq:2.1_NAND} para o resultado \(Y_{1}\) desejado,
@@ -251,10 +251,10 @@ função booleana.
 
 \begin{align}
   Y_{2} &= (\overline{A} \cdot \overline{B} \cdot \overline{C}) + (\overline{A} \cdot \overline{B} \cdot \overline{D}) + (\overline{A} \cdot \overline{C} \cdot \overline{D}) + (\overline{B} \cdot \overline{C} \cdot \overline{D})\\
-  Y_{2} &= \overline{AB} \cdot (\overline{C} + \overline{D}) + \overline{CD} \cdot (\overline{A} + \overline{B})\\
-  Y_{2} &= \overline{AB} \cdot \overline{(CD)} + \overline{CD} \cdot \overline{(AB)}\\
-  Y_{2} &= \overline{\overline{ \left[ \overline{AB} \cdot \overline{(CD)} \right] }} + \overline{\overline{ \left[ \overline{CD} \cdot \overline{(AB)} \right] }}\\
-  Y_{2} &= \overline{ \left( \overline{ \left[ \overline{AB} \cdot \overline{(CD)} \right] } \cdot  \overline{ \left[ \overline{CD} \cdot \overline{(AB)} \right] } \right)} \label{eq:2.2_NAND}
+  Y_{2} &= \overline{A}\cdot \overline{B} \cdot (\overline{C} + \overline{D}) + \overline{C} \cdot \overline{D} \cdot (\overline{A} + \overline{B})\\
+  Y_{2} &= \overline{A}\cdot\overline{B} \cdot \overline{(CD)} + \overline{C}\cdot\overline{D} \cdot \overline{(AB)}\\
+  Y_{2} &= \overline{\overline{ \left[ \overline{A}\cdot\overline{B} \cdot \overline{(CD)} \right] }} + \overline{\overline{ \left[ \overline{C}\cdot\overline{D} \cdot \overline{(AB)} \right] }}\\
+  Y_{2} &= \overline{ \left( \overline{ \left[ \overline{A}\cdot\overline{B} \cdot \overline{(CD)} \right] } \cdot  \overline{ \left[ \overline{C}\cdot\overline{D} \cdot \overline{(AB)} \right] } \right)} \label{eq:2.2_NAND}
 \end{align}
 
 Possuindo a fórmula final \ref{eq:2.2_NAND} para o resultado \(Y_{2}\) desejado,
