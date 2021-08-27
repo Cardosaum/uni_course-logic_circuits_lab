@@ -44,15 +44,18 @@
     "fig:2_1_karnaugh_map.png"
     "eq:2.1_NAND"
     "fig:decisao_maioria"
+    "fig:decisao_maioria_montagem"
     "sec:decisao_minoria"
     "tab:decisao_minoria"
     "fig:2_2_karnaugh_map.png"
     "eq:2.2_NAND"
     "fig:decisao_minoria"
+    "fig:decisao_minoria_montagem"
     "sec:decisao_igualdade"
     "tab:decisao_igualdade"
     "eq:2.3_NAND"
     "fig:decisao_igualdade"
+    "fig:decisao_igualdade_montagem"
     "sec:Resultados"
     "sec:Conclusao")
    (LaTeX-add-bibliographies))
