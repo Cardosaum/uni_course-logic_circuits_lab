@@ -235,8 +235,7 @@ Esse experimento é muito semelhante ao anterior. Dessa forma, seguiremos os
 mesmos passos:
 
 Como desejamos fazer uma decisão de minoria, precisamos inicialmente planejar
-qual circuito lógico produziria o resultado desejado. Assim, precisamos
-inicialmente construir a tabela verdade desejada, que será a seguinte:
+qual circuito lógico produziria o resultado desejado. Assim, a tabela verdade desejada será:
 
 \begin{table}[H]
     \centering
@@ -264,8 +263,7 @@ inicialmente construir a tabela verdade desejada, que será a seguinte:
 \end{table}
 
 De posse da tabela verdade, podemos criar uma fórmula booleana que retorne o
-output desejado. Criando o mapa de Karnaugh para essa tabela verdade, observamos
-o seguinte:
+output desejado. Criando o mapa de Karnaugh da mesma, observamos o seguinte:
 
 \begin{figure}[H]
     \centering
@@ -281,11 +279,11 @@ seguinte equação para \(Y_{2}\):
 \end{equation}
 
 Entretanto, como devemos representar essa fórmula apenas em termos de portas
-\textbf{NAND}, precisamos modificar a equação um pouco. Também temos a questão
-de que esse circuito seria muito complexo para se implementar usando uma
-conversão direta das \textbf{OR} para portas \textbf{NAND} requeridas no
-enunciado. Por isso, também realizaremos alguns passos para minimização da
-função booleana.
+\textbf{NAND}, podemos modificar a equação a fim de facilitar a implementação.
+Também temos a questão de que esse circuito seria muito complexo para se
+implementar usando uma conversão direta das \textbf{OR} para portas
+\textbf{NAND} requeridas no enunciado. Portanto, também realizaremos alguns
+passos para minimização da função booleana.
 
 \begin{align}
   Y_{2} &= (\overline{A} \cdot \overline{B} \cdot \overline{C}) + (\overline{A} \cdot \overline{B} \cdot \overline{D}) + (\overline{A} \cdot \overline{C} \cdot \overline{D}) + (\overline{B} \cdot \overline{C} \cdot \overline{D})\\
@@ -308,7 +306,7 @@ lógico final:
 
 É possível concluir através da tabela, do diagrama, e da fórmula em
 \ref{eq:2.2_NAND}, que de fato o circuito lógico final descreve uma decisão de
-minoria com \(4\) entradas utilizando apenas usando portas \textbf{NAND}.
+minoria com \(4\) entradas utilizando apenas portas \textbf{NAND}.
 
 Como requisitado, apresentamos a montagem do circuito abaixo:
 
@@ -432,8 +430,11 @@ Para conferir o vídeo deste experimento, acesse o seguinte link:
 
 Através da utilização do teorema de Demorgan foi possível obter uma maior
 minimização, sendo que indiretamente pode-se comprovar a veracidade do teorema,
-e também pudemos aplicar a transição entre portas, ou seja, com portas \textbf{OR}
-chegar a uma \textbf{AND}.
+e também pudemos aplicar a transição entre portas, ou seja, com portas
+\textbf{OR} chegar a uma \textbf{AND}. É interessante notarmos também o fato de
+que, valendo-se dos valores de \emph{don't care}, pudemos simplificar a função
+booleana para o circuito de decisão de igualdade, pois cortamos uma operação
+\emph{AND} desnecessária.
 
 \section{Conclusão}
 \label{sec:Conclusao}
