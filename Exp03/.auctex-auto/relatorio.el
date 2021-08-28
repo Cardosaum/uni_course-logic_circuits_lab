@@ -53,6 +53,7 @@
     "fig:decisao_minoria_montagem"
     "sec:decisao_igualdade"
     "tab:decisao_igualdade"
+    "tab:tabela_verdade_decisao_igualdade"
     "eq:2.3_NAND"
     "fig:decisao_igualdade"
     "fig:decisao_igualdade_montagem"

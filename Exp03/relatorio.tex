@@ -67,10 +67,20 @@ Circuitos Combinacionais: Mapa de Karnaugh}
 \label{sec:Introducao}
 
 % Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
-Os experimentos realizados visam abordar assuntos como a criação de circuitos
-combinacionais utilizando minimização lógica através de mapas de Karnaugh. Além
-disso, exploraremos a universalidade e completude das portas \textbf{NAND} para
-a construção de qualquer circuito lógico desejado.
+
+Os experimentos realizados neste experimento visam abordar assuntos como a
+criação de circuitos combinacionais utilizando minimização lógica através de
+mapas de Karnaugh. Além disso, exploraremos a universalidade e completude das
+portas \textbf{NAND} para a construção de qualquer circuito lógico desejado.
+
+Cabe observar que, valendo-se do uso de ferramentas de simplificação lógica como
+o mapa de Karnaugh (ou o algoritmo de Quine–McCluskey, não abordado nesse
+experimento), podemos não somente facilitar a construção de circuitos lócicos,
+mas também reduzir gastos com componentes físicos, pois a minimização lógica em
+grande maioria dos casos, leva a um uso de menos portas lógicas, facilitando
+tando a vida do programador que precisa organizar os circuitos que devem ser
+montados, como o poupa da necessidade de arcar com outros circuitos integrados
+caso fosse implementar uma função lógica menos otimizada.
 
 \subsection{Objetivos}
 \label{sec:Objetivos}
@@ -115,7 +125,7 @@ inicialmente construir a tabela verdade desejada, que será a seguinte:
 
 \begin{table}[H]
     \centering
-    \caption{Decisão de Maioria apenas com portas \textbf{NAND}}
+    \caption{Tabela Verdade para Decisão de Maioria}
     \begin{tabular}{|c|c|c|c|c|}\hline
     \multicolumn{4}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
     \textbf{D} & \textbf{C} & \textbf{B} & \textbf{A} & $\textbf{L0}=Y_{1}$ \\\hline
@@ -217,7 +227,7 @@ inicialmente construir a tabela verdade desejada, que será a seguinte:
 
 \begin{table}[H]
     \centering
-    \caption{Decisão de Minoria apenas com portas \textbf{NAND}}
+    \caption{Tabela Verdade para Decisão de Minoria}
     \begin{tabular}{|c|c|c|c|c|}\hline
     \multicolumn{4}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
     \textbf{D} & \textbf{C} & \textbf{B} & \textbf{A} & $\textbf{L1}=Y_{2}$ \\\hline
@@ -326,8 +336,46 @@ igualdade, dado por \textbf{S3} deverá ser:
     0 & 0 & 1 \\\hline
     0 & 1 & 0 \\\hline
     1 & 0 & 0 \\\hline
-    1 & 1 & 0 \\\hline
+    1 & 1 & * \\\hline
     \end{tabular}\label{tab:decisao_igualdade}
+\end{table}
+
+Cabe ressalvar que na tabela \ref{tab:decisao_igualdade}, a última linha possui
+o valor de output ``\(*\)'' pois a entrada ``\(S1 = 1, \; S2 = 1\)'' é
+logicamente impossível de ocorrer. Dessa forma, podemos atribuir o valor de
+\emph{don't care} para esse output. Fazendo isso, passamos de uma função final
+\(Y_{3} = S1 \cdot S2 + \overline{S1} \cdot \overline{S2}\) para uma forma mais
+simplificada \(Y_{3} = \overline{S1} \cdot \overline{S2} \).
+
+Por questão de completude, reproduziremos também a tabela verdade do circuito de
+Decisão de Igualdade; Cabe ressaltar, entretanto, que não utilizamos mapa de
+Karnaugh nem outro método para gerar essa tabela nem construir o circuito
+lógico. O que fizemos, entretanto, foi utilizar as saídas dos circuitos de
+Decisão de Maioria e Minoria.
+
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para Decisão de Igualdade}
+    \begin{tabular}{|c|c|c|c|c|}\hline
+    \multicolumn{4}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
+    \textbf{D} & \textbf{C} & \textbf{B} & \textbf{A} & $\textbf{L2}=Y_{3}$ \\\hline
+    0 & 0 & 0 & 0 & 0 \\\hline
+    0 & 0 & 0 & 1 & 0 \\\hline
+    0 & 0 & 1 & 0 & 0 \\\hline
+    0 & 0 & 1 & 1 & 1 \\\hline
+    0 & 1 & 0 & 0 & 0 \\\hline
+    0 & 1 & 0 & 1 & 1 \\\hline
+    0 & 1 & 1 & 0 & 1 \\\hline
+    0 & 1 & 1 & 1 & 0 \\\hline
+    1 & 0 & 0 & 0 & 0 \\\hline
+    1 & 0 & 0 & 1 & 1 \\\hline
+    1 & 0 & 1 & 0 & 1 \\\hline
+    1 & 0 & 1 & 1 & 0 \\\hline
+    1 & 1 & 0 & 0 & 1 \\\hline
+    1 & 1 & 0 & 1 & 0 \\\hline
+    1 & 1 & 1 & 0 & 0 \\\hline
+    1 & 1 & 1 & 1 & 0 \\\hline
+    \end{tabular}\label{tab:tabela_verdade_decisao_igualdade}
 \end{table}
 
 Como desejamos fazer uma decisão de igualdade, basta pegarmos o resultado da
@@ -344,7 +392,7 @@ Esquematicamente, teremos o seguinte diagrama:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.9\textwidth]{Exp03/2.3.png}
+    \includegraphics[width=.6\textwidth]{Exp03/2.3.png}
     \caption{Decisão de Igualdade, utilizando circuitos para Decisão de Maioria e Minoria}
     \label{fig:decisao_igualdade}
 \end{figure}
@@ -369,13 +417,22 @@ Para conferir o vídeo deste experimento, acesse o seguinte link:
 \section{Análise dos Resultados}
 \label{sec:Resultados}
 
-Através dos experimentos realizados foi possível comprovar a universalidade de portas \textbf{NAND} e também como portas \textbf{XOR} de N entradas possuem um regra geral que é capaz de descrever suas saídas.
+Através da utilização do teorema de Demorgan foi possível obter uma maior
+minimização, sendo que indiretamente pode-se comprovar a veracidade do teorema,
+e também pudemos aplicar a transição entre portas, ou seja, com portas \textbf{OR}
+chegar a uma \textbf{AND}.
 
 \section{Conclusão}
 \label{sec:Conclusao}
 
-Utilizando conceitos referentes a universalidade de portas temos uma ferramenta que possibilita maior versatilidade no dia a dia, a princípio poderia parecer ilógico do porquê é útil este conceito, contudo, deve-se notar que nem sempre possuímos todas as portas desejadas disponíveis, assim, ter recursos alternativos para lidar com situações como estas é importante.
-Referente ao uso de portas \textbf{XOR} temos que seus conceitos de paridade são muito propícios em análise de bits, exemplo a ser citado é através da transmissão de dados, e um exemplo de código que utiliza de tal característica é o código de Hamming, que através da análise de paridade de bits é capaz de realizar a detecção de erros em transmissão de dados, criando então uma camada de segurança.
+Através dos experimentos realizados foi possível comprovar a universalidade de
+portas \textbf{NAND}, pois pudemos, partindo de funções booleanas complexas
+reduzí-las todas a funções que usassem apenas os operadores lógicos \emph{AND}
+(\(\land\)) e \emph{NOT} (\(\lnot\)), mapeando posteriormente apenas para portas
+\textbf{NAND}; Também pudemos ver, na prática, como o mapa de Karnaugh auxilia
+na minimização de funções lógicas, reduzindo consideravelmente o número de
+portas lógicas necessárias (claro, se pudessemos utilizar portas \textbf{NOR},
+\textbf{OR}, etc nossos circuitos montados seriam menores).
 
 \nocite{*}
 \bibliographystyle{sbc}
@@ -392,11 +449,11 @@ Respostas:
     \begin{tabular}{|c|c|} \hline
     \textbf{A} & \textbf{B}\\
     \hline
-    1 & c \\ \hline
-    2 & a \\ \hline
-    3 & d \\ \hline
-    4 & c \\ \hline
-    5 & b \\ \hline
+    1 & b \\ \hline
+    2 & d \\ \hline
+    3 & c \\ \hline
+    4 & a \\ \hline
+    5 & d \\ \hline
     \end{tabular}
 \end{table}
 
