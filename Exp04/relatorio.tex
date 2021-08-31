@@ -1,3 +1,8 @@
+% https://www.tinkercad.com/things/5tth6OLRHPt-copy-of-kit-logico-modelo/editel?sharecode=SUnxTp9Fps-BiMfSit7VU2lw1o5RQNifgeI15UbR-yM
+% https://www.tinkercad.com/things/hCCrtzcJJyE-roteiro3-parte-22/editel?sharecode=PtsZp45ElX69eXlrZ6RUbpy1vHVZd_---8yJ6dxY2TU
+% https://www.tinkercad.com/things/69kCawlKX2i-roteiro3-parte-23/editel?sharecode=3Xug60JRRaJmdqFbfj94RdsFyIY3DcZ6AZmUIQGJKSs
+% https://drive.google.com/drive/folders/1qmQaSxEHMEMgjFNUYUIII_uWlMOWUh7Z?usp=sharing
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Este é um documento que servirá de modelo para
 % os relatórios feitos na disciplina Laboratório de Circuitos Lógicos
@@ -23,160 +28,395 @@
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{hyperref}
-     
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[shortlabels]{enumitem}
+
 \sloppy
 
 
-\title{Experimento X\\ 
-Circuitos Combinacionais: Multiplexadores}
+\title{Experimento 4\\
+Circuitos Combinacionais: Comparador de Palavras}
 
-\author{Aluno 1, 10/0012345\\
-        Aluno 2,  12/0123456\\
-        Grupo B1
-%        Aluno 3, 11/1029881
+\author{Matheus Cardoso de Souza, 202033507\\
+        Ualiton Ventura da Silva, 202033580\\
+        Grupo G42
 }
 
 %%%% LEMBRE-SE DE MUDAR O GRUPO NA LINHA ABAIXO!!!!! %%%%%%
 \address{Dep. Ciência da Computação -- Universidade de Brasília (UnB)\\
   CIC0231 - Laboratório de Circuitos Lógicos
-  \email{aluno1@gmail.com, aluno2@hotmail.com}
+  \email{matheus-cardoso.mc@aluno.unb.br, 202033580@aluno.unb.br}
 }
 
-\begin{document} 
+\begin{document}
 \maketitle
 
 \selectlanguage{american}
  \begin{abstract}
-   Write here a short summary of the report in English. This corresponds to the Experiment 7 report on combinational circuits, specifically the multiplexers.
+   This report corresponds to the Experiment 3 on ``Combinational Circuits:
+   \textbf{Karnaugh Map}''. With this experiment we were able to more broadly
+   apply and understand \textbf{NAND} gate's property of functional
+   completeness, applying only this logic gate to build a Majority Decision
+   Circuitry, as well as a Minority Decision and a Equality Decision Circuitry.
  \end{abstract}
-\selectlanguage{brazil}     
-    
- \begin{resumo} 
-  Escreva aqui um pequeno resumo do relatório. Este corresponde ao relatório do Experimento 7 sobre circuitos combinacionais, especificamente os multiplexadores.
+\selectlanguage{brazil}
+
+ \begin{resumo}
+   O presente relatório corresponde ao Experimento 3 sobre ``Circuitos
+   Combinacionais: \textbf{Mapa de Karnaugh}''. Com esse experimento pudemos
+   aplicar e entender mais amplamente a propriedade de completude funcional das
+   portas lógicas \textbf{NAND}, aplicando somente elas para criar três
+   circuitos: Decisão de Maioria, Minoria e Igualdade.
  \end{resumo}
 
 
 \section{Introdução}
 \label{sec:Introducao}
 
-Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
+% Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
+
+Os experimentos realizados neste relatório visam abordar assuntos como a
+criação de circuitos combinacionais utilizando minimização lógica através de
+mapas de Karnaugh. Além disso, exploraremos a universalidade e completude das
+portas \textbf{NAND} para a construção de qualquer circuito lógico desejado.
+
+Cabe observar que, valendo-se do uso de ferramentas de simplificação lógica como
+o mapa de Karnaugh (ou o algoritmo de Quine–McCluskey, não abordado nesse
+experimento), podemos não somente facilitar a construção de circuitos lócicos,
+mas também reduzir gastos com componentes físicos, pois a minimização lógica em
+grande maioria dos casos, leva a um uso de menos portas lógicas, facilitando
+tando a vida do projetista que precisa organizar os circuitos que devem ser
+montados, como o poupa da necessidade de arcar com outros circuitos integrados
+caso fosse implementar uma função lógica menos otimizada.
 
 \subsection{Objetivos}
 \label{sec:Objetivos}
+Neste experimento temos como objetivo abordar conceitos referentes ao uso de
+mapas de Karnaugh para a simplificação de funções booleanas, a fim de
+proporcionar a criação de circuitos combinacionais mais simples e eficientes.
+Também exploraremos a propriedade de universalidade das portas \textbf{NAND}
+para construção de quaiquer circuitos lógicos, bem como pretendemos nos valer de
+regras como as de Demorgan para converter funções booleanas que aprincípio não
+utilizariam portas \textbf{NAND} para funções equivalentes que façam uso
+exclusivamente dessas portas.
 
-Descrever aqui os objetivos do experimento.
-
-\subsection{Materiais} 
+\subsection{Materiais}
 \label{sec:Materiais}
-Neste experimento foram utilizados os seguintes materiais e equipamentos:
+Em função da natureza do ensino a distância, os presentes experimentos não foram
+realizados usando-se materiais e equipamentos físicos, mas sim emulados por meio
+do simulador online \href{https://www.tinkercad.com/}{Tinkercad}, e também do
+\href{https://www.digitalelectronicsdeeds.com/deeds.html}{Deeds}.
+
+A seguir estão enumerados os materiais simulados:
 \begin{itemize}
     \item Painel Digital
-
     \item \textit{Protoboard}
-    
     \item Fios
-    
-    \item Portas Lógicas AND e NAND
+    \item Seletores de estado lógico
+    \item LEDs
+    \item Resistores
+    \item Multímetros
+    \item Portas Lógicas \textbf{NAND}
 \end{itemize}
 
 \section{Procedimentos}
 \label{sec:Procedimentos}
 
-Escreva nesta seção os diversos itens pedidos no experimentos.
+Passaremos a apresentar os experimentos requeridos.
 
-\subsection{Multiplexador de 4 entradas}
-\label{sec:Mux}
+\subsection{Atraso de Propagação em portas lógicas}\label{sec:atraso_de_propagação}
 
-Descrever o experimento realizado. Sempre  que colocar uma figura deve-se explicar o que se pretende que o leitor veja, ou uma análise logo após a figura. 
+\begin{enumerate}[A]
+\item \textbf{Equações Lógicas de \(L0\) e \(L1\)}
+\end{enumerate}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.5\textwidth]{fig1.jpg}
-    \caption{Exemplo de como colocar a legenda em uma figura.}
-    \label{fig:exemplo}
-\end{figure}
-
-A Figura~\ref{fig:exemplo} apresenta um exemplo de como usar e citar uma figura. Sempre comente cada figura no texto.
-
-Aqui temos um exemplo de como citar uma URL na bibliografia~\cite{systemverilog}.
-
-Aqui temos um exemplo de como criar um hiperlink. Veja neste
-\href{https://www.youtube.com/watch?v=itWbXy0Qzw0}{link} um exemplo de vídeo publicado. Ao contrário do vídeo deste exemplo, sempre inicie o vídeo apresentando o grupo (nome e semestre), narrando o que é o experimento, os objetivos e descreva o que está sendo feito no vídeo. Termine concluindo se o objetivo foi cumprido ou não.
-
-Sempre identifique no site do vídeo:
-\begin{itemize}
-    \item o experimento: Experimento 7;
-    \item o semestre: 2020/1;
-    \item a disciplina: CIC0231 - Laboratório de Circuitos Lógicos;
-    \item a universidade: Universidade de Brasília (UnB);
-    \item o grupo: Grupo B1;
-    \item os nomes dos componentes do grupo.
-\end{itemize}
-
-Desta forma se facilita uma busca pelo vídeo. É apresentado acima como fazer uma listagem não numerada.
-
-\subsection{Demultiplexador}
-\label{sec:Demux}
-
-Este é outro item do experimento. Aqui temos um exemplo de como construir e citar uma tabela, conforme mostrado na Tabela~\ref{tab:resultados}.
+Fazendo a tabela, temos:
 
 \begin{table}[H]
     \centering
-    \caption{Exemplo de como construir uma tabela.}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \cline{2-7}
-    \multicolumn{1}{c}{} & \multicolumn{3}{|c|}{Fase 1} & \multicolumn{3}{c|}{Fase 2} & \multicolumn{1}{c}{} \\
-    \hline
-    Experimento & $n_g$ & $n_l$ & $n_t$ & $n_g$ & $n_l$ & $n_t$ & $t(s)$ \\
-    \hline
-    1 bit full adder & 8.16 & 3.8 & 47.6 & 5.03 & 3.0 & 25.93 & 99.13 \\
-    2 bits full adder & 18.06 & 5.16 & 107.13 & 11.06 & 4.9 & 60.06 & 709.56 \\
-    2 bits multiplier & 14.2 & 4.03 & 74.33 & 7.7 & 2.2 & 37.53 & 357.76 \\
-    7 segment decoder & 47.53 & 5.83 & 270.46 & 32.86 & 5.0 & 176.4 & 740.63 \\
-    Karnaugh 1 bit full adder & 19.0 & 6.0 & 102.0 & 5.03 & 3.0 & 24.8 & 130.73 \\
-    \hline
-    \end{tabular}
-    \label{tab:resultados}
+    \caption{Equações Lógicas de \(L0\) e \(L1\)}
+    \begin{tabular}{|c|c|c|}\hline
+        \multicolumn{1}{|c|}{Entrada} & \multicolumn{2}{|c|}{Saídas} \\\hline
+        \textbf{A} & \textbf{\(L0\)} & \textbf{\(L1\)} \\\hline
+        0 & 0 & 1 \\\hline
+        1 & 0 & 0 \\\hline
+    \end{tabular}\label{tab:atraso_de_propagação:L0_L1}
 \end{table}
 
-Aqui devemos colocar uma apresentação e análise da tabela, explicando ao leitor o que se pretende mostrar.
+\begin{enumerate}[B]
+\item \textbf{Comportamento de \(L0\) e \(L1\)}
+\end{enumerate}
 
-As equações devem fazer parte do texto, como 
+Os LEDs \(L0\) e \(L1\) possuem o comportamento esperado.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_b_clk_up.png}
+    \caption{Clock Up}\label{fig:exp4_2.0_b_clk_up.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_b_clk_down.png}
+    \caption{Clock Down}\label{fig:exp4_2.0_b_clk_down.png}
+\end{figure}
+
+\begin{enumerate}[C]
+\item \textbf{Formas de onda para \(L0\) e \(L1\)}
+\end{enumerate}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_c_clk_up.png}
+    \caption{Clock Up}\label{fig:exp4_2.0_c_clk_up.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_c_clk_down.png}
+    \caption{Clock Down}\label{fig:exp4_2.0_c_clk_down.png}
+\end{figure}
+
+\begin{enumerate}[D]
+\item \textbf{Motivo de pulsos em \(L0\)}
+\end{enumerate}
+
+Delay
+
+\begin{enumerate}[E]
+\item \textbf{Haveria pulso em \(L0\) caso houvesse um número par de portas \textbf{NOT}?}
+\end{enumerate}
+
+Sim, só depende se a quantidade de portas \textbf{NOT} é suficiente para
+introduzir um delay suficientemente grante.
+
+\subsection{Comparador de palavras de \(3\) \emph{bits}}\label{sec:comparador_de_palavras_3_bits}
+
+Completando a tabela para o circuito \textbf{XNOR}, temos:
+
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para o circuito \textbf{XNOR}}
+    \begin{tabular}{|c|c|c|c|c|}\hline
+    \multicolumn{2}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
+    \textbf{A_i} & \textbf{B_i} & \textbf{Z_i} \\\hline
+    0 & 0 & 1 \\\hline
+    0 & 1 & 0 \\\hline
+    1 & 0 & 0 \\\hline
+    1 & 1 & 1 \\\hline
+    \end{tabular}\label{tab:decisao_minoria}
+\end{table}
+
+De posse da tabela verdade, podemos criar uma fórmula booleana que retorne o
+output desejado. Criando o mapa de Karnaugh da mesma, observamos o seguinte:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.5\textwidth]{Exp03/2_2_karnaugh_map.png}
+    \caption{Mapa de Karnaugh para o \textit{``Circuito de Minoria''}}\label{fig:2_2_karnaugh_map.png}
+\end{figure}
+
+Observando o mapa de Karnaugh, vemos que, por \textit{Soma de Produtos}, temos a
+seguinte equação para \(Y_{2}\):
 
 \begin{equation}
-\label{eq:logica}
-    Y=AB+\bar{B}\bar{A}
+  Y_{2} = (\overline{A} \cdot \overline{B} \cdot \overline{C}) + (\overline{A} \cdot \overline{B} \cdot \overline{D}) + (\overline{A} \cdot \overline{C} \cdot \overline{D}) + (\overline{B} \cdot \overline{C} \cdot \overline{D})
 \end{equation}
 
-\noindent onde $A$ e $B$ são as variáveis de entrada. $Y$ a variável de saída. Podemos citar como Equação~\ref{eq:logica}.
+Entretanto, como devemos representar essa fórmula apenas em termos de portas
+\textbf{NAND}, podemos modificar a equação a fim de facilitar a implementação.
+Também temos a questão de que esse circuito seria muito complexo para se
+implementar usando uma conversão direta das \textbf{OR} para portas
+\textbf{NAND} requeridas no enunciado. Portanto, também realizaremos alguns
+passos para minimização da função booleana.
+
+\begin{align}
+  Y_{2} &= (\overline{A} \cdot \overline{B} \cdot \overline{C}) + (\overline{A} \cdot \overline{B} \cdot \overline{D}) + (\overline{A} \cdot \overline{C} \cdot \overline{D}) + (\overline{B} \cdot \overline{C} \cdot \overline{D})\\
+  Y_{2} &= \overline{A}\cdot \overline{B} \cdot (\overline{C} + \overline{D}) + \overline{C} \cdot \overline{D} \cdot (\overline{A} + \overline{B})\\
+  Y_{2} &= \overline{A}\cdot\overline{B} \cdot \overline{(CD)} + \overline{C}\cdot\overline{D} \cdot \overline{(AB)}\\
+  Y_{2} &= \overline{\overline{ \left[ \overline{A}\cdot\overline{B} \cdot \overline{(CD)} \right] }} + \overline{\overline{ \left[ \overline{C}\cdot\overline{D} \cdot \overline{(AB)} \right] }}\\
+  Y_{2} &= \overline{ \left( \overline{ \left[ \overline{A}\cdot\overline{B} \cdot \overline{(CD)} \right] } \cdot  \overline{ \left[ \overline{C}\cdot\overline{D} \cdot \overline{(AB)} \right] } \right)} \label{eq:2.2_NAND}
+\end{align}
+
+Possuindo a fórmula final \ref{eq:2.2_NAND} para o resultado \(Y_{2}\) desejado,
+podemos criar um diagrama de mapeamento da função booleana para o circuito
+lógico final:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp03/2.2.png}
+    \caption{Decisão de Minoria apenas com portas \textbf{NAND}}
+    \label{fig:decisao_minoria}
+\end{figure}
+
+É possível concluir através da tabela, do diagrama, e da fórmula em
+\ref{eq:2.2_NAND}, que de fato o circuito lógico final descreve uma decisão de
+minoria com \(4\) entradas utilizando apenas portas \textbf{NAND}.
+
+Como requisitado, apresentamos a montagem do circuito abaixo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp03/2.2_montagem.jpg}
+    \caption{Montagem do circuito para \textit{Decisão de Minoria} apenas com portas \textbf{NAND}}
+    \label{fig:decisao_minoria_montagem}
+\end{figure}
+
+Para conferir o vídeo deste experimento, acesse o seguinte link:
+\href{https://youtu.be/7aZFW8PNZ44}{https://youtu.be/7aZFW8PNZ44}.
+\\[2em]
+
+\subsection{Circuito para \textit{``Decisão de Igualdade''} utilizando apenas portas \textbf{NAND}}\label{sec:decisao_igualdade}
+
+O atual experimento visa implementar um circuito para \textit{Decisão de
+Igualdade} utilizando somente portas \textbf{NAND}. O circuito deve ter 4 inputs
+(\textbf{A}, \textbf{B}, \textbf{C} e \textbf{D}) e ter como output uma saída em
+LED (\(Y_{3}\) \( = \) \textbf{L2}).
+
+Esse experimento é muito semelhante aos anteriores, e fará uso dos circuitos
+combinacionais já montados para produzir seu output.
+
+Como desejamos fazer uma decisão de igualdade, e dado que já dispomos de um
+circuito para decisão de maioria e outro para minoria, podemos lançar mão desses
+circuitos para construir o desejado. Tal utilização dos já criados se dará da
+seguinte forma: Sejam \textbf{S1} e \textbf{S2} as saídas lógicas dos circuitos
+de maioria e minoria, respectivamente, temos que a saída do circuito de
+igualdade, dado por \textbf{S3} deverá ser:
+
+\begin{table}[H]
+    \centering
+    \caption{Decisão de Igualdade, baseado nos circuitos de Maioria e Minoria}
+    \begin{tabular}{|c|c|c|}\hline
+    \multicolumn{2}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
+    \textbf{S1} & \textbf{S2} & \textbf{S3} \\\hline
+    0 & 0 & 1 \\\hline
+    0 & 1 & 0 \\\hline
+    1 & 0 & 0 \\\hline
+    1 & 1 & * \\\hline
+    \end{tabular}\label{tab:decisao_igualdade}
+\end{table}
+
+Cabe ressalvar que na tabela \ref{tab:decisao_igualdade}, a última linha possui
+o valor de output ``\(*\)'' pois a entrada ``\(S1 = 1, \; S2 = 1\)'' é
+logicamente impossível de ocorrer. Dessa forma, podemos atribuir o valor de
+\emph{don't care} para esse output. Fazendo isso, passamos de uma função final
+\(Y_{3} = S1 \cdot S2 + \overline{S1} \cdot \overline{S2}\) para uma forma mais
+simplificada \(Y_{3} = \overline{S1} \cdot \overline{S2} \).
+
+Por questão de completude, reproduziremos também a tabela verdade do circuito de
+Decisão de Igualdade; Cabe ressaltar, entretanto, que não utilizamos mapa de
+Karnaugh nem outro método para gerar essa tabela nem construir o circuito
+lógico. O que fizemos, entretanto, foi utilizarmos as saídas dos circuitos de
+Decisão de Maioria e Minoria.
+
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para Decisão de Igualdade}
+    \begin{tabular}{|c|c|c|c|c|}\hline
+    \multicolumn{4}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
+    \textbf{D} & \textbf{C} & \textbf{B} & \textbf{A} & $\textbf{L2}=Y_{3}$ \\\hline
+    0 & 0 & 0 & 0 & 0 \\\hline
+    0 & 0 & 0 & 1 & 0 \\\hline
+    0 & 0 & 1 & 0 & 0 \\\hline
+    0 & 0 & 1 & 1 & 1 \\\hline
+    0 & 1 & 0 & 0 & 0 \\\hline
+    0 & 1 & 0 & 1 & 1 \\\hline
+    0 & 1 & 1 & 0 & 1 \\\hline
+    0 & 1 & 1 & 1 & 0 \\\hline
+    1 & 0 & 0 & 0 & 0 \\\hline
+    1 & 0 & 0 & 1 & 1 \\\hline
+    1 & 0 & 1 & 0 & 1 \\\hline
+    1 & 0 & 1 & 1 & 0 \\\hline
+    1 & 1 & 0 & 0 & 1 \\\hline
+    1 & 1 & 0 & 1 & 0 \\\hline
+    1 & 1 & 1 & 0 & 0 \\\hline
+    1 & 1 & 1 & 1 & 0 \\\hline
+    \end{tabular}\label{tab:tabela_verdade_decisao_igualdade}
+\end{table}
+
+Como desejamos fazer uma decisão de igualdade, basta pegarmos o resultado da
+\textit{Soma de Produtos} da tabela \ref{tab:decisao_igualdade} acima.
+
+Dessa forma, concluímos que a saída \(Y_{3}\) desejada pode ser expressa da
+seguinte forma:
+
+\begin{equation}
+  Y_{3} = S3 = \overline{S1} \cdot \overline{S2} \label{eq:2.3_NAND}
+\end{equation}
+
+Esquematicamente, teremos o seguinte diagrama:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.6\textwidth]{Exp03/2.3.png}
+    \caption{Decisão de Igualdade, utilizando circuitos para Decisão de Maioria e Minoria}
+    \label{fig:decisao_igualdade}
+\end{figure}
+
+É possível concluir através da tabela, do diagrama, e da fórmula em
+\ref{eq:2.3_NAND}, que de fato o circuito lógico final descreve uma decisão de
+minoria com \(4\) entradas utilizando apenas portas \textbf{NAND}.
+
+Como requisitado, apresentamos a montagem do circuito abaixo:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp03/2.3_montagem.jpg}
+    \caption{Montagem do circuito para \textit{Decisão de Igualdade} apenas com portas \textbf{NAND}}
+    \label{fig:decisao_igualdade_montagem}
+\end{figure}
+
+Para conferir o vídeo deste experimento, acesse o seguinte link:
+\href{https://youtu.be/4czNGPVAp7s}{https://youtu.be/4czNGPVAp7s}.
+\\[2em]
 
 \section{Análise dos Resultados}
 \label{sec:Resultados}
 
-Faça uma análise crítica dos resultados obtidos nos experimentos. Esta análise pode ser feita item a item ou de uma forma geral.
-
-Dica: Use pesquisa na Internet para tirar as dúvidas sobre edição em \LaTeX .
+Através da utilização do teorema de Demorgan foi possível obter uma maior
+minimização, sendo que indiretamente pode-se comprovar a veracidade do teorema,
+e também pudemos aplicar a transição entre portas, ou seja, com portas
+\textbf{OR} chegar a uma \textbf{AND}. É interessante notarmos também o fato de
+que, valendo-se dos valores de \emph{don't care}, pudemos simplificar a função
+booleana para o circuito de decisão de igualdade, pois cortamos uma operação
+\emph{AND} desnecessária.
 
 \section{Conclusão}
 \label{sec:Conclusao}
 
-Concluir o relatório explanando rapidamente o que foi feito e os resultados obtidos, sempre correlacionando com os objetivos do experimento apresentados na Seção~\ref{sec:Objetivos}. 
+Através dos experimentos realizados foi possível comprovar a universalidade de
+portas \textbf{NAND}, pois pudemos, partindo de funções booleanas complexas
+reduzí-las todas a funções que usassem apenas os operadores lógicos \emph{AND}
+(\(\land\)) e \emph{NOT} (\(\lnot\)), mapeando posteriormente apenas para portas
+\textbf{NAND}; Também pudemos ver, na prática, como o mapa de Karnaugh auxilia
+na minimização de funções lógicas, reduzindo consideravelmente o número de
+portas lógicas necessárias (claro, se pudessemos utilizar portas \textbf{NOR},
+\textbf{OR}, etc nossos circuitos montados seriam menores).
 
-
+\nocite{*}
 \bibliographystyle{sbc}
 \bibliography{relatorio}  %Aqui é a definição do arquivo .bib a ser usado pelas referências
 
 
-\newpage 
+\newpage
 % Colocar aqui apenas as respostas dos itens da Auto-Avaliação
 \section*{Auto-Avaliação}
 
-\begin{enumerate}
-    \item a
-    \item c
-    \item b
-    \item d
-\end{enumerate}
+Respostas:
+
+\begin{table}[H]
+    \begin{tabular}{|c|c|} \hline
+    \textbf{A} & \textbf{B}\\
+    \hline
+    1 & b \\ \hline
+    2 & d \\ \hline
+    3 & c \\ \hline
+    4 & a \\ \hline
+    5 & d \\ \hline
+    \end{tabular}
+\end{table}
 
 
 \end{document}
