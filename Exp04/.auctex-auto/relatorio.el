@@ -48,16 +48,6 @@
     "fig:exp4_2.0_c_clk_down.png"
     "sec:comparador_de_palavras_3_bits"
     "tab:comparador_de_palavras_3_bits"
-    "fig:2_2_karnaugh_map.png"
-    "eq:2.2_NAND"
-    "fig:decisao_minoria"
-    "fig:decisao_minoria_montagem"
-    "sec:decisao_igualdade"
-    "tab:decisao_igualdade"
-    "tab:tabela_verdade_decisao_igualdade"
-    "eq:2.3_NAND"
-    "fig:decisao_igualdade"
-    "fig:decisao_igualdade_montagem"
     "sec:Resultados"
     "sec:Conclusao")
    (LaTeX-add-bibliographies))
