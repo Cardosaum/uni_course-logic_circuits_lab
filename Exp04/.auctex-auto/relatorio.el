@@ -47,7 +47,7 @@
     "fig:exp4_2.0_c_clk_up.png"
     "fig:exp4_2.0_c_clk_down.png"
     "sec:comparador_de_palavras_3_bits"
-    "tab:decisao_minoria"
+    "tab:comparador_de_palavras_3_bits"
     "fig:2_2_karnaugh_map.png"
     "eq:2.2_NAND"
     "fig:decisao_minoria"
