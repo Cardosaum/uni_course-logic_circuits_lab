@@ -103,17 +103,34 @@ Passaremos a apresentar os experimentos requeridos.
 \subsection{Atraso de Propagação em portas lógicas}\label{sec:atraso_de_propagação}
 
 \begin{enumerate}[A)]
-\item \textbf{Equações Lógicas de \(L0\) e \(L1\)}
+\item \textbf{Equações Lógicas de L0 e L1}
 \end{enumerate}
 
-Fazendo a tabela, temos:
+Começaremos com a equação lógica \textbf{L1}, pois \textbf{L0} depende dessa. Temos que, como
+o número de portas \textbf{NOT} que ligam o sinal de clock \textbf{A} à
+\textbf{L1} é \emph{ímpar}, a saída terá o sinal de \textbf{A} negado. Sendo
+assim, concluímos que a equação para \textbf{L1} será:
+
+\begin{equation}
+L1 = \overline{A}
+\end{equation}
+
+Agora, considerando a saída \textbf{L0}, podemos verificar que existe uma porta
+\textbf{AND} tomando o resultado de \textbf{A} e \textbf{L1}. Portanto, a equação de \textbf{L0} será:
+
+\begin{equation}
+L0 = A \cdot L1
+\end{equation}
+
+Dessa forma, podemos expressar ambos \textbf{L0} e \textbf{L1} por meio de uma
+tabela verdade, em função de \textbf{A}.
 
 \begin{table}[H]
     \centering
-    \caption{Equações Lógicas de \(L0\) e \(L1\)}
+    \caption{\textbf{L0} e \textbf{L1} em função de \textbf{A}}
     \begin{tabular}{|c|c|c|}\hline
         \multicolumn{1}{|c|}{Entrada} & \multicolumn{2}{|c|}{Saídas} \\\hline
-        \textbf{A} & \textbf{\(L0\)} & \textbf{\(L1\)} \\\hline
+        \textbf{A} & \textbf{L0} & \textbf{L1} \\\hline
         0 & 0 & 1 \\\hline
         1 & 0 & 0 \\\hline
     \end{tabular}\label{tab:atraso_de_propagação:L0_L1}
@@ -123,7 +140,15 @@ Fazendo a tabela, temos:
 \item \textbf{Comportamento de \(L0\) e \(L1\)}
 \end{enumerate}
 
-Os LEDs \(L0\) e \(L1\) possuem o comportamento esperado.
+Utilizando a ferramenta
+\href{https://www.digitalelectronicsdeeds.com/deeds.html}{Deeds} para a
+simulação do circuito lógico, podemos observar que as saídas de \textbf{L0} e
+\textbf{L1} são exatamente as esperadas quando leva-se em conta a tabela verdade
+\ref{tab:atraso_de_propagação:L0_L1} apresentada acima.
+
+Como representado nas figuras a seguir, o output de \textbf{L0} é \emph{sempre}
+igual a $0$, e o output de \textbf{L1} é \emph{sempre} o oposto de \textbf{A},
+assim como esperado.
 
 \begin{figure}[H]
     \centering
@@ -141,15 +166,26 @@ Os LEDs \(L0\) e \(L1\) possuem o comportamento esperado.
 \item \textbf{Formas de onda para \(L0\) e \(L1\)}
 \end{enumerate}
 
+Utilizando a ferramenta \emph{Timing Diagram Simulation} podemos gerar as
+formas de onda para \textbf{L0} e \textbf{L1}. A seguir reproduzimos as mesmas.
+
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_c_clk_up.png}
+    \includegraphics[width=1\textwidth]{Exp04/exp4_2.0_c_clk_wave.png}
+    \caption{Clock Up}\label{fig:exp4_2.0_c_clk_up.png}
+\end{figure}
+
+Como pode-se observar,
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_c_clk_up_zoom.png}
     \caption{Clock Up}\label{fig:exp4_2.0_c_clk_up.png}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_c_clk_down.png}
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_c_clk_down_zoom.png}
     \caption{Clock Down}\label{fig:exp4_2.0_c_clk_down.png}
 \end{figure}
 
