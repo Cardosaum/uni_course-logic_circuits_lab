@@ -119,7 +119,7 @@ Agora, considerando a saída \textbf{L0}, podemos verificar que existe uma porta
 \textbf{AND} tomando o resultado de \textbf{A} e \textbf{L1}. Portanto, a equação de \textbf{L0} será:
 
 \begin{equation}
-L0 = A \cdot L1
+L0 = A \cdot L1\label{eq:L0}
 \end{equation}
 
 Dessa forma, podemos expressar ambos \textbf{L0} e \textbf{L1} por meio de uma
@@ -137,7 +137,7 @@ tabela verdade, em função de \textbf{A}.
 \end{table}
 
 \begin{enumerate}[B)]
-\item \textbf{Comportamento de \(L0\) e \(L1\)}
+\item \textbf{Comportamento de L0 e L1}
 \end{enumerate}
 
 Utilizando a ferramenta
@@ -163,7 +163,7 @@ assim como esperado.
 \end{figure}
 
 \begin{enumerate}[C)]
-\item \textbf{Formas de onda para \(L0\) e \(L1\)}
+\item \textbf{Formas de onda para L0 e L1}
 \end{enumerate}
 
 Utilizando a ferramenta \emph{Timing Diagram Simulation} podemos gerar as
@@ -172,28 +172,35 @@ formas de onda para \textbf{L0} e \textbf{L1}. A seguir reproduzimos as mesmas.
 \begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{Exp04/exp4_2.0_c_clk_wave.png}
-    \caption{Clock Up}\label{fig:exp4_2.0_c_clk_up.png}
+    \caption{Clock Up}\label{fig:exp4_2.0_c_clk_wave.png}
 \end{figure}
 
-Como pode-se observar,
+Como pode-se observar, a saída \textbf{L0} possui um pequeno pulso quando o
+clock varia. Podemos explicar esse comportamento levando em consideração o delay
+que as portas lógicas possuem. Como a porta lógica \textbf{L0} possui como um de
+seus inputs a porta \textbf{L1}, que por sua vez tem um delay de $5$ portas
+\textbf{NOT}, a porta \textbf{L0} soma um delay de $5$ portas \textbf{NOT} e $1$
+porta \textbf{AND}. Dessa forma, a soma total resulta em um delay de $21ns$,
+como pode-se ver na imagem a seguir.
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_c_clk_up_zoom.png}
-    \caption{Clock Up}\label{fig:exp4_2.0_c_clk_up.png}
-\end{figure}
-
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_c_clk_down_zoom.png}
-    \caption{Clock Down}\label{fig:exp4_2.0_c_clk_down.png}
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_c_clk_wave_lenght.png}
+    \caption{Comprimento do pulso em \textbf{L0}}\label{fig:exp4_2.0_c_clk_wave_lenght.png}
 \end{figure}
 
 \begin{enumerate}[D)]
-\item \textbf{Motivo de pulsos em \(L0\)}
+\item \textbf{Pulsos em L0 quando A retorna a 0}
 \end{enumerate}
 
-Delay
+Para respondermos se haveria algum possível pulso em \textbf{L0} quando
+\textbf{A} retorna ao nível lógico $0$ precisamos considerar qual a função
+lógica responsável por produzir o output em \textbf{L0}. Lembrando da equação
+\ref{eq:L0}, vemos que a única forma de termos um pulso em \textbf{L0} seria se
+\textbf{L1} fosse $1$ no momento que \textbf{A} retorna ao nível $0$. Podemos
+afirmar isso pois consideramos o delay da porta \textbf{AND} responsável pelo
+output de \textbf{L0}. Logo, o pulso seria consideravelmente menor que o
+existente na passagem de \textbf{A} $= \, 0$ para \textbf{A} $= \, 1$.
 
 \begin{enumerate}[E)]
 \item \textbf{Haveria pulso em \(L0\) caso houvesse um número par de portas \textbf{NOT}?}
