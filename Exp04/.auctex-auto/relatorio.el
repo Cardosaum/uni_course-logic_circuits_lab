@@ -54,6 +54,7 @@
     "fig:exp4_2.0_e_clk_circuito_wave.png"
     "sec:comparador_de_palavras_3_bits"
     "tab:comparador_de_palavras_3_bits"
+    "fig:exp4_2.1_d_circuito.png"
     "sec:Resultados"
     "sec:Conclusao")
    (LaTeX-add-bibliographies))

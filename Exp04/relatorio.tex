@@ -293,15 +293,48 @@ Para implementarmos um circuito lógico \textbf{XNOR} usando apenas portas
 \item \textbf{Circuito comparador de palavras de 3 bits}
 \end{enumerate}
 
+Para montarmos o circuito total pedido no enunciado, basta usarmos $3$ dos
+blocos implementados no item anterior, fazendo um \textbf{AND} entre cada uma
+das $3$ saídas. Caso cada um dos blocos retorne o nível lógico $1$, então
+teremos que o output final também será com nível lógico $1$, e, caso contrário,
+o nível $0$. Existe, entretanto, um requisito: devemos montar esse circuito
+apenas com portas \textbf{NAND} de $2$ entradas; Sendo assim, apresentamos um
+circuito que satisfaz os requisitos necessários para o objetivo desejado:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.1_d_circuito.png}
+    \caption{Circuito Comparador de palavras de 3 bits}\label{fig:exp4_2.1_d_circuito.png}
+\end{figure}
+
+Reproduzimos a seguir a tabela verdade do circuito final. Contudo, Faz-se
+necessário uma ressalva: como o circuito final possui $6$ valores de input, isso
+acarreta em uma tabela com $2^{6} = 64$ linhas. Uma tabela assim seria muito
+grande para reproduzirmos aqui. Dessa forma, optamos por somente mostrar os
+inputs que produzem um output com valor igual a $1$. Todas as demais combinações
+são assumidas como produzindo o output de nível lógico $0$.
+
 \begin{table}[H]
     \centering
     \caption{Tabela Verdade para o circuito geral}
-    \begin{tabular}{|c|c|c|c|c|c|}\hline
+    \begin{tabular}{|c|c|c|c|c|c|c|}\hline
     \multicolumn{6}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
     $A_{1}$ & $A_{2}$ & $A_{3}$ & $B_{1}$ & $B_{2}$ & $B_{3}$ & $Z_{i}$ \\\hline
-    0 & 0 & 0 & 0 & 0 & 0 & - \\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 1 \\\hline
+    0 & 0 & 1 & 0 & 0 & 1 & 1 \\\hline
+    0 & 1 & 0 & 0 & 1 & 0 & 1 \\\hline
+    0 & 1 & 1 & 0 & 1 & 1 & 1 \\\hline
+    1 & 0 & 0 & 1 & 0 & 0 & 1 \\\hline
+    1 & 0 & 1 & 1 & 0 & 1 & 1 \\\hline
+    1 & 1 & 0 & 1 & 1 & 0 & 1 \\\hline
+    1 & 1 & 1 & 1 & 1 & 1 & 1 \\\hline
     \end{tabular}\label{tab:comparador_de_palavras_3_bits}
 \end{table}
+
+
+\begin{enumerate}[E)]
+\item \textbf{Circuito comparador de palavras de 3 bits}
+\end{enumerate}
 
 \section{Análise dos Resultados}
 \label{sec:Resultados}
