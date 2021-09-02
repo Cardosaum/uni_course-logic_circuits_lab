@@ -254,14 +254,19 @@ portas \textbf{NOT}, e que ainda assim possui pulsos em \textbf{L0}.
 
 \subsection{Comparador de palavras de \(3\) \emph{bits}}\label{sec:comparador_de_palavras_3_bits}
 
-Completando a tabela para o circuito \textbf{XNOR}, temos:
+\begin{enumerate}[A)]
+\item \textbf{Completando a tabela verdade para um circuito \textbf{XNOR}}
+\end{enumerate}
+
+Para fazermos a tabela verdade do circuito proposto no enunciado, basta notarmos
+a própria definição de uma porta \textbf{XNOR}; Sendo assim, teremos:
 
 \begin{table}[H]
     \centering
     \caption{Tabela Verdade para o circuito \textbf{XNOR}}
     \begin{tabular}{|c|c|c|c|c|}\hline
     \multicolumn{2}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
-    \textbf{$A_{i}$} & \textbf{$B_{i}$} & \textbf{$Z_{i}$} \\\hline
+    $A_{i}$ & $B_{i}$ & $Z_{i}$ \\\hline
     0 & 0 & 1 \\\hline
     0 & 1 & 0 \\\hline
     1 & 0 & 0 \\\hline
@@ -269,6 +274,34 @@ Completando a tabela para o circuito \textbf{XNOR}, temos:
     \end{tabular}\label{tab:comparador_de_palavras_3_bits}
 \end{table}
 
+\begin{enumerate}[B)]
+\item \textbf{Implementação da função lógica $Z_{i}$ apenas com portas NAND}
+\end{enumerate}
+
+Para implementarmos um circuito lógico \textbf{XNOR} usando apenas portas
+\textbf{NAND}, podemos usar o circuito a seguir:
+
+\begin{equation}
+\overline{\left( \overline{(\overline{A_{i} \cdot A_{i}}) \cdot (\overline{B_{i} \cdot B_{i}})} \right) \cdot (\overline{A_{i} \cdot B_{i}})}
+\end{equation}
+
+\begin{enumerate}[C)]
+\item \textbf{TODO}
+\end{enumerate}
+
+\begin{enumerate}[D)]
+\item \textbf{Circuito comparador de palavras de 3 bits}
+\end{enumerate}
+
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para o circuito geral}
+    \begin{tabular}{|c|c|c|c|c|c|}\hline
+    \multicolumn{6}{|c|}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
+    $A_{1}$ & $A_{2}$ & $A_{3}$ & $B_{1}$ & $B_{2}$ & $B_{3}$ & $Z_{i}$ \\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & - \\\hline
+    \end{tabular}\label{tab:comparador_de_palavras_3_bits}
+\end{table}
 
 \section{Análise dos Resultados}
 \label{sec:Resultados}
