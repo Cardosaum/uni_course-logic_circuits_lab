@@ -1,8 +1,3 @@
-% https://www.tinkercad.com/things/5tth6OLRHPt-copy-of-kit-logico-modelo/editel?sharecode=SUnxTp9Fps-BiMfSit7VU2lw1o5RQNifgeI15UbR-yM
-% https://www.tinkercad.com/things/hCCrtzcJJyE-roteiro3-parte-22/editel?sharecode=PtsZp45ElX69eXlrZ6RUbpy1vHVZd_---8yJ6dxY2TU
-% https://www.tinkercad.com/things/69kCawlKX2i-roteiro3-parte-23/editel?sharecode=3Xug60JRRaJmdqFbfj94RdsFyIY3DcZ6AZmUIQGJKSs
-% https://drive.google.com/drive/folders/1qmQaSxEHMEMgjFNUYUIII_uWlMOWUh7Z?usp=sharing
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Este é um documento que servirá de modelo para
 % os relatórios feitos na disciplina Laboratório de Circuitos Lógicos
@@ -190,24 +185,72 @@ como pode-se ver na imagem a seguir.
 \end{figure}
 
 \begin{enumerate}[D)]
-\item \textbf{Pulsos em L0 quando A retorna a 0}
+\item \textbf{Pulsos em L0 quando A retorna ao nível 0}
 \end{enumerate}
 
-Para respondermos se haveria algum possível pulso em \textbf{L0} quando
-\textbf{A} retorna ao nível lógico $0$ precisamos considerar qual a função
-lógica responsável por produzir o output em \textbf{L0}. Lembrando da equação
+De forma sucinta, podemos afirmar que, para o circuito específico deste
+exercício, contendo $5$ portas \textbf{NOT} e $1$ porta \textbf{AND}, não existe
+pulso em \textbf{L0} quando \textbf{A} retorna ao nível $0$.
+
+Para justificar tal afirmação precisamos considerar qual a função lógica
+responsável por produzir o output em \textbf{L0}. Lembrando da equação
 \ref{eq:L0}, vemos que a única forma de termos um pulso em \textbf{L0} seria se
 \textbf{L1} fosse $1$ no momento que \textbf{A} retorna ao nível $0$. Podemos
 afirmar isso pois consideramos o delay da porta \textbf{AND} responsável pelo
 output de \textbf{L0}. Logo, o pulso seria consideravelmente menor que o
-existente na passagem de \textbf{A} $= \, 0$ para \textbf{A} $= \, 1$.
+existente na passagem de nível lógico \textbf{A} $= \, 0$ para \textbf{A}
+$= \, 1$, mas seria possível existir. Cabe ressaltar, entretanto, que o pulso em
+\textbf{L0} \emph{não} aconteceria na montagem de apenas $5$ portas
+\textbf{NOT}, pois o delay não seria sufucientemente grande. Na imagem a seguir
+apresentamos uma possível configuração de circuito lógico, contendo um número
+\emph{ímpar} de portas \textbf{NOT}, que tem de fato um pulso em \textbf{L0}
+quando \textbf{A} está retornando ao nível $0$.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_d_clk_circuito_ao_voltar_para_zero.png}
+    \caption{Circuito que apresenta pulso quando \textbf{A} retorna ao nível 0}\label{fig:exp4_2.0_d_clk_circuito_ao_voltar_para_zero.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_d_clk_wave_ao_voltar_para_zero.png}
+    \caption{Formato de onda desse circuito}\label{fig:exp4_2.0_d_clk_wave_ao_voltar_para_zero.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_d_clk_wave_lenght_ao_voltar_para_zero.png}
+    \caption{Tamanho do pulso existente quando \textbf{A} retorna ao nível 0}\label{fig:exp4_2.0_d_clk_wave_lenght_ao_voltar_para_zero.png}
+\end{figure}
 
 \begin{enumerate}[E)]
-\item \textbf{Haveria pulso em \(L0\) caso houvesse um número par de portas \textbf{NOT}?}
+\item \textbf{Haveria pulso em L0 caso houvesse um número par de portas NOT?}
 \end{enumerate}
 
-Sim, só depende se a quantidade de portas \textbf{NOT} é suficiente para
-introduzir um delay suficientemente grante.
+Sim poderia existir um pulso em \textbf{L0}. O único limitante para a observação
+de pulsos é a quantidade de portas \textbf{NOT} existentes no circuito. O motivo
+é o mesmo do item anterior: quanto maior o número de portas, maior será o delay
+no circuito lógico; Caso o delay acarrete em uma superposição entre o nível
+lógico de \textbf{A} e \textbf{L1}, então haverá um pulso em \textbf{L0}. Ou
+seja, o pulso é apenas limitado à introdução de um delay suficientemente grande
+no circuito.
+
+Como prova dessa afirmação, é apresentado um circuito com número \emph{par} de
+portas \textbf{NOT}, e que ainda assim possui pulsos em \textbf{L0}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_e_clk_circuito.png}
+    \caption{Circuito com pulso em \textbf{L0} usando número \emph{par} de portas \textbf{NOT}}\label{fig:exp4_2.0_e_clk_circuito.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/exp4_2.0_e_clk_circuito_wave.png}
+    \caption{Formato de onda do circuito com pulso}\label{fig:exp4_2.0_e_clk_circuito_wave.png}
+\end{figure}
+
 
 \subsection{Comparador de palavras de \(3\) \emph{bits}}\label{sec:comparador_de_palavras_3_bits}
 
