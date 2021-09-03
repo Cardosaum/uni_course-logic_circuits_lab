@@ -200,7 +200,11 @@ como pode-se ver na imagem a seguir.
 
 De forma sucinta, podemos afirmar que, para o circuito específico deste
 exercício, contendo $5$ portas \textbf{NOT} e $1$ porta \textbf{AND}, não existe
-pulso em \textbf{L0} quando \textbf{A} retorna ao nível $0$.
+pulso em \textbf{L0} quando \textbf{A} retorna ao nível $0$. O motivo para isso
+é simples: quando \textbf{A} está retornando de $1$ para $0$ o valor lógico de
+\textbf{L1} é $0$, e assim a porta lógica \textbf{AND} que produz o output de
+\textbf{L0} sempre retornará o valor $0$, justificando a ausência de pulso nesse
+momento do circuito.
 
 Para justificar tal afirmação precisamos considerar qual a função lógica
 responsável por produzir o output em \textbf{L0}. Lembrando da equação
