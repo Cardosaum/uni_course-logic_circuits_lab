@@ -56,6 +56,7 @@
     "tab:comparador_de_palavras_3_bits"
     "fig:exp4_2_1__c_circuit.png"
     "fig:exp4_2.1_d_circuito.png"
+    "fig:exp4_2_1__e_wave.png"
     "fig:Comparador1Bit.png"
     "sec:Resultados"
     "sec:Conclusao")
