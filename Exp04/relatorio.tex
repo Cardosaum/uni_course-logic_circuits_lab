@@ -371,7 +371,19 @@ ele. A seguir é reproduzido tal gráfico.
     \caption{Comparador de 1 bit}\label{fig:exp4_2_1__e_wave.png}
 \end{figure}
 
-\textbf{TODO FALTA A EXPLICAÇÃO BOLADA!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!}
+Como podemos observar pela imagem, os pulsos obtidos em \textbf{Z} nem sempre
+correspondem a posição esperada deles. Por exemplo, o terceiro pulso existente,
+que ocorre por volta dos $70 ns$, não deveria existir. Podemos justificar essa
+afirmação com duas observações: \textbf{1)} O referido pulso é bem maior do que
+teoricamente deveria ser (hava vista que o pulso em \textbf{A1} é muito menor
+que ele) e \textbf{2)} o pulso em \textbf{B2} possui valor $1$ nesse momento, e
+o esperado seria que tivesse o valor $0$.
+
+Considerando essas observações e o valor teoricamente esperado, podemos
+justificar o valor experimental observado levando em consideração o atraso que
+cada porta lógica insere no circuito. Dessa forma, algumas configurações que
+anteriormente não seriam esperadas de produzirem o valor lógico $1$ acabam
+existindo.
 
 \subsection{Comparador de palavras de \(2\) \emph{bits}}\label{sec:comparador_de_palavras_3_bits}
 
