@@ -55,7 +55,10 @@ Circuitos Combinacionais: Comparador de Palavras}
 \selectlanguage{brazil}
 
  \begin{resumo}
-   TODO
+   O presente relatório tem como objetivo a elaboração de circuitos comparadores
+   utilizando conceitos já apresentados como mapa de Karnaugh e funções
+   booleanas e suas simplificações, assim como a análise de seus resultados e
+   atrasos obtidos por fatores mecânicos existentes na microarquitetura digital.
  \end{resumo}
 
 
@@ -64,12 +67,21 @@ Circuitos Combinacionais: Comparador de Palavras}
 
 % Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
 
-TODO
+Portas lógicas possuem a característica de poderem se combinar de diferentes
+maneiras para a formulação de novos circuitos, a depender da maneira a qual se
+combinam temos um circuito combinacional, que não retém memória de seus estados
+anteriores. Contudo, ao ocorrer a associação destas portas lógicas, não será
+obtido um sistema inafetado por erros, pois é necessária a consideração de
+fatores mecânicos e como eles prejudicam a execução de um dado circuito, seja
+ele combinacional ou não.
 
 \subsection{Objetivos}
 \label{sec:Objetivos}
 
-TODO
+O atual experimento busca não somente criar e demonstrar novos tipos de
+combinações para a obtenção de comportamentos específicos e desejados, como
+também fatores a serem considerados referentes ao tempo de resposta de um dado
+sistema e porque ocorrem atrasos ao associar inumeras portas lógicas.
 
 \subsection{Materiais}
 \label{sec:Materiais}
@@ -78,16 +90,11 @@ realizados usando-se materiais e equipamentos físicos, mas sim emulados por mei
 do simulador online \href{https://www.tinkercad.com/}{Tinkercad}, e também do
 \href{https://www.digitalelectronicsdeeds.com/deeds.html}{Deeds}.
 
-A seguir estão enumerados os materiais simulados:
+A seguir estão enumerados os materiais utilizados:
 \begin{itemize}
-    \item Painel Digital
-    \item \textit{Protoboard}
-    \item Fios
-    \item Seletores de estado lógico
-    \item LEDs
-    \item Resistores
-    \item Multímetros
-    \item Portas Lógicas \textbf{NAND}
+    \item Componentes de Entrada(Gerador de clock e chave de estado)
+    \item Componentes de Saída
+    \item Portas Lógicas \textbf{NAND}, \textbf{OR}, \textbf{AND}, \textbf{NOT}
 \end{itemize}
 
 \section{Procedimentos}
@@ -336,15 +343,144 @@ são assumidas como produzindo o output de nível lógico $0$.
 \item \textbf{Circuito comparador de palavras de 3 bits}
 \end{enumerate}
 
+\subsection{Comparador de palavras de \(2\) \emph{bits}}\label{sec:comparador_de_palavras_3_bits}
+
+\begin{enumerate}[A)]
+\item \textbf{Tabela verdade de um comparador de 1 bit}
+\end{enumerate}
+
+Como trata-se de um comparador de 1 bit, para a tabela verdade teremos:
+
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para o circuito comparador de 1 bit}
+    \begin{tabular}{|c|c|c|c|c|}\hline
+    \multicolumn{2}{|c|}{Entradas} & \multicolumn{3}{|c|}{Saída} \\\hline
+    \textbf{$A$} & \textbf{$B$} & \textbf{$Y_{1}$} & \textbf{$Y_{2}$} & \textbf{$Y_{3}$} \\\hline
+    0 & 0 & 0 & 1 & 0 \\\hline
+    0 & 1 & 0 & 0 & 1\\\hline
+    1 & 0 & 1 & 0 & 0\\\hline
+    1 & 1 & 0 & 1 & 0\\\hline
+    \end{tabular}\label{tab:comparador_de_palavras_3_bits}
+\end{table}
+
+Assim, terı́amos que para cada uma das saı́das desejadas, suas equações lógicas seriam:
+
+\begin{equation}
+Y_{1} = A \cdot \overline{B}
+\end{equation}
+
+\begin{equation}
+Y_{2} = A \cdot B + \overline{A} \cdot \overline{B}
+\end{equation}
+
+\begin{equation}
+Y_{3} = \overline{A} \cdot B
+\end{equation}
+
+Observa-se que todas as equações já estão em uma forma minimizada, já que possuem poucos termos, e quando colocadas em mapa de Karnaugh não haverá uma maneira de reduzi-las mais do que já descrito. Contudo, a minimização poderá ocorrer ao implementar o circuito.
+
+\begin{enumerate}[B)]
+\item \textbf{Implementação de um comparador de 1 bit}
+\end{enumerate}
+
+A principio, seguindo as equações de maneira literal teríamos o seguinte esquema:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/Comparador1Bit.png}
+    \caption{Comparador de 1 bit}\label{fig:Comparador1Bit.png}
+\end{figure}
+
+Uma maneira de criar redução será:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/Comparador1Simplificado.png}
+    \caption{Comparador Simplificado de 1 bit}\label{fig:Comparador1Bit.png}
+\end{figure}
+
+Ou seja, bastando reduzir as portas \textbf{NOT} implementadas. Assim, temos que o subcircuito implementado através do Deeds será:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Exp04/Exp4.2.2.2.png}
+    \caption{Comparador Simplificado de 1 bit - Deed}\label{fig:Comparador1Bit.png}
+\end{figure}
+
+Deve-se ater também ao fato de que por a utilização de duas portas \textbf{NOT} fatores como fan-out serão considerados.
+Abaixo encontra-se o link de simulação:
+
+"link bolado lindo perfeito QUERO CAFÉ"
+
+\begin{enumerate}[C)]
+\item \textbf{Implementação de um comparador de 2 bits}
+\end{enumerate}
+
+Utilizando o comparador de 1 bit construido, temos que a implementação para um comparador de 2 bits será:
+
+IMAGEM
+
+Abaixo segue o link de sua simulação:
+
+"LINQUEEEEEEEEE EU QUERO CAFÉ"
+
+Portanto, temos para sua tabela verdade o seguinte resultado:
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para o circuito comparador de 2 bits}
+    \begin{tabular}{|c|c|c|c|c|c|c|}\hline
+    \multicolumn{4}{|c|}{Entradas} & \multicolumn{3}{|c|}{Saída} \\\hline
+    \textbf{$A_{1}$} & \textbf{$A_{0}$} & \textbf{$B_{1}$} & \textbf{$B_{0}$} & \textbf{$Y_{1}$} & \textbf{$Y_{2}$} & \textbf{$Y_{3}$} \\\hline
+    0 & 0 & 0 & 0 & 0 & 1 & 0\\\hline
+    0 & 0 & 0 & 1 & 0 & 0 & 1\\\hline
+    0 & 0 & 1 & 0 & 0 & 0 & 1\\\hline
+    0 & 0 & 1 & 1 & 0 & 0 & 1\\\hline
+    0 & 1 & 0 & 0 & 1 & 0 & 0\\\hline
+    0 & 1 & 0 & 1 & 0 & 1 & 0\\\hline
+    0 & 1 & 1 & 0 & 0 & 0 & 1\\\hline
+    0 & 1 & 1 & 1 & 0 & 0 & 1\\\hline
+    1 & 0 & 0 & 0 & 1 & 0 & 0\\\hline
+    1 & 0 & 0 & 1 & 1 & 0 & 0\\\hline
+    1 & 0 & 1 & 0 & 0 & 1 & 0\\\hline
+    1 & 0 & 1 & 1 & 0 & 0 & 1\\\hline
+    1 & 1 & 0 & 0 & 1 & 0 & 0\\\hline
+    1 & 1 & 0 & 1 & 1 & 0 & 0\\\hline
+    1 & 1 & 1 & 0 & 1 & 0 & 0\\\hline
+    1 & 1 & 1 & 1 & 0 & 1 & 0\\\hline
+    \end{tabular}\label{tab:comparador_de_palavras_3_bits}
+\end{table}
+
+\begin{enumerate}[D)]
+\item \textbf{Atrasos Obtidos}
+\end{enumerate}
+Devido a estrutura de circuito feita, ocorrem longos atrasos, e que para o computadores utilizados contidianamente já seria um atraso significativo, percebe-se não somente problemas em seus atrasos como a produção de Hazards. Portanto, seria necessário uma análise mais detalhada que visa a redução destes erros.
+
 \section{Análise dos Resultados}
 \label{sec:Resultados}
 
-TODO
+Como pudemos notar através de todos os experimentos realizados erros e atrasos
+ocorrem, provando a falha mecânica e a necessidade de técnicas que reduzam estes
+mesmos erros. Percebe-se também como da transição de um estado booleano a outro
+não irá produzir uma saída imediata, por fatores como o da própria borda de
+subida e descida na mudança de estados. Importante notar que apesar do uso de um
+simulador para os circuitos, ao utilizarmos geradores de onda no mundo físico,
+deve-se considerar que não é possível a criação de estados de ondas que ocorrem
+ao mesmo tempo, ou seja, simultâneos, pois, como já mencionado, sempre há
+fatores mecânicos a serem considerados.
 
 \section{Conclusão}
 \label{sec:Conclusao}
 
-TODO
+A elaboração de técnicas que lidam com a álgebra booleana possibilitam
+facilidade ao lidar com problemas do mundo real, de um ponto de vista teórico
+foi possível a construção de modelos práticos. A principio poderia ser
+percebidos como problemas futeis ou sem muitas necessidades, contudo, deve-se
+notar que todos os computadores necessitam de tais operações, ou seja, igualdade
+e inequações, assim, o presente relatório apesar de tratar destes problemas de
+maneira mais simplificada ainda foi capaz de descrever comportamentos tão
+desejados na implementação de máquinas utilizadas no dia a dia. Apesar de sermos
+capazes de descrever tais comportamentos, deve-se notar que vêm com um preço,
+sendo os erros associados a estes mesmos circuitos.
 
 \nocite{*}
 \bibliographystyle{sbc}
@@ -356,19 +492,17 @@ TODO
 \section*{Auto-Avaliação}
 
 Respostas:
-
-TODO
-% \begin{table}[H]
-%     \begin{tabular}{|c|c|} \hline
-%     \textbf{A} & \textbf{B}\\
-%     \hline
-%     1 & b \\ \hline
-%     2 & d \\ \hline
-%     3 & c \\ \hline
-%     4 & a \\ \hline
-%     5 & d \\ \hline
-%     \end{tabular}
-% \end{table}
+\begin{table}[H]
+     \begin{tabular}{|c|c|} \hline
+     \textbf{A} & \textbf{B}\\
+     \hline
+     1 & c \\ \hline
+     2 & a \\ \hline
+     3 & d \\ \hline
+     4 & a \\ \hline
+     5 & a \\ \hline
+     \end{tabular}
+\end{table}
 
 
 \end{document}
