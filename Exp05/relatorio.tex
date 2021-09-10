@@ -52,10 +52,10 @@ Circuitos Combinacionais: Codificador e Decodificador}
  \begin{abstract}
    TODO
  \end{abstract}
-\selectlanguage{brazil}
 
+\selectlanguage{brazil}
  \begin{resumo}
-   TODO
+   O presente relatório tem como objetivo a elaboração e análise de circuitos codificadores e decodificadores, sendo os codificadores compostos em sua entrada por 10 bits e saída de 4, já os decodificadores o inverso, ou seja, 4 bits de entrada e 10 de saída.
  \end{resumo}
 
 
@@ -64,12 +64,17 @@ Circuitos Combinacionais: Codificador e Decodificador}
 
 % Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
 
-TODO
+Codificadores tem como objetivo a simplificação de um conjunto de bits dados em uma versão simplificada sem perder a informação desejada, exemplo, se tivermos uma entrada de 10 bits poderíamos produzir saídas de 4 bits, mas observa-se que somente será possível se algumas das combinações de entrada obtiverem a mesma saída, porque para 10 bits existem $2^{10}$ combinações e sua saída por possuir 4 bits é capaz de produzir $2^{4}$ saídas.
+\cite{codificadores_mandelli}
+
+Diante deste caso existem duas possibilidades, ou de fato irão possuir mesmas saídas por opção ou para casos como estes, em que as entradas são diferentes mas as saídas são iguais, parte destas entradas será desconsiderada por serem irrevelante para o problema.
+
+Utilizando decodificadores temos o comportamento oposto ao codificador, então para um dado conjunto de informações simplificada ocorrerá a decomposição em uma maior quantidade de bits, exemplo, para uma entrada de 4 bits poderíamos ter uma decomposição em 10 bits, sendo este um comportamento desejado para a reconstituição de uma informação simplficada em sua original.
 
 \subsection{Objetivos}
 \label{sec:Objetivos}
 
-TODO
+Os textos subsequentes deste relatório tem como fim a elaboração de codificadores e decodificadores, sendo estes codificadores compostos em sua entradas por 10 bits e saída de 4 bits. Já os decodificadores serão de maneira oposta composto por entradas de 4 bits e saídas de 10 bits, como fim, por ambos circuitos possuirem lógica relacionada ocorrerá a codificação de uma informação e atráves do decodificador ocorrerá a reconstituição da informação.
 
 \subsection{Materiais}
 \label{sec:Materiais}
@@ -91,26 +96,26 @@ A seguir estão enumerados os materiais utilizados:
 Passaremos a apresentar os experimentos requeridos.
 
 % 2.1
-\subsection{Elaboração de Codificador}\label{sec:elaboração_codificador}
+\subsection{Elaboração de Codificador}\label{sec:2.1}
 
 Para a elaboração do circuito, deve-se analisar a seguinte tabela:
 \begin{table}[H]
     \centering
-    \caption{}
-    \begin{tabular}{|c|c|c|c|c|}\hline
-    \multicolumn{1}{|c|}{Entrada} & \multicolumn{4}{|c|}{Saida} \\\hline
-    \textbf{$ $} & \textbf{$A$} & \textbf{$B$} & \textbf{$C$} & \textbf{$D$} \\\hline
-    0 & 0 & 0 & 0 & 0 \\\hline
-    1 & 0 & 0 & 0 & 1\\\hline
-    2 & 0 & 0 & 1 & 1\\\hline
-    3 & 0 & 0 & 1 & 0\\\hline
-    4 & 0 & 1 & 1 & 0\\\hline
-    5 & 0 & 1 & 1 & 1\\\hline
-    6 & 0 & 1 & 0 & 1\\\hline
-    7 & 0 & 1 & 0 & 0\\\hline
-    8 & 1 & 1 & 0 & 0\\\hline
-    9 & 1 & 1 & 0 & 1\\\hline
-    \end{tabular}\label{tab:comparador_de_palavras_3_bits}
+    \caption{Tabela Verdade para o Decodificador}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c||c|c|c|c|}\hline
+    \multicolumn{10}{|c||}{Entradas} & \multicolumn{4}{|c|}{Saídas} \\\hline
+    \textbf{$e_{0}$} & \textbf{$e_{1}$} & \textbf{$e_{2}$} & \textbf{$e_{3}$} & \textbf{$e_{4}$} & \textbf{$e_{5}$} & \textbf{$e_{6}$} & \textbf{$e_{7}$} & \textbf{$e_{8}$} & \textbf{$e_{9}$} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} \\\hline
+    1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\hline
+    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\\hline
+    0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\\hline
+    0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\\hline
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0\\\hline
+    0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1\\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1\\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0\\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 0\\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 1\\\hline
+    \end{tabular}\label{tab:tabela_and}
 \end{table}
 
 Sendo que '0' é codificado como '0000000001', '1' como '0000000010', ... , '9' como '1000000000'.
@@ -125,7 +130,11 @@ F_{A}(e_{8}, e_{9}) = e_{8} + e_{9}
 
 Observação, é importante atentar-se ao fato de que em casos onde o valor selecionado não envolve '8' ou '9', obrigatoriamente $e_{8}=0$ e $e_{9}=0$, assim, \textbf{$A$} também será igual a 0.
 
-Utilizando raciocínio semelhante para outros, temos então que:
+Utilizando raciocínio semelhante para os demais pode ser elaborado outra das equações booleanas, temos:
+
+\begin{equation}
+F_{A}(e_{8}, e_{9}) = e_{8} + e_{9}
+\end{equation}
 
 \begin{equation}
 F_{B}(e_{4},e_{5},e_{6},e_{7},e_{8}) = e_{4}+e_{5}+e_{6}+e_{7}+e_{8}
@@ -139,22 +148,32 @@ F_{C}(e_{2},e_{3},e_{4},e_{5}) = e_{2}+e_{3}+e_{4}+e_{5}
 F_{D}(e_{1},e_{2},e_{5},e_{6},e_{9}) = e_{1}+e_{2}+e_{5}+e_{6}+e_{9}
 \end{equation}
 
-\begin{figure}[htp]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=12cm]{Exp05/2.1.png}
+    \includegraphics[width=10cm]{Exp05/2.1.png}
     \caption{Subcircuito Comparador}
-    \label{fig:galaxy}
+    \label{fig:subComparador2.1}
 \end{figure}
 
+Importante notar que não todas as saídas são descritas, pois, possuindo 10 bits de entrada, haverão $2^{10}$ de combinações, portanto haveriam $2^{10}$ de saídas, contudo nos atentamos a somente algumas, todas as outras são casos não relevantes para o problema em questão.
 
 % 2.2
-\subsection{Simulações do Codificador}\label{sec:encoder_simulations}
+\subsection{Simulações do Codificador}\label{sec:2.2}
+
+O diagrama esquemático será descrito por:
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{Exp05/2.2.png}
+    \caption{TODOOOOOOOOOOOO COLOCAR CAPTION}
+    \label{fig:2.2.png}
+\end{figure}
 
 Para conferir o vídeo deste experimento, acesse o seguinte link:
 \href{https://youtu.be/x9ct4AeliNU}{https://youtu.be/x9ct4AeliNU}
 
 % 2.3
-\subsection{Obtendo as funções booleandas para o decodificador}\label{sec:boolean_functions_decoder}
+\subsection{Obtendo as funções booleanas para o decodificador}\label{sec:2.3}
 
 Nesta seção temos por objetivo obter as funções booleanas para o decodificador
 de números em código decimal para números em código de Gray.
@@ -164,7 +183,7 @@ de números em código decimal para números em código de Gray.
     \caption{Tabela Verdade para o Decodificador}
     \begin{tabular}{|c|c|c|c||c|c|c|c|c|c|c|c|c|c|}\hline
     \multicolumn{4}{|c||}{Entradas} & \multicolumn{10}{|c|}{Saídas} \\\hline
-    \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} & \textbf{5} & \textbf{6} & \textbf{7} & \textbf{8} & \textbf{9} \\\hline
+    \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{$e_{0}$} & \textbf{$e_{1}$} & \textbf{$e_{2}$} & \textbf{$e_{3}$} & \textbf{$e_{4}$} & \textbf{$e_{5}$} & \textbf{$e_{6}$} & \textbf{$e_{7}$} & \textbf{$e_{8}$} & \textbf{$e_{9}$} \\\hline
     0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\\hline
     0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\\hline
     0 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\\hline
@@ -182,35 +201,54 @@ Analisando a tabela verdade, é fácil verificarmos quais devem ser as funções
 booleanas de cada saída. Reproduzimos em seguida cada uma delas:
 
 \begin{align}
-0 &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot \overline{D} \\
-1 &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot D \\
-2 &= \overline{A} \cdot \overline{B} \cdot C \cdot D \\
+e_{0} &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot \overline{D} \\
+e_{1} &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot D \\
+e_{2} &= \overline{A} \cdot \overline{B} \cdot C \cdot D \\
 3 &= \overline{A} \cdot \overline{B} \cdot C \cdot \overline{D} \\
-4 &= \overline{A} \cdot B \cdot C \cdot \overline{D} \\
-5 &= \overline{A} \cdot B \cdot C \cdot D \\
-6 &= \overline{A} \cdot B \cdot \overline{C} \cdot D \\
-7 &= \overline{A} \cdot B \cdot \overline{C} \cdot \overline{D} \\
-8 &= A \cdot B \cdot \overline{C} \cdot \overline{D} \\
-9 &= A \cdot B \cdot \overline{C} \cdot D
+e_{4} &= \overline{A} \cdot B \cdot C \cdot \overline{D} \\
+e_{5} &= \overline{A} \cdot B \cdot C \cdot D \\
+e_{6} &= \overline{A} \cdot B \cdot \overline{C} \cdot D \\
+e_{7} &= \overline{A} \cdot B \cdot \overline{C} \cdot \overline{D} \\
+e_{8} &= A \cdot B \cdot \overline{C} \cdot \overline{D} \\
+e_{9} &= A \cdot B \cdot \overline{C} \cdot D
 \end{align}
 
 TODO: terminar de escrever esse tópico
 
 % 2.4
-\subsection{Decodificador}\label{sec:todooo}
+\subsection{Decodificador}\label{sec:2.4}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Exp05/Exp5__2_4_wave.png}
+    \caption{Gráfico de Onda do \emph{Decodificador}}
+    \label{fig:Exp5__2_4_wave.png}
+\end{figure}
 
 Para conferir o vídeo deste experimento, acesse o seguinte link:
 \href{https://youtu.be/cj7vgZDZrKo}{https://youtu.be/cj7vgZDZrKo}
 
 % 2.5
-\subsection{Coder \& Decoder}\label{sec:ham}
+\subsection{Coder \& Decoder}\label{sec:2.5}
 
 Para conferir o vídeo deste experimento, acesse o seguinte link:
 \href{https://youtu.be/BpFrHE5Ggb8}{https://youtu.be/BpFrHE5Ggb8}
 
 \section{Análise dos Resultados}
-\label{sec:Resultados}
+\label{sec:resultados}
+TODO
 
+\subsection{Análise em \ref{sec:2.1} e \ref{sec:2.2}}\label{sec:analise2.1}
+
+Para o item 2.1 e 2.2 temos que de fato ocorreram os resultados esperados, concluindo que apesar da não utilização de soma de produtos e produtos de somas ainda assim pudemos descrever o comportamento desejado.
+
+\subsection{Análise em 2.3}\label{sec:analise2.2}
+TODO
+
+\subsection{Análise em 2.4}\label{sec:analise2.2}
+TODO
+
+\subsection{Análise em 2.5}\label{sec:analise2.2}
 TODO
 
 \section{Conclusão}
