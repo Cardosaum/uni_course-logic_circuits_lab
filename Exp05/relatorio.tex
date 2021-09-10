@@ -55,7 +55,10 @@ Circuitos Combinacionais: Codificador e Decodificador}
 
 \selectlanguage{brazil}
  \begin{resumo}
-   O presente relatório tem como objetivo a elaboração e análise de circuitos codificadores e decodificadores, sendo os codificadores compostos em sua entrada por 10 bits e saída de 4, já os decodificadores o inverso, ou seja, 4 bits de entrada e 10 de saída.
+   O presente relatório tem como objetivo a elaboração e análise de circuitos
+   codificadores e decodificadores, sendo os codificadores compostos em sua
+   entrada por 10 bits e saída de 4, já os decodificadores o inverso, ou seja, 4
+   bits de entrada e 10 de saída.
  \end{resumo}
 
 
@@ -64,17 +67,33 @@ Circuitos Combinacionais: Codificador e Decodificador}
 
 % Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
 
-Codificadores tem como objetivo a simplificação de um conjunto de bits dados em uma versão simplificada sem perder a informação desejada, exemplo, se tivermos uma entrada de 10 bits poderíamos produzir saídas de 4 bits, mas observa-se que somente será possível se algumas das combinações de entrada obtiverem a mesma saída, porque para 10 bits existem $2^{10}$ combinações e sua saída por possuir 4 bits é capaz de produzir $2^{4}$ saídas.
-\cite{codificadores_mandelli}
+Codificadores tem como objetivo a simplificação de um conjunto de bits dados em
+uma versão simplificada sem perder a informação desejada, exemplo, se tivermos
+uma entrada de 10 bits poderíamos produzir saídas de 4 bits, mas observa-se que
+somente será possível se algumas das combinações de entrada obtiverem a mesma
+saída, porque para 10 bits existem $2^{10}$ combinações e sua saída por possuir
+4 bits é capaz de produzir $2^{4}$ saídas. \cite{codificadores_mandelli}
 
-Diante deste caso existem duas possibilidades, ou de fato irão possuir mesmas saídas por opção ou para casos como estes, em que as entradas são diferentes mas as saídas são iguais, parte destas entradas será desconsiderada por serem irrevelante para o problema.
+Diante deste caso existem duas possibilidades, ou de fato irão possuir mesmas
+saídas por opção ou para casos como estes, em que as entradas são diferentes mas
+as saídas são iguais, parte destas entradas será desconsiderada por serem
+irrevelante para o problema.
 
-Utilizando decodificadores temos o comportamento oposto ao codificador, então para um dado conjunto de informações simplificada ocorrerá a decomposição em uma maior quantidade de bits, exemplo, para uma entrada de 4 bits poderíamos ter uma decomposição em 10 bits, sendo este um comportamento desejado para a reconstituição de uma informação simplficada em sua original.
+Utilizando decodificadores temos o comportamento oposto ao codificador, então
+para um dado conjunto de informações simplificada ocorrerá a decomposição em uma
+maior quantidade de bits, exemplo, para uma entrada de 4 bits poderíamos ter uma
+decomposição em 10 bits, sendo este um comportamento desejado para a
+reconstituição de uma informação simplficada em sua original.
 
 \subsection{Objetivos}
 \label{sec:Objetivos}
 
-Os textos subsequentes deste relatório tem como fim a elaboração de codificadores e decodificadores, sendo estes codificadores compostos em sua entradas por 10 bits e saída de 4 bits. Já os decodificadores serão de maneira oposta composto por entradas de 4 bits e saídas de 10 bits, como fim, por ambos circuitos possuirem lógica relacionada ocorrerá a codificação de uma informação e atráves do decodificador ocorrerá a reconstituição da informação.
+Os textos subsequentes deste relatório tem como fim a elaboração de
+codificadores e decodificadores, sendo estes codificadores compostos em sua
+entradas por 10 bits e saída de 4 bits. Já os decodificadores serão de maneira
+oposta composto por entradas de 4 bits e saídas de 10 bits, como fim, por ambos
+circuitos possuirem lógica relacionada ocorrerá a codificação de uma informação
+e atráves do decodificador ocorrerá a reconstituição da informação.
 
 \subsection{Materiais}
 \label{sec:Materiais}
@@ -118,19 +137,30 @@ Para a elaboração do circuito, deve-se analisar a seguinte tabela:
     \end{tabular}\label{tab:tabela_and}
 \end{table}
 
-Sendo que '0' é codificado como '0000000001', '1' como '0000000010', ... , '9' como '1000000000'.
-Temos que para cada 10 bits de entrada temos que somente 1 será dado como 1, por exemplo, não temos a entrada '0000000011'.
+Sendo que '0' é codificado como '0000000001', '1' como '0000000010', \ldots,
+'9' como '1000000000'. Temos que para cada 10 bits de entrada temos que somente
+1 será dado como 1, por exemplo, não temos a entrada '0000000011'.
 
-Denotando cada um dos 10 bits como $e_{9},e_{8},e_{7},e_{6},e_{5},e_{4},e_{3},e_{2},e_{1},e_{0}$. Assim, deve-se analisar também que cada bit também descreve seu respectivo valor, exemplo, $e_{8}$ descreve o símbolo '8', pois, quando $e_{8}=1$ temos que todos os outros serão iguais a 0, portanto, estaremos descrevendo o valor '8'.
+Denotando cada um dos 10 bits como
+$e_{9},e_{8},e_{7},e_{6},e_{5},e_{4},e_{3},e_{2},e_{1},e_{0}$. Assim, deve-se
+analisar também que cada bit também descreve seu respectivo valor, exemplo,
+$e_{8}$ descreve o símbolo '8', pois, quando $e_{8}=1$ temos que todos os outros
+serão iguais a 0, portanto, estaremos descrevendo o valor '8'.
 
-Para maior simplicidade podemos analisar o fato de que para a saída \textbf{$A$}, depende de somente as entradas $e_{8}$ e $e_{9}$, como cada caso irá ocorrer de maneira individual, \textbf{$A$} poderá ser descrito como:
+Para maior simplicidade podemos analisar o fato de que para a saída
+\textbf{$A$}, depende de somente as entradas $e_{8}$ e $e_{9}$, como cada caso
+irá ocorrer de maneira individual, \textbf{$A$} poderá ser descrito como:
+
 \begin{equation}
 F_{A}(e_{8}, e_{9}) = e_{8} + e_{9}
 \end{equation}
 
-Observação, é importante atentar-se ao fato de que em casos onde o valor selecionado não envolve '8' ou '9', obrigatoriamente $e_{8}=0$ e $e_{9}=0$, assim, \textbf{$A$} também será igual a 0.
+Observação, é importante atentar-se ao fato de que em casos onde o valor
+selecionado não envolve '8' ou '9', obrigatoriamente $e_{8}=0$ e $e_{9}=0$,
+assim, \textbf{$A$} também será igual a 0.
 
-Utilizando raciocínio semelhante para os demais pode ser elaborado outra das equações booleanas, temos:
+Utilizando raciocínio semelhante para os demais pode ser elaborado outra das
+equações booleanas, temos:
 
 \begin{equation}
 F_{A}(e_{8}, e_{9}) = e_{8} + e_{9}
@@ -155,7 +185,10 @@ F_{D}(e_{1},e_{2},e_{5},e_{6},e_{9}) = e_{1}+e_{2}+e_{5}+e_{6}+e_{9}
     \label{fig:subComparador2.1}
 \end{figure}
 
-Importante notar que não todas as saídas são descritas, pois, possuindo 10 bits de entrada, haverão $2^{10}$ de combinações, portanto haveriam $2^{10}$ de saídas, contudo nos atentamos a somente algumas, todas as outras são casos não relevantes para o problema em questão.
+Importante notar que não todas as saídas são descritas, pois, possuindo 10 bits
+de entrada, haverão $2^{10}$ de combinações, portanto haveriam $2^{10}$ de
+saídas, contudo nos atentamos a somente algumas, todas as outras são casos não
+relevantes para o problema em questão.
 
 % 2.2
 \subsection{Simulações do Codificador}\label{sec:2.2}
@@ -240,7 +273,9 @@ TODO
 
 \subsection{Análise em \ref{sec:2.1} e \ref{sec:2.2}}\label{sec:analise2.1}
 
-Para o item 2.1 e 2.2 temos que de fato ocorreram os resultados esperados, concluindo que apesar da não utilização de soma de produtos e produtos de somas ainda assim pudemos descrever o comportamento desejado.
+Para o item 2.1 e 2.2 temos que de fato ocorreram os resultados esperados,
+concluindo que apesar da não utilização de soma de produtos e produtos de somas
+ainda assim pudemos descrever o comportamento desejado.
 
 \subsection{Análise em 2.3}\label{sec:analise2.2}
 TODO
