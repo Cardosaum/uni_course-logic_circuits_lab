@@ -68,32 +68,43 @@ Circuitos Combinacionais: Codificador e Decodificador}
 % Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
 
 Codificadores tem como objetivo a simplificação de um conjunto de bits dados em
-uma versão simplificada sem perder a informação desejada, exemplo, se tivermos
-uma entrada de 10 bits poderíamos produzir saídas de 4 bits, mas observa-se que
-somente será possível se algumas das combinações de entrada obtiverem a mesma
-saída, porque para 10 bits existem $2^{10}$ combinações e sua saída por possuir
-4 bits é capaz de produzir $2^{4}$ saídas. \cite{codificadores_mandelli}
+uma versão simplificada sem perder a informação desejada; Por exemplo, se
+tivermos uma entrada de 10 bits poderíamos produzir saídas de 4 bits, mas
+observa-se que somente será possível se algumas das combinações de entrada
+obtiverem a mesma saída, porque para 10 bits existem $2^{10} = 1024$ combinações
+e sua saída por possuir 4 bits é capaz de produzir apenas $2^{4} = 16$ saídas.
+\cite{codificadores_mandelli}
 
-Diante deste caso existem duas possibilidades, ou de fato irão possuir mesmas
-saídas por opção ou para casos como estes, em que as entradas são diferentes mas
-as saídas são iguais, parte destas entradas será desconsiderada por serem
-irrevelante para o problema.
+Diante desse caso existem duas possibilidades: Ou de fato as saídas possuirão
+alguns resultados iguais para entradas distindas; Ou para casos como estes, em
+que as entradas são diferentes mas as saídas são iguais, parte destas entradas
+serão desconsideradas por serem irrevelantes para o problema (vide
+\cite{codificadores_e_decodificadores} para maiores informações).
 
 Utilizando decodificadores temos o comportamento oposto ao codificador, então
-para um dado conjunto de informações simplificada ocorrerá a decomposição em uma
-maior quantidade de bits, exemplo, para uma entrada de 4 bits poderíamos ter uma
-decomposição em 10 bits, sendo este um comportamento desejado para a
-reconstituição de uma informação simplficada em sua original.
+para um dado conjunto de informações simplificadas ocorrerá a decomposição em
+uma maior quantidade de bits; Por exemplo, para uma entrada de 4 bits poderíamos
+ter uma decomposição em 10 bits, sendo esse um comportamento desejado para a
+reconstituição de uma informação simplificada em sua original.
+
+\textbf{TODO: \emph{citar como isso pode ser útil para problemas da vida real,
+    mencionar o código de gray, sua conversão de decimal para binário, mencionar
+    benefícios de ter um conjunto de dados expresso de forma mais compacta (4
+    bits ao invés de 10), mencionar também como codificadores e decodificadores
+    podem auxiliar a conversão de dados em formato eficiente para o computador
+    (binário) em dados em formato legível para o ser humano (decimal). }}
 
 \subsection{Objetivos}
 \label{sec:Objetivos}
 
 Os textos subsequentes deste relatório tem como fim a elaboração de
 codificadores e decodificadores, sendo estes codificadores compostos em sua
-entradas por 10 bits e saída de 4 bits. Já os decodificadores serão de maneira
-oposta composto por entradas de 4 bits e saídas de 10 bits, como fim, por ambos
-circuitos possuirem lógica relacionada ocorrerá a codificação de uma informação
-e atráves do decodificador ocorrerá a reconstituição da informação.
+entradas por 10 bits e saída de 4 bits, sendo expressos no código de
+\emph{Gray}. Já os decodificadores serão de maneira oposta composto por entradas
+de 4 bits, no código de \emph{Gray}, e tendo por saída, dados de 10 bits; Como
+resultado, por ambos circuitos possuirem lógica relacionada ocorrerá a
+codificação de uma informação e atráves do decodificador ocorrerá a
+reconstituição da informação.
 
 \subsection{Materiais}
 \label{sec:Materiais}
