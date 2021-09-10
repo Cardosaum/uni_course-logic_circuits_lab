@@ -48,6 +48,7 @@
     "sec:2.3"
     "fig:Exp5__2_3_block.png"
     "sec:2.4"
+    "fig:Exp5__2_4_circuit.png"
     "fig:Exp5__2_4_wave.png"
     "sec:2.5"
     "sec:resultados"
