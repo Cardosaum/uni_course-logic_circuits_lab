@@ -57,8 +57,8 @@ Circuitos Combinacionais: Codificador e Decodificador}
  \begin{resumo}
    O presente relatório tem como objetivo a elaboração e análise de circuitos
    codificadores e decodificadores, sendo os codificadores compostos em sua
-   entrada por 10 bits e saída de 4, já os decodificadores o inverso, ou seja, 4
-   bits de entrada e 10 de saída.
+   entrada por $10$ bits e saída de $4$, já os decodificadores o inverso, ou
+   seja,$4$ bits de entrada e $10$ de saída.
  \end{resumo}
 
 
@@ -69,11 +69,11 @@ Circuitos Combinacionais: Codificador e Decodificador}
 
 Codificadores tem como objetivo a simplificação de um conjunto de bits dados em
 uma versão simplificada sem perder a informação desejada; Por exemplo, se
-tivermos uma entrada de 10 bits poderíamos produzir saídas de 4 bits, mas
+tivermos uma entrada de $10$ bits poderíamos produzir saídas de $4$ bits, mas
 observa-se que somente será possível se algumas das combinações de entrada
-obtiverem a mesma saída, porque para 10 bits existem $2^{10} = 1024$ combinações
-e sua saída por possuir 4 bits é capaz de produzir apenas $2^{4} = 16$ saídas.
-\cite{codificadores_mandelli}
+obtiverem a mesma saída, porque para $10$ bits existem $2^{10} = 1024$
+combinações e sua saída por possuir $4$ bits é capaz de produzir apenas
+$2^{4} = 16$ saídas. \cite{codificadores_mandelli}
 
 Diante desse caso existem duas possibilidades: Ou de fato as saídas possuirão
 alguns resultados iguais para entradas distindas; Ou para casos como estes, em
@@ -83,9 +83,9 @@ serão desconsideradas por serem irrevelantes para o problema (vide
 
 Utilizando decodificadores temos o comportamento oposto ao codificador, então
 para um dado conjunto de informações simplificadas ocorrerá a decomposição em
-uma maior quantidade de bits; Por exemplo, para uma entrada de 4 bits poderíamos
-ter uma decomposição em 10 bits, sendo esse um comportamento desejado para a
-reconstituição de uma informação simplificada em sua original.
+uma maior quantidade de bits; Por exemplo, para uma entrada de $4$ bits
+poderíamos ter uma decomposição em $10$ bits, sendo esse um comportamento
+desejado para a reconstituição de uma informação simplificada em sua original.
 
 \textbf{TODO: \emph{citar como isso pode ser útil para problemas da vida real,
     mencionar o código de gray, sua conversão de decimal para binário, mencionar
@@ -99,10 +99,10 @@ reconstituição de uma informação simplificada em sua original.
 
 Os textos subsequentes deste relatório tem como fim a elaboração de
 codificadores e decodificadores, sendo estes codificadores compostos em sua
-entradas por 10 bits e saída de 4 bits, sendo expressos no código de
+entradas por $10$ bits e saída de $4$ bits, sendo expressos no código de
 \emph{Gray}. Já os decodificadores serão de maneira oposta composto por entradas
-de 4 bits, no código de \emph{Gray}, e tendo por saída, dados de 10 bits; Como
-resultado, por ambos circuitos possuirem lógica relacionada ocorrerá a
+de $4$ bits, no código de \emph{Gray}, e tendo por saída, dados de $10$ bits;
+Como resultado, por ambos circuitos possuirem lógica relacionada ocorrerá a
 codificação de uma informação e atráves do decodificador ocorrerá a
 reconstituição da informação.
 
@@ -148,15 +148,17 @@ Para a elaboração do circuito, deve-se analisar a seguinte tabela:
     \end{tabular}\label{tab:tabela_and}
 \end{table}
 
-Sendo que '0' é codificado como '0000000001', '1' como '0000000010', \ldots,
-'9' como '1000000000'. Temos que para cada 10 bits de entrada temos que somente
-1 será dado como 1, por exemplo, não temos a entrada '0000000011'.
+Sendo que ``$0$'' é codificado como ``$0000000001$'', ``$1$'' como
+``$0000000010$'', \ldots, ``$9$'' como ``$1000000000$''. Temos que para cada
+$10$ bits de entrada temos que somente $1$ será dado como $1$, por exemplo, não
+temos a entrada ``$0000000011$''.
 
-Denotando cada um dos 10 bits como
+Denotando cada um dos $10$ bits como
 $e_{9},e_{8},e_{7},e_{6},e_{5},e_{4},e_{3},e_{2},e_{1},e_{0}$. Assim, deve-se
 analisar também que cada bit também descreve seu respectivo símbolo; Por
-exemplo, $e_{8}$ descreve o símbolo '8', pois, quando $e_{8}=1$ temos que todos
-os outros serão iguais a 0, portanto, estaremos descrevendo o símbolo '8'.
+exemplo, $e_{8}$ descreve o símbolo ``$8$'', pois, quando $e_{8}=1$ temos que
+todos os outros serão iguais a $0$, portanto, estaremos descrevendo o símbolo
+``$8$''.
 
 Para maior simplicidade podemos analisar o fato de que para a saída
 \textbf{$A$}, depende de somente as entradas $e_{8}$ e $e_{9}$, como cada caso
@@ -167,8 +169,8 @@ F_{A}(e_{8}, e_{9}) = e_{8} + e_{9}
 \end{equation}
 
 Observação, é importante atentar-se ao fato de que em casos onde o valor
-selecionado não envolve ``$8$'' ou ``$9$'', obrigatoriamente $e_{8}=0$ e $e_{9}=0$,
-assim, \textbf{$A$} também será igual a $0$.
+selecionado não envolve ``$8$'' ou ``$9$'', obrigatoriamente $e_{8}=0$ e
+$e_{9}=0$, assim, \textbf{$A$} também será igual a $0$.
 
 Utilizando raciocínio semelhante para os demais pode ser elaborado outra das
 equações booleanas, temos:
@@ -187,8 +189,8 @@ F_{D}(e_{1},e_{2},e_{5},e_{6},e_{9}) &= e_{1}+e_{2}+e_{5}+e_{6}+e_{9}
     \label{fig:subComparador2.1}
 \end{figure}
 
-Importante notar que não todas as saídas são descritas, pois, possuindo 10 bits
-de entrada, haverão $2^{10}$ de combinações, portanto haveriam $2^{10}$ de
+Importante notar que não todas as saídas são descritas, pois, possuindo $10$
+bits de entrada, haverão $2^{10}$ de combinações, portanto haveriam $2^{10}$ de
 saídas, contudo nos atentamos a somente algumas, todas as outras são casos não
 relevantes para o problema em questão.
 
