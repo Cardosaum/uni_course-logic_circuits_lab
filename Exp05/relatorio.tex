@@ -215,8 +215,68 @@ Para conferir o vídeo deste experimento, acesse o seguinte link:
 Nesta seção temos por objetivo obter as funções booleanas para o decodificador
 de números em código de \emph{Gray} para números em decimal.
 
+Como explicado em~\cite{codificadores_mandelli}, e com em maiores detalhes em
+~\cite{codificadores_e_decodificadores}, para criarmos uma função que funcione
+como decodificador, precisaremos obter uma função separada para cada um dos
+outputs existentes. Assim sendo, teremos um total de $10$ funções, uma para cada
+símbolo do código decimal. E, para obtermos as funções individuais, devemos
+considerar quais inputs no código de \emph{Gray} produzirão o resultado para o
+símbolo em decimal com valor lógico $1$.
 
+Tendo por base o código de \emph{Gray} especificado
+em~\cite{gray_code_table}, é fácil
+verificarmos quais devem ser as funções booleanas de cada saída. Reproduzimos em
+seguida cada uma delas:
 
+\begin{align}
+e_{0} &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot \overline{D} \\
+e_{1} &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot D \\
+e_{2} &= \overline{A} \cdot \overline{B} \cdot C \cdot D \\
+e_{3} &= \overline{A} \cdot \overline{B} \cdot C \cdot \overline{D} \\
+e_{4} &= \overline{A} \cdot B \cdot C \cdot \overline{D} \\
+e_{5} &= \overline{A} \cdot B \cdot C \cdot D \\
+e_{6} &= \overline{A} \cdot B \cdot \overline{C} \cdot D \\
+e_{7} &= \overline{A} \cdot B \cdot \overline{C} \cdot \overline{D} \\
+e_{8} &= A \cdot B \cdot \overline{C} \cdot \overline{D} \\
+e_{9} &= A \cdot B \cdot \overline{C} \cdot D
+\end{align}
+
+É interessante notarmos que não mencionamos sobre valores \emph{don't care} na
+tabela, mas eles existem, e são referentes a todas as entradas que não
+correspondam ao valores dentro do intervalo $0 \leq x \leq 9$. Teoricamente
+poderíamos tentar otimizar as funções apresentadas anteriormente, fazendo uso de
+métodos como mapa de Karnaugh ou Quine-McCluskey, mas fazendo isso teríamos um
+circuito com um delay um pouco maior, devido ao fato de haverem mais portas
+lógicas acopladas, aumentando o caminho crítico do circuito, assim como
+explicado em~\cite{codificadores_e_decodificadores}
+e~\cite{codificadores_mandelli}. Optamos por ter um delay menor no circuito
+final.
+
+Agora, de posse das funções finais para cada um dos outputs esperados, podemos
+criar um circuito lógico que satisfaça as referidas funções booleanas. O
+mapeamento de funções para portas lógicas é bem direto nesse caso, pois é
+constituido apenas de portas \textbf{AND} e \textbf{NOT}, assim como é possível
+observar na figura \ref{fig:Exp5__2_3_block.png}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Exp05/Exp5__2_3_block.png}
+    \caption{Circuito Lógico para o \emph{Decodificador}}
+    \label{fig:Exp5__2_3_block.png}
+\end{figure}
+
+Assim, concluímos as etapas de obtenção das funções booleanas para o
+decodificador e também da criação do diagrama lógico total.
+
+% 2.4
+\subsection{Decodificador}\label{sec:2.4}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Exp05/Exp5__2_4_wave.png}
+    \caption{Gráfico de Onda do \emph{Decodificador}}
+    \label{fig:Exp5__2_4_wave.png}
+\end{figure}
 
 \begin{table}[H]
     \centering
@@ -237,33 +297,7 @@ de números em código de \emph{Gray} para números em decimal.
     \end{tabular}\label{tab:tabela_and}
 \end{table}
 
-Analisando a tabela verdade, é fácil verificarmos quais devem ser as funções
-booleanas de cada saída. Reproduzimos em seguida cada uma delas:
-
-\begin{align}
-e_{0} &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot \overline{D} \\
-e_{1} &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot D \\
-e_{2} &= \overline{A} \cdot \overline{B} \cdot C \cdot D \\
-3 &= \overline{A} \cdot \overline{B} \cdot C \cdot \overline{D} \\
-e_{4} &= \overline{A} \cdot B \cdot C \cdot \overline{D} \\
-e_{5} &= \overline{A} \cdot B \cdot C \cdot D \\
-e_{6} &= \overline{A} \cdot B \cdot \overline{C} \cdot D \\
-e_{7} &= \overline{A} \cdot B \cdot \overline{C} \cdot \overline{D} \\
-e_{8} &= A \cdot B \cdot \overline{C} \cdot \overline{D} \\
-e_{9} &= A \cdot B \cdot \overline{C} \cdot D
-\end{align}
-
-TODO: terminar de escrever esse tópico
-
-% 2.4
-\subsection{Decodificador}\label{sec:2.4}
-
-\begin{figure}[htp]
-    \centering
-    \includegraphics[width=12cm]{Exp05/Exp5__2_4_wave.png}
-    \caption{Gráfico de Onda do \emph{Decodificador}}
-    \label{fig:Exp5__2_4_wave.png}
-\end{figure}
+Analisando a tabela verdade,
 
 Para conferir o vídeo deste experimento, acesse o seguinte link:
 \href{https://youtu.be/cj7vgZDZrKo}{https://youtu.be/cj7vgZDZrKo}
