@@ -89,17 +89,59 @@ A seguir estão enumerados os materiais utilizados:
 Passaremos a apresentar os experimentos requeridos.
 
 % 2.1
-\subsection{Obtendo as funções booleandas para o codificador}\label{sec:boolean_functions_encoder}
+\subsection{Elaboração de Codificador}\label{sec:elaboração_codificador}
 
-Nesta seção temos por objetivo obter as funções booleanas para o codificador de
-números em código decimal para números em código de Gray.
+Para a elaboração do circuito, deve-se analisar a seguinte tabela:
+\begin{table}[H]
+    \centering
+    \caption{}
+    \begin{tabular}{|c|c|c|c|c|}\hline
+    \multicolumn{1}{|c|}{Entrada} & \multicolumn{4}{|c|}{Saida} \\\hline
+    \textbf{$ $} & \textbf{$A$} & \textbf{$B$} & \textbf{$C$} & \textbf{$D$} \\\hline
+    0 & 0 & 0 & 0 & 0 \\\hline
+    1 & 0 & 0 & 0 & 1\\\hline
+    2 & 0 & 0 & 1 & 1\\\hline
+    3 & 0 & 0 & 1 & 0\\\hline
+    4 & 0 & 1 & 1 & 0\\\hline
+    5 & 0 & 1 & 1 & 1\\\hline
+    6 & 0 & 1 & 0 & 1\\\hline
+    7 & 0 & 1 & 0 & 0\\\hline
+    8 & 1 & 1 & 0 & 0\\\hline
+    9 & 1 & 1 & 0 & 1\\\hline
+    \end{tabular}\label{tab:comparador_de_palavras_3_bits}
+\end{table}
 
-Notamos inicialmente que o código decimal de input, que é representado por 10
-símbolos diferentes, possui 10 bits como input. Dessa forma, para cada um dos 4
-bits de output do código de Gray deveremos criar uma tabela verdade que contenha
-$2^{10} = 1024$ linhas. Uma tabela desse tamanho é com certeza muito grande.
-Assim, podemos escolher uma forma alternativa para a obtenção da função
-booleana. Como sabemos que todas as outras combinações que não sejam correspondentes ao
+Sendo que '0' é codificado como '0000000001', '1' como '0000000010', ... , '9' como '1000000000'.
+Temos que para cada 10 bits de entrada temos que somente 1 será dado como 1, por exemplo, não temos a entrada '0000000011'.
+
+Denotando cada um dos 10 bits como $e_{9},e_{8},e_{7},e_{6},e_{5},e_{4},e_{3},e_{2},e_{1},e_{0}$. Assim, deve-se analisar também que cada bit também descreve seu respectivo valor, exemplo, $e_{8}$ descreve o símbolo '8', pois, quando $e_{8}=1$ temos que todos os outros serão iguais a 0, portanto, estaremos descrevendo o valor '8'.
+
+Para maior simplicidade podemos analisar o fato de que para a saída \textbf{$A$}, depende de somente as entradas $e_{8}$ e $e_{9}$, como cada caso irá ocorrer de maneira individual, \textbf{$A$} poderá ser descrito como:
+\begin{equation}
+F_{A}(e_{8}, e_{9}) = e_{8} + e_{9}
+\end{equation}
+
+Utilizando raciocínio semelhante para outros, temos então que:
+
+\begin{equation}
+F_{B}(e_{4},e_{5},e_{6},e_{7},e_{8}) = e_{4}+e_{5}+e_{6}+e_{7}+e_{8}
+\end{equation}
+
+\begin{equation}
+F_{C}(e_{2},e_{3},e_{4},e_{5}) = e_{2}+e_{3}+e_{4}+e_{5}
+\end{equation}
+
+\begin{equation}
+F_{D}(e_{1},e_{2},e_{5},e_{6},e_{9}) = e_{1}+e_{2}+e_{5}+e_{6}+e_{9}
+\end{equation}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Exp05/2.1.png}
+    \caption{Subcircuito Comparador}
+    \label{fig:galaxy}
+\end{figure}
+
 
 % 2.3
 \subsection{Obtendo as funções booleandas para o decodificador}\label{sec:boolean_functions_decoder}
@@ -132,20 +174,20 @@ booleanas de cada saída. Reproduzimos em seguida cada uma delas:
 \begin{align}
 0 &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot \overline{D} \\
 1 &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot D \\
-2 &= \overline{A} \cdot \overline{B} C \cdot D \\
-3 &= \overline{A} \cdot \overline{B} \cdot C\overline{D} \\
+2 &= \overline{A} \cdot \overline{B} \cdot C \cdot D \\
+3 &= \overline{A} \cdot \overline{B} \cdot C \cdot \overline{D} \\
 4 &= \overline{A} \cdot B \cdot C \cdot \overline{D} \\
 5 &= \overline{A} \cdot B \cdot C \cdot D \\
 6 &= \overline{A} \cdot B \cdot \overline{C} \cdot D \\
 7 &= \overline{A} \cdot B \cdot \overline{C} \cdot \overline{D} \\
 8 &= A \cdot B \cdot \overline{C} \cdot \overline{D} \\
-9 &= A \codt B \cdot \overline{C} \cdot D
+9 &= A \cdot B \cdot \overline{C} \cdot D
 \end{align}
 
-TODO: terminanar de escrever esse tópico
+TODO: terminar de escrever esse tópico
 
 % 2.4
-\subsection{}\label{sec:boolean_functions_decoder}
+\subsection{Decodificador}\label{sec:boolean_functions_decoder}
 
 
 
@@ -170,18 +212,19 @@ TODO
 
 Respostas:
 
-TODO
-% \begin{table}[H]
-%      \begin{tabular}{|c|c|} \hline
-%      \textbf{A} & \textbf{B}\\
-%      \hline
-%      1 & c \\ \hline
-%      2 & a \\ \hline
-%      3 & d \\ \hline
-%      4 & a \\ \hline
-%      5 & a \\ \hline
-%      \end{tabular}
-% \end{table}
+\begin{table}[H]
+      \begin{tabular}{|c|c|} \hline
+      \textbf{A} & \textbf{B}\\
+      \hline
+      1 & c \\ \hline
+      2 & c \\ \hline
+      3 & d \\ \hline
+      4 & a \\ \hline
+      5 & a \\ \hline
+      6 & a \\ \hline
+      7 & a \\ \hline
+      \end{tabular}
+\end{table}
 
 
 \end{document}
