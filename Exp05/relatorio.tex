@@ -318,7 +318,7 @@ que pode ser visualizado na figura~\ref{fig:Exp5__2_4_wave.png}.
 De posse das informações na figura \ref{fig:Exp5__2_4_wave.png}, podemos
 preencher a tabela verdade para esse decodificador; Levando em conta os inputs
 válidos, inválidos e os valores \emph{don't care}, chegamos à
-tabela~\ref{tab:truth_table_decoder}
+tabela~\ref{tab:truth_table_decoder}.
 
 \begin{table}[H]
     \centering
@@ -350,8 +350,6 @@ Assim, concluímos as simulações para o circuito do decodificador.
 Para conferir o vídeo deste experimento, acesse o seguinte link:
 \href{https://youtu.be/elA_wvxQr8o}{https://youtu.be/elA_wvxQr8o}
 
-\textbf{TODO: REUPAR O VÍDEO, USANDO O CIRCUITO NOVO}
-
 % 2.5
 \subsection{Integração de \emph{Codificador} e \emph{Decodificador}}\label{sec:2.5}
 
@@ -375,7 +373,10 @@ vídeo do experimento, que pode ser acessado pelo seguinte link:
 
 \section{Análise dos Resultados}
 \label{sec:resultados}
-TODO
+Todos os tópicos apresentados foram implementados de forma satisfatória, assim
+como requisitado. Passaremos agora às considerações finais de cada um dos
+tópicos de forma individual e, por último, faremos uma avaliação do conjunto de
+experimentos deste relatório.
 
 \subsection{Análise em \ref{sec:2.1} e \ref{sec:2.2}}\label{sec:analise2.1}
 
@@ -411,15 +412,26 @@ que tínhamos na saída, e de fato obtivemos tal comportamento.
 \section{Conclusão}
 \label{sec:Conclusao}
 
-Temos por fim que de fato é pudemos descrever e elaborar codificadores e
-decodificadores, possuindo o comportamento esperado, devemos nos atentar que
-apesar da comprovação e elaboração dos circuitos estes estão limitados ao escopo
-deste relatório, não descrevemos generalizações que aplicam-se a todos
-codificadores e decodificadores.
+Temos, por fim, que de fato pudemos descrever e elaborar codificadores e
+decodificadores, possuindo o comportamento esperado. Devemos nos atentar ao fato
+de que, apesar da comprovação e elaboração dos circuitos, esses estão limitados
+ao escopo deste relatório, não descrevemos generalizações que aplicam-se a todos
+os possíveis codificadores e decodificadores.
 
 É necessário observar também que além da comprovação de funcionamento foi
 possível compreender que codificadores e decodificadores possuem comportamentos
 opostos, assim descrito no último item.
+
+Foi interessante notarmos também como pudemos, de forma relativamente simples,
+converter codificações de dados distintas, e, de certa forma, até fazermos
+compressão e expansão de dados, haja vista que criamos um circuito que pode
+livremente converter dados com códigos diferentes representados em $4$ bits (o
+código de \emph{Gray}) e também os símbolos do sistema decimal (representados
+com $10$ bits). Assim, pudemos demonstrar de forma prática alguns dos pontos
+mencionados na introdução sobre a importância prática de codificadores e
+decodificadores como sistemas que permitem conversão entre distintos formatos de
+codificações e também como forma de circuito que permite compressão e expansão
+de dados.
 
 
 \nocite{*}
@@ -433,9 +445,8 @@ opostos, assim descrito no último item.
 
 Respostas:
 
-\textbf{TODO: PREENCHER AS RESPOSTAS CORRETAMENTE}
 \begin{table}[H]
-      \begin{tabular}{|c|c|} \hline
+      \begin{tabular}{|c|l|} \hline
       \textbf{Questão} & \textbf{Resposta}\\
       \hline
       1 & c \\ \hline
@@ -443,9 +454,9 @@ Respostas:
       3 & a \\ \hline
       4 & b \\ \hline
       5 & c \\ \hline
-      6 & e \\ \hline
-      7 & b \\ \hline
-      8 & f \\ \hline
+      6 & e $\rightarrow$ \textbf{NOT} \emph{A} defeituosa, sempre com nível $0$ na saída \\ \hline
+      7 & b $\rightarrow$ Porta \textbf{NOT} \emph{D} defeituosa, sempre em $1$ \\ \hline
+      8 & f $\rightarrow$ Porta \textbf{NOT} \emph{A} defeituosa, sempre em $1$ \\ \hline
       \end{tabular}
 \end{table}
 
