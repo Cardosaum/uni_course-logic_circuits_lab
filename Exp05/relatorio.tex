@@ -50,7 +50,13 @@ Circuitos Combinacionais: Codificador e Decodificador}
 
 \selectlanguage{american}
  \begin{abstract}
-   TODO
+   The current report aims to build and analize logic circuits that implement
+   encoder and decoder functionalities; Having encoders with $10$ bits for input
+   and $4$ bits as their output, while decoders with $4$ bits for input and $10$
+   bits for output. We also discuss about the importance of encoders and
+   decoders, a few of their applications in real world problems and finally the
+   implementation of a conversor of \emph{Gray} code values into symbols of the
+   decimal sistem.
  \end{abstract}
 
 \selectlanguage{brazil}
@@ -58,7 +64,10 @@ Circuitos Combinacionais: Codificador e Decodificador}
    O presente relatório tem como objetivo a elaboração e análise de circuitos
    codificadores e decodificadores, sendo os codificadores compostos em sua
    entrada por $10$ bits e saída de $4$, já os decodificadores o inverso, ou
-   seja,$4$ bits de entrada e $10$ de saída.
+   seja,$4$ bits de entrada e $10$ de saída. Abordamos também a importância de
+   codificadores e decodificadores, algumas de suas aplicações em problemas
+   reais e também a implementação de um conversor de valores no código de
+   \emph{Gray} para símbolos do sistema decimal.
  \end{resumo}
 
 
@@ -87,12 +96,24 @@ uma maior quantidade de bits; Por exemplo, para uma entrada de $4$ bits
 poderíamos ter uma decomposição em $10$ bits, sendo esse um comportamento
 desejado para a reconstituição de uma informação simplificada em sua original.
 
-\textbf{TODO: \emph{citar como isso pode ser útil para problemas da vida real,
-    mencionar o código de gray, sua conversão de decimal para binário, mencionar
-    benefícios de ter um conjunto de dados expresso de forma mais compacta (4
-    bits ao invés de 10), mencionar também como codificadores e decodificadores
-    podem auxiliar a conversão de dados em formato eficiente para o computador
-    (binário) em dados em formato legível para o ser humano (decimal). }}
+Os circuitos que implementam funcionalidades de codificadores e decodificadores
+são muito úteis por permitirem, assim como o nome sugere, a conversão de uma
+forma de codificação de dados em outra e, dessa forma, proporciona uma
+capacidade de pessoas e máquinas operarem com dados. Tomemos por exemplo o fato
+de que, para o computador, é muito conveniente que os dados sejam manipulados na
+forma de números binários (isso permite que circuitos lógicos e elétricos sejam
+construídos com maior resistência a ruído); Entretanto, os computadores são
+apenas ferramentas, e quem de fato fará a inperpretação dos dados é um ser
+humano, que opera de forma mais comum com números de base decimal. Tal conflito
+entre diferentes codificações de dados pode ser facilmente resolvido com
+codificadores e decodificadores, que transformam dados em base binária para
+decimal e vice-versa. Esse exemplo foi, entretanto, admitidamente simplista.
+Existem muitas outras aplicações importantes para codificadores e
+decodificadores, como por exemplo compressão de dados (transformando inputs de
+tamanho $2^{n}$ em outputs com tamanho $n$), conversão de dados, entre outros.
+
+Neste relatório, nos debruçaremos principalmente sobre a conversão de dados no
+código de \emph{Gray} para símbolos no sistema decimal e vice-versa.
 
 \subsection{Objetivos}
 \label{sec:Objetivos}
@@ -202,7 +223,7 @@ O diagrama esquemático será descrito por:
 \begin{figure}[H]
     \centering
     \includegraphics[width=12cm]{Exp05/2.2.png}
-    \caption{TODOOOOOOOOOOOO COLOCAR CAPTION}
+    \caption{Gráfico em forma de onda para o circuito do \emph{Codificador}}
     \label{fig:2.2.png}
 \end{figure}
 
@@ -294,6 +315,11 @@ que pode ser visualizado na figura~\ref{fig:Exp5__2_4_wave.png}.
     \label{fig:Exp5__2_4_wave.png}
 \end{figure}
 
+De posse das informações na figura \ref{fig:Exp5__2_4_wave.png}, podemos
+preencher a tabela verdade para esse decodificador; Levando em conta os inputs
+válidos, inválidos e os valores \emph{don't care}, chegamos à
+tabela~\ref{tab:truth_table_decoder}
+
 \begin{table}[H]
     \centering
     \caption{Tabela Verdade para o Decodificador}
@@ -310,18 +336,41 @@ que pode ser visualizado na figura~\ref{fig:Exp5__2_4_wave.png}.
     0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\\hline
     1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\\hline
     1 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\\hline
-    \end{tabular}\label{tab:tabela_and}
+    1 & 1 & 1 & 1 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 1 & 1 & 0 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 0 & 1 & 0 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 0 & 1 & 1 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 0 & 0 & 1 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 0 & 0 & 0 & * & * & * & * & * & * & * & * & * & * \\\hline
+    \end{tabular}\label{tab:truth_table_decoder}
 \end{table}
 
-Analisando a tabela verdade,
+Assim, concluímos as simulações para o circuito do decodificador.
 
 Para conferir o vídeo deste experimento, acesse o seguinte link:
-\href{https://youtu.be/cj7vgZDZrKo}{https://youtu.be/cj7vgZDZrKo}
+\href{https://youtu.be/elA_wvxQr8o}{https://youtu.be/elA_wvxQr8o}
+
+\textbf{TODO: REUPAR O VÍDEO, USANDO O CIRCUITO NOVO}
 
 % 2.5
-\subsection{Coder \& Decoder}\label{sec:2.5}
+\subsection{Integração de \emph{Codificador} e \emph{Decodificador}}\label{sec:2.5}
 
-Para conferir o vídeo deste experimento, acesse o seguinte link:
+Para finalizarmos este esperimento, realizaremos a integração entre o
+codificador, feito no item~\ref{sec:2.2} e o decodificador do
+item~\ref{sec:2.4}.
+
+A montagem final, integrando todos os circuitos, pode ser visualizada na
+figura~\ref{fig:Exp5__2_5_circuit.png}:
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Exp05/Exp5__2_5_circuit.png}
+    \caption{Circuito de \emph{Codificador} e \emph{Decodificador} integrados}
+    \label{fig:Exp5__2_5_circuit.png}
+\end{figure}
+
+Agora, para a visualização do funcionamento do circuito, disponibilizamos o
+vídeo do experimento, que pode ser acessado pelo seguinte link:
 \href{https://youtu.be/BpFrHE5Ggb8}{https://youtu.be/BpFrHE5Ggb8}
 
 \section{Análise dos Resultados}
@@ -330,23 +379,48 @@ TODO
 
 \subsection{Análise em \ref{sec:2.1} e \ref{sec:2.2}}\label{sec:analise2.1}
 
-Para o item 2.1 e 2.2 temos que de fato ocorreram os resultados esperados,
+Para os itens 2.1 e 2.2 temos que de fato ocorreram os resultados esperados,
 concluindo que apesar da não utilização de soma de produtos e produtos de somas
-ainda assim pudemos descrever o comportamento desejado.
+ainda assim pudemos descrever o comportamento desejado, ou seja, o codificador
+simplificou as entradas a saídas que descrevem representações do código de gray,
+sendo que estas mesmas entradas são descritas por símbolos decimais, que por sua
+vez são descritos através da composição de 10 bits.
 
-\subsection{Análise em 2.3}\label{sec:analise2.2}
-TODO
+\subsection{Análise em \ref{sec:2.3} e \ref{sec:2.4}}\label{sec:analise2.4}
 
-\subsection{Análise em 2.4}\label{sec:analise2.2}
-TODO
+Para os itens 2.3 e 2.4, pudemos a inicio teorizar o circuito utilizado e então
+comprovar sua eficácia, assim, ao ser colocado em prática foi possível a
+conclusão de seu real funcionamento, sendo de fato o esperado.
 
-\subsection{Análise em 2.5}\label{sec:analise2.2}
-TODO
+\subsection{Análise em \ref{sec:2.5}}\label{sec:analise2.5}
+
+Dado que os circuitos elaborados nas seções anteriores tiveram o comportamento
+desejado, temos que por fim ao criarmos uma entrada de um codificador descrito
+por funções do tipo $f_{k}(\text{\emph{entrada}}) = \text{\emph{saída}}$ (onde
+$k \in \{A,B,C,D\}$), temos então que ao invertermos esta função, ou seja,
+$g_{k}(\text{\emph{saída}}) = \text{\emph{entrada}}$, ao realizarmos a
+composição de funções, ou seja,
+$g_{k} \circ f_{k}(\text{\emph{entrada}}) = g(f(\text{\emph{entrada}}))$ teremos
+que $g(f(\text{\emph{entrada}})) = \text{\emph{entrada}}$.
+
+Nos experimentos realizados, temos que o codificador produz o comportamento
+inverso daquela do decodificador, podendo ser aplicado o mesmo raciocínio a
+saídas esperadas, temos que ao associá-los como resultado deverá haver o mesmo
+que tínhamos na saída, e de fato obtivemos tal comportamento.
 
 \section{Conclusão}
 \label{sec:Conclusao}
 
-TODO
+Temos por fim que de fato é pudemos descrever e elaborar codificadores e
+decodificadores, possuindo o comportamento esperado, devemos nos atentar que
+apesar da comprovação e elaboração dos circuitos estes estão limitados ao escopo
+deste relatório, não descrevemos generalizações que aplicam-se a todos
+codificadores e decodificadores.
+
+É necessário observar também que além da comprovação de funcionamento foi
+possível compreender que codificadores e decodificadores possuem comportamentos
+opostos, assim descrito no último item.
+
 
 \nocite{*}
 \bibliographystyle{sbc}
@@ -359,17 +433,19 @@ TODO
 
 Respostas:
 
+\textbf{TODO: PREENCHER AS RESPOSTAS CORRETAMENTE}
 \begin{table}[H]
       \begin{tabular}{|c|c|} \hline
-      \textbf{A} & \textbf{B}\\
+      \textbf{Questão} & \textbf{Resposta}\\
       \hline
       1 & c \\ \hline
       2 & c \\ \hline
-      3 & d \\ \hline
-      4 & a \\ \hline
-      5 & a \\ \hline
-      6 & a \\ \hline
-      7 & a \\ \hline
+      3 & a \\ \hline
+      4 & b \\ \hline
+      5 & c \\ \hline
+      6 & e \\ \hline
+      7 & b \\ \hline
+      8 & f \\ \hline
       \end{tabular}
 \end{table}
 

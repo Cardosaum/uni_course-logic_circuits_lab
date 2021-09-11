@@ -50,10 +50,13 @@
     "sec:2.4"
     "fig:Exp5__2_4_circuit.png"
     "fig:Exp5__2_4_wave.png"
+    "tab:truth_table_decoder"
     "sec:2.5"
+    "fig:Exp5__2_5_circuit.png"
     "sec:resultados"
     "sec:analise2.1"
-    "sec:analise2.2"
+    "sec:analise2.4"
+    "sec:analise2.5"
     "sec:Conclusao")
    (LaTeX-add-bibliographies))
  :latex)
