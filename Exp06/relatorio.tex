@@ -23,160 +23,442 @@
 \usepackage{algorithmic}
 \usepackage{algorithm}
 \usepackage{hyperref}
-     
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage[shortlabels]{enumitem}
+
 \sloppy
 
 
-\title{Experimento X\\ 
-Circuitos Combinacionais: Multiplexadores}
+\title{Experimento 5\\
+Circuitos Combinacionais: Codificador e Decodificador}
 
-\author{Aluno 1, 10/0012345\\
-        Aluno 2,  12/0123456\\
-        Grupo B1
-%        Aluno 3, 11/1029881
+\author{Matheus Cardoso de Souza, 202033507\\
+        Ualiton Ventura da Silva, 202033580\\
+        Grupo G42
 }
 
 %%%% LEMBRE-SE DE MUDAR O GRUPO NA LINHA ABAIXO!!!!! %%%%%%
 \address{Dep. Ciência da Computação -- Universidade de Brasília (UnB)\\
   CIC0231 - Laboratório de Circuitos Lógicos
-  \email{aluno1@gmail.com, aluno2@hotmail.com}
+  \email{matheus-cardoso.mc@aluno.unb.br, 202033580@aluno.unb.br}
 }
 
-\begin{document} 
+\begin{document}
 \maketitle
 
 \selectlanguage{american}
  \begin{abstract}
-   Write here a short summary of the report in English. This corresponds to the Experiment 7 report on combinational circuits, specifically the multiplexers.
+   The current report aims to build and analize logic circuits that implement
+   encoder and decoder functionalities; Having encoders with $10$ bits for input
+   and $4$ bits as their output, while decoders with $4$ bits for input and $10$
+   bits for output. We also discuss about the importance of encoders and
+   decoders, a few of their applications in real world problems and finally the
+   implementation of a conversor of \emph{Gray} code values into symbols of the
+   decimal sistem.
  \end{abstract}
-\selectlanguage{brazil}     
-    
- \begin{resumo} 
-  Escreva aqui um pequeno resumo do relatório. Este corresponde ao relatório do Experimento 7 sobre circuitos combinacionais, especificamente os multiplexadores.
+
+\selectlanguage{brazil}
+ \begin{resumo}
+   O presente relatório tem como objetivo a elaboração e análise de circuitos
+   codificadores e decodificadores, sendo os codificadores compostos em sua
+   entrada por $10$ bits e saída de $4$, já os decodificadores o inverso, ou
+   seja,$4$ bits de entrada e $10$ de saída. Abordamos também a importância de
+   codificadores e decodificadores, algumas de suas aplicações em problemas
+   reais e também a implementação de um conversor de valores no código de
+   \emph{Gray} para símbolos do sistema decimal.
  \end{resumo}
 
 
 \section{Introdução}
 \label{sec:Introducao}
 
-Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
+% Escreva com suas palavras o que vai ser trabalhado no experimento. Aqui temos um exemplo de como citar a bibliografia consultada \cite{boulic:91} \cite{smith:99}.
+
+Codificadores tem como objetivo a simplificação de um conjunto de bits dados em
+uma versão simplificada sem perder a informação desejada; Por exemplo, se
+tivermos uma entrada de $10$ bits poderíamos produzir saídas de $4$ bits, mas
+observa-se que somente será possível se algumas das combinações de entrada
+obtiverem a mesma saída, porque para $10$ bits existem $2^{10} = 1024$
+combinações e sua saída por possuir $4$ bits é capaz de produzir apenas
+$2^{4} = 16$ saídas. \cite{codificadores_mandelli}
+
+Diante desse caso existem duas possibilidades: Ou de fato as saídas possuirão
+alguns resultados iguais para entradas distindas; Ou para casos como estes, em
+que as entradas são diferentes mas as saídas são iguais, parte destas entradas
+serão desconsideradas por serem irrevelantes para o problema (vide
+\cite{codificadores_e_decodificadores} para maiores informações).
+
+Utilizando decodificadores temos o comportamento oposto ao codificador, então
+para um dado conjunto de informações simplificadas ocorrerá a decomposição em
+uma maior quantidade de bits; Por exemplo, para uma entrada de $4$ bits
+poderíamos ter uma decomposição em $10$ bits, sendo esse um comportamento
+desejado para a reconstituição de uma informação simplificada em sua original.
+
+Os circuitos que implementam funcionalidades de codificadores e decodificadores
+são muito úteis por permitirem, assim como o nome sugere, a conversão de uma
+forma de codificação de dados em outra e, dessa forma, proporciona uma
+capacidade de pessoas e máquinas operarem com dados. Tomemos por exemplo o fato
+de que, para o computador, é muito conveniente que os dados sejam manipulados na
+forma de números binários (isso permite que circuitos lógicos e elétricos sejam
+construídos com maior resistência a ruído); Entretanto, os computadores são
+apenas ferramentas, e quem de fato fará a inperpretação dos dados é um ser
+humano, que opera de forma mais comum com números de base decimal. Tal conflito
+entre diferentes codificações de dados pode ser facilmente resolvido com
+codificadores e decodificadores, que transformam dados em base binária para
+decimal e vice-versa. Esse exemplo foi, entretanto, admitidamente simplista.
+Existem muitas outras aplicações importantes para codificadores e
+decodificadores, como por exemplo compressão de dados (transformando inputs de
+tamanho $2^{n}$ em outputs com tamanho $n$), conversão de dados, entre outros.
+
+Neste relatório, nos debruçaremos principalmente sobre a conversão de dados no
+código de \emph{Gray} para símbolos no sistema decimal e vice-versa.
 
 \subsection{Objetivos}
 \label{sec:Objetivos}
 
-Descrever aqui os objetivos do experimento.
+Os textos subsequentes deste relatório tem como fim a elaboração de
+codificadores e decodificadores, sendo estes codificadores compostos em sua
+entradas por $10$ bits e saída de $4$ bits, sendo expressos no código de
+\emph{Gray}. Já os decodificadores serão de maneira oposta composto por entradas
+de $4$ bits, no código de \emph{Gray}, e tendo por saída, dados de $10$ bits;
+Como resultado, por ambos circuitos possuirem lógica relacionada ocorrerá a
+codificação de uma informação e atráves do decodificador ocorrerá a
+reconstituição da informação.
 
-\subsection{Materiais} 
+\subsection{Materiais}
 \label{sec:Materiais}
-Neste experimento foram utilizados os seguintes materiais e equipamentos:
-\begin{itemize}
-    \item Painel Digital
+Em função da natureza do ensino a distância, os presentes experimentos não foram
+realizados usando-se materiais e equipamentos físicos, mas sim emulados por meio
+do \href{https://www.digitalelectronicsdeeds.com/deeds.html}{Deeds}.
 
-    \item \textit{Protoboard}
-    
-    \item Fios
-    
-    \item Portas Lógicas AND e NAND
+A seguir estão enumerados os materiais utilizados:
+\begin{itemize}
+    \item Componentes de Entrada (Gerador de clock e chaves de estado)
+    \item Componentes de Saída
+    \item Portas Lógicas \textbf{OR}, \textbf{AND}, \textbf{NOT}
 \end{itemize}
 
 \section{Procedimentos}
 \label{sec:Procedimentos}
+% \setcounter{subsection}{-1}
 
-Escreva nesta seção os diversos itens pedidos no experimentos.
+Passaremos a apresentar os experimentos requeridos.
 
-\subsection{Multiplexador de 4 entradas}
-\label{sec:Mux}
+% 2.1
+\subsection{Elaboração de Codificador}\label{sec:2.1}
 
-Descrever o experimento realizado. Sempre  que colocar uma figura deve-se explicar o que se pretende que o leitor veja, ou uma análise logo após a figura. 
+Para a elaboração do circuito, deve-se analisar a seguinte tabela:
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para o Decodificador}
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c||c|c|c|c|}\hline
+    \multicolumn{10}{|c||}{Entradas} & \multicolumn{4}{|c|}{Saídas} \\\hline
+    \textbf{$e_{0}$} & \textbf{$e_{1}$} & \textbf{$e_{2}$} & \textbf{$e_{3}$} & \textbf{$e_{4}$} & \textbf{$e_{5}$} & \textbf{$e_{6}$} & \textbf{$e_{7}$} & \textbf{$e_{8}$} & \textbf{$e_{9}$} & \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} \\\hline
+    1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0\\\hline
+    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1\\\hline
+    0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\\hline
+    0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0\\\hline
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 0\\\hline
+    0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1\\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 1\\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0\\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 & 1 & 0 & 0\\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 & 1 & 0 & 1\\\hline
+    \end{tabular}\label{tab:tabela_and}
+\end{table}
+
+Sendo que ``$0$'' é codificado como ``$0000000001$'', ``$1$'' como
+``$0000000010$'', \ldots, ``$9$'' como ``$1000000000$''. Temos que para cada
+$10$ bits de entrada temos que somente $1$ será dado como $1$, por exemplo, não
+temos a entrada ``$0000000011$''.
+
+Denotando cada um dos $10$ bits como
+$e_{9},e_{8},e_{7},e_{6},e_{5},e_{4},e_{3},e_{2},e_{1},e_{0}$. Assim, deve-se
+analisar também que cada bit também descreve seu respectivo símbolo; Por
+exemplo, $e_{8}$ descreve o símbolo ``$8$'', pois, quando $e_{8}=1$ temos que
+todos os outros serão iguais a $0$, portanto, estaremos descrevendo o símbolo
+``$8$''.
+
+Para maior simplicidade podemos analisar o fato de que para a saída
+\textbf{$A$}, depende de somente as entradas $e_{8}$ e $e_{9}$, como cada caso
+irá ocorrer de maneira individual, \textbf{$A$} poderá ser descrito como:
+
+\begin{equation}
+F_{A}(e_{8}, e_{9}) = e_{8} + e_{9}
+\end{equation}
+
+Observação, é importante atentar-se ao fato de que em casos onde o valor
+selecionado não envolve ``$8$'' ou ``$9$'', obrigatoriamente $e_{8}=0$ e
+$e_{9}=0$, assim, \textbf{$A$} também será igual a $0$.
+
+Utilizando raciocínio semelhante para os demais pode ser elaborado outra das
+equações booleanas, temos:
+
+\begin{align}
+F_{A}(e_{8}, e_{9}) &= e_{8} + e_{9} \\
+F_{B}(e_{4},e_{5},e_{6},e_{7},e_{8},e_{9}) &= e_{4}+e_{5}+e_{6}+e_{7}+e_{8}+e_{9} \\
+F_{C}(e_{2},e_{3},e_{4},e_{5}) &= e_{2}+e_{3}+e_{4}+e_{5} \\
+F_{D}(e_{1},e_{2},e_{5},e_{6},e_{9}) &= e_{1}+e_{2}+e_{5}+e_{6}+e_{9}
+\end{align}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=.5\textwidth]{fig1.jpg}
-    \caption{Exemplo de como colocar a legenda em uma figura.}
-    \label{fig:exemplo}
+    \includegraphics[width=10cm]{Exp05/2.1.png}
+    \caption{Subcircuito Comparador}
+    \label{fig:subComparador2.1}
 \end{figure}
 
-A Figura~\ref{fig:exemplo} apresenta um exemplo de como usar e citar uma figura. Sempre comente cada figura no texto.
+Importante notar que não todas as saídas são descritas, pois, possuindo $10$
+bits de entrada, haverão $2^{10}$ de combinações, portanto haveriam $2^{10}$ de
+saídas, contudo nos atentamos a somente algumas, todas as outras são casos não
+relevantes para o problema em questão.
 
-Aqui temos um exemplo de como citar uma URL na bibliografia~\cite{systemverilog}.
+% 2.2
+\subsection{Simulações do Codificador}\label{sec:2.2}
 
-Aqui temos um exemplo de como criar um hiperlink. Veja neste
-\href{https://www.youtube.com/watch?v=itWbXy0Qzw0}{link} um exemplo de vídeo publicado. Ao contrário do vídeo deste exemplo, sempre inicie o vídeo apresentando o grupo (nome e semestre), narrando o que é o experimento, os objetivos e descreva o que está sendo feito no vídeo. Termine concluindo se o objetivo foi cumprido ou não.
+O diagrama esquemático será descrito por:
 
-Sempre identifique no site do vídeo:
-\begin{itemize}
-    \item o experimento: Experimento 7;
-    \item o semestre: 2020/1;
-    \item a disciplina: CIC0231 - Laboratório de Circuitos Lógicos;
-    \item a universidade: Universidade de Brasília (UnB);
-    \item o grupo: Grupo B1;
-    \item os nomes dos componentes do grupo.
-\end{itemize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{Exp05/2.2.png}
+    \caption{Gráfico em forma de onda para o circuito do \emph{Codificador}}
+    \label{fig:2.2.png}
+\end{figure}
 
-Desta forma se facilita uma busca pelo vídeo. É apresentado acima como fazer uma listagem não numerada.
+Para conferir o vídeo deste experimento, acesse o seguinte link:
+\href{https://youtu.be/x9ct4AeliNU}{https://youtu.be/x9ct4AeliNU}
 
-\subsection{Demultiplexador}
-\label{sec:Demux}
+% 2.3
+\subsection{Obtendo as funções booleanas para o decodificador}\label{sec:2.3}
 
-Este é outro item do experimento. Aqui temos um exemplo de como construir e citar uma tabela, conforme mostrado na Tabela~\ref{tab:resultados}.
+Nesta seção temos por objetivo obter as funções booleanas para o decodificador
+de números em código de \emph{Gray} para números em decimal.
+
+Como explicado em~\cite{codificadores_mandelli}, e com em maiores detalhes em
+~\cite{codificadores_e_decodificadores}, para criarmos uma função que funcione
+como decodificador, precisaremos obter uma função separada para cada um dos
+outputs existentes. Assim sendo, teremos um total de $10$ funções, uma para cada
+símbolo do código decimal. E, para obtermos as funções individuais, devemos
+considerar quais inputs no código de \emph{Gray} produzirão o resultado para o
+símbolo em decimal com valor lógico $1$.
+
+Tendo por base o código de \emph{Gray} especificado
+em~\cite{gray_code_table}, é fácil
+verificarmos quais devem ser as funções booleanas de cada saída. Reproduzimos em
+seguida cada uma delas:
+
+\begin{align}
+e_{0} &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot \overline{D} \\
+e_{1} &= \overline{A} \cdot \overline{B} \cdot \overline{C} \cdot D \\
+e_{2} &= \overline{A} \cdot \overline{B} \cdot C \cdot D \\
+e_{3} &= \overline{A} \cdot \overline{B} \cdot C \cdot \overline{D} \\
+e_{4} &= \overline{A} \cdot B \cdot C \cdot \overline{D} \\
+e_{5} &= \overline{A} \cdot B \cdot C \cdot D \\
+e_{6} &= \overline{A} \cdot B \cdot \overline{C} \cdot D \\
+e_{7} &= \overline{A} \cdot B \cdot \overline{C} \cdot \overline{D} \\
+e_{8} &= A \cdot B \cdot \overline{C} \cdot \overline{D} \\
+e_{9} &= A \cdot B \cdot \overline{C} \cdot D
+\end{align}
+
+É interessante notarmos que não mencionamos sobre valores \emph{don't care} na
+tabela, mas eles existem, e são referentes a todas as entradas que não
+correspondam ao valores dentro do intervalo $0 \leq x \leq 9$. Teoricamente
+poderíamos tentar otimizar as funções apresentadas anteriormente, fazendo uso de
+métodos como mapa de Karnaugh ou Quine-McCluskey, mas fazendo isso teríamos um
+circuito com um delay um pouco maior, devido ao fato de haverem mais portas
+lógicas acopladas, aumentando o caminho crítico do circuito, assim como
+explicado em~\cite{codificadores_e_decodificadores}
+e~\cite{codificadores_mandelli}. Optamos por ter um delay menor no circuito
+final.
+
+Agora, de posse das funções finais para cada um dos outputs esperados, podemos
+criar um circuito lógico que satisfaça as referidas funções booleanas. O
+mapeamento de funções para portas lógicas é bem direto nesse caso, pois é
+constituido apenas de portas \textbf{AND} e \textbf{NOT}, assim como é possível
+observar na figura \ref{fig:Exp5__2_3_block.png}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Exp05/Exp5__2_3_block.png}
+    \caption{Circuito Lógico para o \emph{Decodificador}}
+    \label{fig:Exp5__2_3_block.png}
+\end{figure}
+
+Assim, concluímos as etapas de obtenção das funções booleanas para o
+decodificador e também da criação do diagrama lógico total.
+
+% 2.4
+\subsection{Implementando e testando o \emph{Decodificador}}\label{sec:2.4}
+
+Passamos agora a mostrar a implementação do circuito lógico total do
+decodificador, bem como seu funcionamento demonstrado em vídeo.
+
+A figura~\ref{fig:Exp5__2_4_circuit.png} mostra a montagem do circuito, suas
+entradas e também suas saídas. É interessante notar que colocamos as entradas
+interativas bem como os clocks no circuito. As entradas interativas facilitam na
+demonstração em vídeo, e os clocks tornam fácil a criação do gráfico de ondas
+que pode ser visualizado na figura~\ref{fig:Exp5__2_4_wave.png}.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Exp05/Exp5__2_4_circuit.png}
+    \caption{Circuito Lógico do \emph{Decodificador} com inputs e outputs}
+    \label{fig:Exp5__2_4_circuit.png}
+\end{figure}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Exp05/Exp5__2_4_wave.png}
+    \caption{Gráfico de Onda do \emph{Decodificador}}
+    \label{fig:Exp5__2_4_wave.png}
+\end{figure}
+
+De posse das informações na figura \ref{fig:Exp5__2_4_wave.png}, podemos
+preencher a tabela verdade para esse decodificador; Levando em conta os inputs
+válidos, inválidos e os valores \emph{don't care}, chegamos à
+tabela~\ref{tab:truth_table_decoder}.
 
 \begin{table}[H]
     \centering
-    \caption{Exemplo de como construir uma tabela.}
-    \begin{tabular}{|c|c|c|c|c|c|c|c|}
-    \cline{2-7}
-    \multicolumn{1}{c}{} & \multicolumn{3}{|c|}{Fase 1} & \multicolumn{3}{c|}{Fase 2} & \multicolumn{1}{c}{} \\
-    \hline
-    Experimento & $n_g$ & $n_l$ & $n_t$ & $n_g$ & $n_l$ & $n_t$ & $t(s)$ \\
-    \hline
-    1 bit full adder & 8.16 & 3.8 & 47.6 & 5.03 & 3.0 & 25.93 & 99.13 \\
-    2 bits full adder & 18.06 & 5.16 & 107.13 & 11.06 & 4.9 & 60.06 & 709.56 \\
-    2 bits multiplier & 14.2 & 4.03 & 74.33 & 7.7 & 2.2 & 37.53 & 357.76 \\
-    7 segment decoder & 47.53 & 5.83 & 270.46 & 32.86 & 5.0 & 176.4 & 740.63 \\
-    Karnaugh 1 bit full adder & 19.0 & 6.0 & 102.0 & 5.03 & 3.0 & 24.8 & 130.73 \\
-    \hline
-    \end{tabular}
-    \label{tab:resultados}
+    \caption{Tabela Verdade para o Decodificador}
+    \begin{tabular}{|c|c|c|c||c|c|c|c|c|c|c|c|c|c|}\hline
+    \multicolumn{4}{|c||}{Entradas} & \multicolumn{10}{|c|}{Saídas} \\\hline
+    \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{$e_{0}$} & \textbf{$e_{1}$} & \textbf{$e_{2}$} & \textbf{$e_{3}$} & \textbf{$e_{4}$} & \textbf{$e_{5}$} & \textbf{$e_{6}$} & \textbf{$e_{7}$} & \textbf{$e_{8}$} & \textbf{$e_{9}$} \\\hline
+    0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\\hline
+    0 & 0 & 0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\\hline
+    0 & 0 & 1 & 1 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\\hline
+    0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 \\\hline
+    0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 & 0 \\\hline
+    0 & 1 & 1 & 1 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0 \\\hline
+    0 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 \\\hline
+    0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 & 0 \\\hline
+    1 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 & 0 \\\hline
+    1 & 1 & 0 & 1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 1 \\\hline
+    1 & 1 & 1 & 1 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 1 & 1 & 0 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 0 & 1 & 0 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 0 & 1 & 1 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 0 & 0 & 1 & * & * & * & * & * & * & * & * & * & * \\\hline
+    1 & 0 & 0 & 0 & * & * & * & * & * & * & * & * & * & * \\\hline
+    \end{tabular}\label{tab:truth_table_decoder}
 \end{table}
 
-Aqui devemos colocar uma apresentação e análise da tabela, explicando ao leitor o que se pretende mostrar.
+Assim, concluímos as simulações para o circuito do decodificador.
 
-As equações devem fazer parte do texto, como 
+Para conferir o vídeo deste experimento, acesse o seguinte link:
+\href{https://youtu.be/elA_wvxQr8o}{https://youtu.be/elA_wvxQr8o}
 
-\begin{equation}
-\label{eq:logica}
-    Y=AB+\bar{B}\bar{A}
-\end{equation}
+% 2.5
+\subsection{Integração de \emph{Codificador} e \emph{Decodificador}}\label{sec:2.5}
 
-\noindent onde $A$ e $B$ são as variáveis de entrada. $Y$ a variável de saída. Podemos citar como Equação~\ref{eq:logica}.
+Para finalizarmos este esperimento, realizaremos a integração entre o
+codificador, feito no item~\ref{sec:2.2} e o decodificador do
+item~\ref{sec:2.4}.
+
+A montagem final, integrando todos os circuitos, pode ser visualizada na
+figura~\ref{fig:Exp5__2_5_circuit.png}:
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Exp05/Exp5__2_5_circuit.png}
+    \caption{Circuito de \emph{Codificador} e \emph{Decodificador} integrados}
+    \label{fig:Exp5__2_5_circuit.png}
+\end{figure}
+
+Agora, para a visualização do funcionamento do circuito, disponibilizamos o
+vídeo do experimento, que pode ser acessado pelo seguinte link:
+\href{https://youtu.be/BpFrHE5Ggb8}{https://youtu.be/BpFrHE5Ggb8}
 
 \section{Análise dos Resultados}
-\label{sec:Resultados}
+\label{sec:resultados}
+Todos os tópicos apresentados foram implementados de forma satisfatória, assim
+como requisitado. Passaremos agora às considerações finais de cada um dos
+tópicos de forma individual e, por último, faremos uma avaliação do conjunto de
+experimentos deste relatório.
 
-Faça uma análise crítica dos resultados obtidos nos experimentos. Esta análise pode ser feita item a item ou de uma forma geral.
+\subsection{Análise em \ref{sec:2.1} e \ref{sec:2.2}}\label{sec:analise2.1}
 
-Dica: Use pesquisa na Internet para tirar as dúvidas sobre edição em \LaTeX .
+Para os itens 2.1 e 2.2 temos que de fato ocorreram os resultados esperados,
+concluindo que apesar da não utilização de soma de produtos e produtos de somas
+ainda assim pudemos descrever o comportamento desejado, ou seja, o codificador
+simplificou as entradas a saídas que descrevem representações do código de gray,
+sendo que estas mesmas entradas são descritas por símbolos decimais, que por sua
+vez são descritos através da composição de 10 bits.
+
+\subsection{Análise em \ref{sec:2.3} e \ref{sec:2.4}}\label{sec:analise2.4}
+
+Para os itens 2.3 e 2.4, pudemos a inicio teorizar o circuito utilizado e então
+comprovar sua eficácia, assim, ao ser colocado em prática foi possível a
+conclusão de seu real funcionamento, sendo de fato o esperado.
+
+\subsection{Análise em \ref{sec:2.5}}\label{sec:analise2.5}
+
+Dado que os circuitos elaborados nas seções anteriores tiveram o comportamento
+desejado, temos que por fim ao criarmos uma entrada de um codificador descrito
+por funções do tipo $f_{k}(\text{\emph{entrada}}) = \text{\emph{saída}}$ (onde
+$k \in \{A,B,C,D\}$), temos então que ao invertermos esta função, ou seja,
+$g_{k}(\text{\emph{saída}}) = \text{\emph{entrada}}$, ao realizarmos a
+composição de funções, ou seja,
+$g_{k} \circ f_{k}(\text{\emph{entrada}}) = g(f(\text{\emph{entrada}}))$ teremos
+que $g(f(\text{\emph{entrada}})) = \text{\emph{entrada}}$.
+
+Nos experimentos realizados, temos que o codificador produz o comportamento
+inverso daquela do decodificador, podendo ser aplicado o mesmo raciocínio a
+saídas esperadas, temos que ao associá-los como resultado deverá haver o mesmo
+que tínhamos na saída, e de fato obtivemos tal comportamento.
 
 \section{Conclusão}
 \label{sec:Conclusao}
 
-Concluir o relatório explanando rapidamente o que foi feito e os resultados obtidos, sempre correlacionando com os objetivos do experimento apresentados na Seção~\ref{sec:Objetivos}. 
+Temos, por fim, que de fato pudemos descrever e elaborar codificadores e
+decodificadores, possuindo o comportamento esperado. Devemos nos atentar ao fato
+de que, apesar da comprovação e elaboração dos circuitos, esses estão limitados
+ao escopo deste relatório, não descrevemos generalizações que aplicam-se a todos
+os possíveis codificadores e decodificadores.
+
+É necessário observar também que além da comprovação de funcionamento foi
+possível compreender que codificadores e decodificadores possuem comportamentos
+opostos, assim descrito no último item.
+
+Foi interessante notarmos também como pudemos, de forma relativamente simples,
+converter codificações de dados distintas, e, de certa forma, até fazermos
+compressão e expansão de dados, haja vista que criamos um circuito que pode
+livremente converter dados com códigos diferentes representados em $4$ bits (o
+código de \emph{Gray}) e também os símbolos do sistema decimal (representados
+com $10$ bits). Assim, pudemos demonstrar de forma prática alguns dos pontos
+mencionados na introdução sobre a importância prática de codificadores e
+decodificadores como sistemas que permitem conversão entre distintos formatos de
+codificações e também como forma de circuito que permite compressão e expansão
+de dados.
 
 
+\nocite{*}
 \bibliographystyle{sbc}
 \bibliography{relatorio}  %Aqui é a definição do arquivo .bib a ser usado pelas referências
 
 
-\newpage 
+\newpage
 % Colocar aqui apenas as respostas dos itens da Auto-Avaliação
 \section*{Auto-Avaliação}
 
-\begin{enumerate}
-    \item a
-    \item c
-    \item b
-    \item d
-\end{enumerate}
+Respostas:
+
+\begin{table}[H]
+      \begin{tabular}{|c|l|} \hline
+      \textbf{Questão} & \textbf{Resposta}\\
+      \hline
+      1 & c \\ \hline
+      2 & c \\ \hline
+      3 & a \\ \hline
+      4 & b \\ \hline
+      5 & c \\ \hline
+      6 & e $\rightarrow$ \textbf{NOT} \emph{A} defeituosa, sempre com nível $0$ na saída \\ \hline
+      7 & b $\rightarrow$ Porta \textbf{NOT} \emph{D} defeituosa, sempre em $1$ \\ \hline
+      8 & f $\rightarrow$ Porta \textbf{NOT} \emph{A} defeituosa, sempre em $1$ \\ \hline
+      \end{tabular}
+\end{table}
 
 
 \end{document}
