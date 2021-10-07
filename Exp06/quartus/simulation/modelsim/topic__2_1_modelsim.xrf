@@ -1,0 +1,17 @@
+vendor_name = ModelSim
+source_file = 1, /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/mux8_alt.sv
+source_file = 1, /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/mux8.sv
+source_file = 1, /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/topic__2_1.bdf
+source_file = 1, /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/Waveform.vwf
+source_file = 1, /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/full_adder.sv
+source_file = 1, /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/topic__2_2.bdf
+source_file = 1, /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/db/topic__2_1.cbx.xml
+design_name = topic__2_2
+instance = comp, \Cout~output , Cout~output, topic__2_2, 1
+instance = comp, \S~output , S~output, topic__2_2, 1
+instance = comp, \A~input , A~input, topic__2_2, 1
+instance = comp, \Cin~input , Cin~input, topic__2_2, 1
+instance = comp, \B~input , B~input, topic__2_2, 1
+instance = comp, \inst|Add1~0 , inst|Add1~0, topic__2_2, 1
+instance = comp, \inst|Add1~1 , inst|Add1~1, topic__2_2, 1
+instance = comp, \~QUARTUS_CREATED_GND~I , ~QUARTUS_CREATED_GND~I, topic__2_2, 1

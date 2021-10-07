@@ -1,0 +1,149 @@
+m255
+K4
+z2
+!s11f vlog 2020.1 2020.02, Feb 28 2020
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 d/home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/simulation/qsim
+vmux8
+Z1 !s110 1633554104
+!i10b 1
+!s100 ?W?;_<d4IB>Xgi6MYe3Pi0
+Z2 !s11b Dg1SIo80bB@j0V0VzS_@n1
+ImBj5MM>JK0TW:aBi5G6ho1
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1633554103
+Z4 8topic__2_1.vo
+Z5 Ftopic__2_1.vo
+!i122 2
+L0 32 261
+Z6 OV;L;2020.1;71
+r1
+!s85 0
+31
+Z7 !s108 1633554104.000000
+Z8 !s107 topic__2_1.vo|
+Z9 !s90 -work|work|topic__2_1.vo|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vmux8_vlg_vec_tst
+R1
+!i10b 1
+!s100 V4`k@zdVR];IGlz`YQRm_3
+R2
+I1^GfSD0ae:779BcfFjj@b2
+R3
+R0
+w1633554102
+Z12 8Waveform.vwf.vt
+Z13 FWaveform.vwf.vt
+!i122 3
+L0 30 113
+R6
+r1
+!s85 0
+31
+R7
+Z14 !s107 Waveform.vwf.vt|
+Z15 !s90 -work|work|Waveform.vwf.vt|
+!i113 1
+R10
+R11
+vtopic__2_1
+Z16 !s110 1633636048
+!i10b 1
+!s100 VdCEIlJ@J0C5?AG7C;N8N3
+R2
+I[IKEOVa:>?H[ELg>YXi1P0
+R3
+R0
+w1633636047
+R4
+R5
+!i122 10
+Z17 L0 32 176
+R6
+r1
+!s85 0
+31
+Z18 !s108 1633636048.000000
+R8
+R9
+!i113 1
+R10
+R11
+vtopic__2_1_vlg_vec_tst
+R16
+!i10b 1
+!s100 ;9>::U1Angc9R3n]iB?;F1
+R2
+IQ:jk^7=^]2If=z;b?GLEM3
+R3
+R0
+w1633636046
+R12
+R13
+!i122 11
+Z19 L0 30 56
+R6
+r1
+!s85 0
+31
+R18
+R14
+R15
+!i113 1
+R10
+R11
+vtopic__2_2
+Z20 !s110 1633647583
+!i10b 1
+!s100 n6]=l:idJ]beQRZ0Z0cmU1
+R2
+I0l@ZNd4A6i6cIHhC<AHUd0
+R3
+R0
+w1633647582
+R4
+R5
+!i122 17
+R17
+R6
+r1
+!s85 0
+31
+Z21 !s108 1633647583.000000
+R8
+R9
+!i113 1
+R10
+R11
+vtopic__2_2_vlg_vec_tst
+R20
+!i10b 1
+!s100 QPgR9I2[U:Nd9GVCSgIB73
+R2
+INDLO:f8F3aOk:CCn8G]QZ3
+R3
+R0
+w1633647581
+8topic__2_2__functional.vwf.vt
+Ftopic__2_2__functional.vwf.vt
+!i122 18
+R19
+R6
+r1
+!s85 0
+31
+R21
+!s107 topic__2_2__functional.vwf.vt|
+!s90 -work|work|topic__2_2__functional.vwf.vt|
+!i113 1
+R10
+R11

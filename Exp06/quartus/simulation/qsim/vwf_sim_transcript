@@ -1,0 +1,66 @@
+Determining the location of the ModelSim executable...
+
+Using: /opt/intelFPGA/20.1/modelsim_ase/linuxaloem/
+
+To specify a ModelSim executable directory, select: Tools -> Options -> EDA Tool Options
+Note: if both ModelSim-Altera and ModelSim executables are available, ModelSim-Altera will be used.
+
+**** Generating the ModelSim Testbench ****
+
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off topic__2_1 -c topic__2_1 --vector_source="/home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/topic__2_2__functional.vwf" --testbench_file="/home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/simulation/qsim/topic__2_2__functional.vwf.vt"
+
+Info: *******************************************************************Info: Running Quartus Prime EDA Netlist Writer    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition    Info: Copyright (C) 2020  Intel Corporation. All rights reserved.    Info: Your use of Intel Corporation's design tools, logic functions     Info: and other software and tools, and any partner logic     Info: functions, and any output files from any of the foregoing     Info: (including device programming or simulation files), and any     Info: associated documentation or information are expressly subject     Info: to the terms and conditions of the Intel Program License     Info: Subscription Agreement, the Intel Quartus Prime License Agreement,    Info: the Intel FPGA IP License Agreement, or other applicable license    Info: agreement, including, without limitation, that your use is for    Info: the sole purpose of programming logic devices manufactured by    Info: Intel and sold by Intel or its authorized distributors.  Please    Info: refer to the applicable agreement for further details, at    Info: https://fpgasoftware.intel.com/eula.    Info: Processing started: Thu Oct  7 19:59:40 2021Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off topic__2_1 -c topic__2_1 --vector_source=/home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/topic__2_2__functional.vwf --testbench_file=/home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/simulation/qsim/topic__2_2__functional.vwf.vtWarning (20013): Ignored 7 assignments for entity "mux8.sv" -- entity does not exist in design    Warning (20014): Assignment for entity set_global_assignment -name EDA_DESIGN_ENTRY_SYNTHESIS_TOOL "FPGA Compiler II" -entity mux8.sv was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_INPUT_GND_NAME GND -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_INPUT_VCC_NAME VDD -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_INPUT_DATA_FORMAT EDIF -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_LMF_FILE fpga_exp.lmf -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_SHOW_LMF_MAPPING_MESSAGES OFF -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_RUN_TOOL_AUTOMATICALLY OFF -entity mux8.sv -section_id eda_design_synthesis was ignoredWarning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Completed successfully. 
+
+Completed successfully. 
+
+**** Generating the timing simulation netlist ****
+
+quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="/home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/simulation/qsim/" topic__2_1 -c topic__2_1
+
+Info: *******************************************************************Info: Running Quartus Prime EDA Netlist Writer    Info: Version 20.1.1 Build 720 11/11/2020 SJ Lite Edition    Info: Copyright (C) 2020  Intel Corporation. All rights reserved.    Info: Your use of Intel Corporation's design tools, logic functions     Info: and other software and tools, and any partner logic     Info: functions, and any output files from any of the foregoing     Info: (including device programming or simulation files), and any     Info: associated documentation or information are expressly subject     Info: to the terms and conditions of the Intel Program License     Info: Subscription Agreement, the Intel Quartus Prime License Agreement,    Info: the Intel FPGA IP License Agreement, or other applicable license    Info: agreement, including, without limitation, that your use is for    Info: the sole purpose of programming logic devices manufactured by    Info: Intel and sold by Intel or its authorized distributors.  Please    Info: refer to the applicable agreement for further details, at    Info: https://fpgasoftware.intel.com/eula.    Info: Processing started: Thu Oct  7 19:59:41 2021Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory=/home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/simulation/qsim/ topic__2_1 -c topic__2_1Warning (20013): Ignored 7 assignments for entity "mux8.sv" -- entity does not exist in design    Warning (20014): Assignment for entity set_global_assignment -name EDA_DESIGN_ENTRY_SYNTHESIS_TOOL "FPGA Compiler II" -entity mux8.sv was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_INPUT_GND_NAME GND -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_INPUT_VCC_NAME VDD -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_INPUT_DATA_FORMAT EDIF -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_LMF_FILE fpga_exp.lmf -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_SHOW_LMF_MAPPING_MESSAGES OFF -entity mux8.sv -section_id eda_design_synthesis was ignored    Warning (20014): Assignment for entity set_global_assignment -name EDA_RUN_TOOL_AUTOMATICALLY OFF -entity mux8.sv -section_id eda_design_synthesis was ignoredWarning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.Warning (10905): Generated the EDA functional simulation netlist because it is the only supported netlist type for this device.Info (204019): Generated file topic__2_1.vo in folder "/home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/simulation/qsim//" for EDA simulation toolInfo: Quartus Prime EDA Netlist Writer was successful. 0 errors, 10 warnings    Info: Peak virtual memory: 689 megabytes    Info: Processing ended: Thu Oct  7 19:59:42 2021    Info: Elapsed time: 00:00:01    Info: Total CPU time (on all processors): 00:00:01
+Completed successfully. 
+
+**** Generating the ModelSim .do script ****
+
+/home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/simulation/qsim/topic__2_1.do generated.
+
+Completed successfully. 
+
+**** Running the ModelSim simulation ****
+
+/opt/intelFPGA/20.1/modelsim_ase/linuxaloem//vsim -c -do topic__2_1.do
+
+Reading pref.tcl
+# 2020.1
+# do topic__2_1.do
+# ** Warning: (vlib-34) Library already exists at "work".
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 19:59:43 on Oct 07,2021# vlog -work work topic__2_1.vo 
+# -- Compiling module topic__2_2
+# # Top level modules:# 	topic__2_2# End time: 19:59:43 on Oct 07,2021, Elapsed time: 0:00:00# Errors: 0, Warnings: 0
+# Model Technology ModelSim - Intel FPGA Edition vlog 2020.1 Compiler 2020.02 Feb 28 2020
+# Start time: 19:59:43 on Oct 07,2021# vlog -work work topic__2_2__functional.vwf.vt 
+# -- Compiling module topic__2_2_vlg_vec_tst
+# # Top level modules:# 	topic__2_2_vlg_vec_tst# End time: 19:59:43 on Oct 07,2021, Elapsed time: 0:00:00# Errors: 0, Warnings: 0
+# vsim -c -t 1ps -L cyclonev_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.topic__2_2_vlg_vec_tst # Start time: 19:59:43 on Oct 07,2021# Loading work.topic__2_2_vlg_vec_tst# Loading work.topic__2_2# Loading cyclonev_ver.cyclonev_io_obuf# Loading cyclonev_ver.cyclonev_io_ibuf# Loading cyclonev_ver.cyclonev_lcell_comb
+# after#25
+# ** Note: $finish    : topic__2_2__functional.vwf.vt(51)#    Time: 1 us  Iteration: 0  Instance: /topic__2_2_vlg_vec_tst
+# End time: 19:59:43 on Oct 07,2021, Elapsed time: 0:00:00# Errors: 0, Warnings: 0
+Completed successfully. 
+
+**** Converting ModelSim VCD to vector waveform ****
+
+Reading /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/topic__2_2__functional.vwf...
+
+Reading /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/simulation/qsim/topic__2_1.msim.vcd...
+
+Processing channel transitions... 
+
+Writing the resulting VWF to /home/matheus/mcs/study/subjects/cs/laboratorio_de_circuitos_logicos_lcl/relatorios/Exp06/quartus/simulation/qsim/topic__2_1_20211007195944.sim.vwf
+
+Finished VCD to VWF conversion.
+
+Completed successfully. 
+
+All completed.
