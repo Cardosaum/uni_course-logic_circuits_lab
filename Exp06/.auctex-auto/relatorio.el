@@ -35,7 +35,11 @@
     "amsmath"
     "array"
     "mwe"
-    "enumitem")
+    "enumitem"
+    "xcolor"
+    "trace")
+   (TeX-add-symbols
+    "colorIndex")
    (LaTeX-add-labels
     "sec:Introducao"
     "fig:mux.png"
@@ -44,12 +48,19 @@
     "sec:Materiais"
     "sec:Procedimentos"
     "sec:2.1"
+    "code:mux8"
     "sec:2.2"
     "sec:2.3"
     "sec:resultados"
     "sec:analise2.1"
     "sec:analise2.4"
     "sec:Conclusao")
-   (LaTeX-add-bibliographies))
+   (LaTeX-add-bibliographies)
+   (LaTeX-add-listings-lstdefinestyles
+    "verilog-style")
+   (LaTeX-add-color-definecolors
+    "vgreen"
+    "vblue"
+    "vorange"))
  :latex)
 

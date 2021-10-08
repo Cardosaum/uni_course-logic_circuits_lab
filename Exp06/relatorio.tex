@@ -29,6 +29,43 @@
 \usepackage{mwe}
 \usepackage[shortlabels]{enumitem}
 
+\usepackage{xcolor}
+\usepackage{listings}
+\definecolor{vgreen}{RGB}{104,180,104}
+\definecolor{vblue}{RGB}{49,49,255}
+\definecolor{vorange}{RGB}{255,143,102}
+
+\lstdefinestyle{verilog-style}
+{
+    language=Verilog,
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{vblue},
+    identifierstyle=\color{black},
+    commentstyle=\color{vgreen},
+    numbers=left,
+    numberstyle=\tiny\color{black},
+    numbersep=10pt,
+    tabsize=8,
+    moredelim=*[s][\colorIndex]{[}{]},
+    literate=*{:}{:}1
+}
+
+\makeatletter
+\newcommand*\@lbracket{[}
+\newcommand*\@rbracket{]}
+\newcommand*\@colon{:}
+\newcommand*\colorIndex{%
+    \edef\@temp{\the\lst@token}%
+    \ifx\@temp\@lbracket \color{black}%
+    \else\ifx\@temp\@rbracket \color{black}%
+    \else\ifx\@temp\@colon \color{black}%
+    \else \color{vorange}%
+    \fi\fi\fi
+}
+\makeatother
+
+\usepackage{trace}
+
 \sloppy
 
 
@@ -87,12 +124,12 @@ maiores detalhes a implementação por circuitos lógicos de um multiplexador.
     \centering
     \begin{minipage}{0.45\textwidth}
       \centering
-      \includegraphics[width=0.9\textwidth]{Exp06/mux.png}
+      \includegraphics[width=0.9\textwidth]{Exp06/Images/mux.png}
       \caption{Como um multiplexador funciona}\label{fig:mux.png}
     \end{minipage}\hfill
     \begin{minipage}{0.45\textwidth}
       \centering
-      \includegraphics[width=0.5\textwidth]{Exp06/mux_wiki.png}
+      \includegraphics[width=0.5\textwidth]{Exp06/Images/mux_wiki.png}
       \caption{Implementação de um multiplexador}\label{fig:mux_wiki.png}
     \end{minipage}\hfill
 \end{figure}
@@ -136,7 +173,24 @@ Passaremos a apresentar os experimentos requeridos.
 % 2.1
 \subsection{Elaboração de Somador Completo desenhando o circuito}\label{sec:2.1}
 
-Para a elaboração do somador requerido no enunciado,
+Para a elaboração do somador requerido no enunciado, precisamos inicialmente
+criar o circuito de um multiplexador. Como requisitado, implementaremos um
+multiplexador 8x1 usando \emph{SystemVerilog}. O código necessário para criar
+tal multiplexador é representado em~\ref{code:mux8}.
+
+\begin{center}
+    \begin{lstlisting}[style={verilog-style}]
+    module mux8(
+        input [7:0] dado,
+        input [2:0] escolha,
+        output saida
+        );
+
+        assign saida = dado[escolha];
+    endmodule
+    \end{lstlisting}
+    \caption{Código para um multiplexador 8x1 em \emph{SystemVerilog}}\label{code:mux8}
+\end{center}
 
 \textbf{***** TODO *****}
 
