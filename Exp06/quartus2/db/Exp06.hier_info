@@ -1,0 +1,41 @@
+|topic__2_1
+S <= mux8:inst.out
+A => inst32.DATAIN
+A => inst27.DATAIN
+B => inst31.DATAIN
+B => inst28.DATAIN
+Cin => inst30.DATAIN
+Cin => inst29.DATAIN
+Cout <= mux8_alt:inst26.saida
+
+
+|topic__2_1|mux8:inst
+data[0] => Mux0.IN7
+data[1] => Mux0.IN6
+data[2] => Mux0.IN5
+data[3] => Mux0.IN4
+data[4] => Mux0.IN3
+data[5] => Mux0.IN2
+data[6] => Mux0.IN1
+data[7] => Mux0.IN0
+choice[0] => Mux0.IN10
+choice[1] => Mux0.IN9
+choice[2] => Mux0.IN8
+out <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|topic__2_1|mux8_alt:inst26
+dado[0] => Mux0.IN7
+dado[1] => Mux0.IN6
+dado[2] => Mux0.IN5
+dado[3] => Mux0.IN4
+dado[4] => Mux0.IN3
+dado[5] => Mux0.IN2
+dado[6] => Mux0.IN1
+dado[7] => Mux0.IN0
+escolha[0] => Mux0.IN10
+escolha[1] => Mux0.IN9
+escolha[2] => Mux0.IN8
+saida <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+
+
