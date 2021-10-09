@@ -106,8 +106,12 @@ Implementação de Circuitos Combinacionais com Multiplexadores}
  \end{resumo}
 
 
-\section{Introdução}
-\label{sec:Introducao}
+\section{Introdução}\label{sec:Introducao}
+
+Como nesse relatório faremos uso de forma extensa de multiplexadores e
+decodificadores, cabe inicialmente uma explanação breve sobre esses circuitos
+lógicos, bem como suas propriedades e aplicações.
+
 
 Multiplexadores (ou \emph{mux}) são circuitos combinacionais capazes de mapear
 $2^{N}$ entradas para apenas $1$ saída, sendo, portanto, conhecidos também como
@@ -134,10 +138,63 @@ maiores detalhes a implementação por circuitos lógicos de um multiplexador.
     \end{minipage}\hfill
 \end{figure}
 
-\textbf{***** TODO *****}
+Um dos usos de multiplexadores é na economia de conexões ao longo de um único
+canal, conectando o único output do multiplexador com o único input do
+demultiplexador. Dessa forma, o benefício é que seria possível reduzir o custo
+de implementação física de múltiplos canais para cada uma das fontes de dados no
+circuito. Pode-se observar como funcionaria um circuito desse na
+figura~\ref{fig:mux_demux.png}
 
-\subsection{Objetivos}
-\label{sec:Objetivos}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{Exp06/Images/mux_demux.png}
+  \caption{Uma das aplicações de um Multiplexador}\label{fig:mux_demux.png}
+\end{figure}
+
+Considerando agora os demultiplexadores, podemos afirmar que eles são
+basicamente a ``\emph{função inversa}'' dos multiplexadores, convertendo $1$
+input em $2^{N}$ outputs, e possuindo $N$ seletores. O diagrama básico de um
+demultiplexador pode ser visto na figura~\ref{fig:demux.png}
+(fonte:~\cite{web_demux}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.4\textwidth]{Exp06/Images/demux.png}
+  \caption{Diagrama de um demultiplexador}\label{fig:demux.png}
+\end{figure}
+
+Por fim, os decodificadores. Podemos dizer que são muito semelhantes aos
+demultiplexadores, cabendo a ressalva de que uma diferença significativa entre
+os dois é que decodificadores não possuem o seletor entre ativo e inativo, já os
+demultiplexadores podem estar no estado ativo ou inativo. Um diagrama de um
+codificador pode ser visto na figura~\ref{fig:decoder.png}
+(fonte:~\cite{web_decoder}).
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{Exp06/Images/decoder.png}
+  \caption{Diagrama de um decodificador}\label{fig:decoder.png}
+\end{figure}
+
+
+Agora, após uma breve explicação das propriedades de multiplexadores,
+demultiplexadores e decodificadores, podemos considerar o uso deles para a
+implementação de circuitos lógicos mais complexos, e bem importantes no dia a
+dia. Um exemplo de circuito lógico muito importante, e de presença praticamente
+ubíqua nos circuitos computacionais atuais são os circuitos somadores,
+responsáveis por operações simples mas básicas e necessárias a toda computação
+de números. Tais circuitos são responsáveis por somar dois bits \textbf{A} e
+\textbf{B}, (possivelmente considerando um carry-in ``\textbf{Cin}''), e
+resultando na soma \textbf{S} e, possivelmente, no carry-out ``\textbf{Cout}''.
+Esse circuito simples é a base para muitos cálculos algébricos realizados em
+praticamente todo ciclo de clock de um computador moderno. Outra aplicação
+importante que multiplexadores, demultiplexadores e decodificadores permitem é a
+implementação de funções genéricas complexas de forma relativamente simples.
+Essas duas aplicações serão abordadas de forma mais técnica e profunda nos
+tópicos seguintes.
+
+
+\subsection{Objetivos}\label{sec:Objetivos}
 
 Os textos subsequentes deste presente relatório tem por finalidade a elaboração
 de circuitos lógicos para implementação de somadores e funções lógicas
@@ -146,7 +203,6 @@ decodificadores. A montagem desses circuitos se dará tanto no nível de
 implementação manual dos circuitos e portas lógicas, bem como o uso da linguagem
 \emph{SystemVerilog}.
 
-\textbf{***** TODO *****}
 
 \subsection{Materiais}
 \label{sec:Materiais}
@@ -161,7 +217,6 @@ A seguir estão enumerados os materiais utilizados:
     \item Multiplexadores
     \item Decodificadores
     \item Portas Lógicas \textbf{NOT}, \textbf{Buffer}
-    \item \textbf{***** TODO *****}
 \end{itemize}
 
 \section{Procedimentos}
@@ -189,38 +244,246 @@ tal multiplexador é representado em~\ref{code:mux8}.
         assign saida = dado[escolha];
     endmodule
     \end{lstlisting}
-    \caption{Código para um multiplexador 8x1 em \emph{SystemVerilog}}\label{code:mux8}
+    \label{code:mux8}
 \end{center}
 
-\textbf{***** TODO *****}
+Agora que dispomos do multiplexador necessário para a construção de um somador,
+precisamos analisar a tabela verdade da função desejada para construirmos um
+circuito adequado.
+
+A tabela verdade desejada do somador está representada
+em~\ref{tab:truth_table_full_adder}:
+
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para o Somador}
+    \begin{tabular}{|c|c|c||c|c|}\hline
+    \multicolumn{3}{|c||}{Entradas} & \multicolumn{2}{|c|}{Saídas} \\\hline
+    \textbf{A} & \textbf{B} & \textbf{Cin} & \textbf{Cout} & \textbf{S} \\\hline
+    0 & 0 & 0 & 0 & 0 \\\hline
+    0 & 0 & 1 & 0 & 1 \\\hline
+    0 & 1 & 0 & 0 & 1 \\\hline
+    0 & 1 & 1 & 1 & 0 \\\hline
+    1 & 0 & 0 & 0 & 1 \\\hline
+    1 & 0 & 1 & 1 & 0 \\\hline
+    1 & 1 & 0 & 1 & 0 \\\hline
+    1 & 1 & 1 & 1 & 1 \\\hline
+    \end{tabular}\label{tab:truth_table_full_adder}
+\end{table}
+
+E, de posse da tabela verdade final, podemos agora criar dois circuitos, um para
+a função que originará o output de \textbf{Cout} e outra função para o output de
+\textbf{S}.
+
+Para o output de \textbf{Cout}, basta implementarmos a seguinte função:
+
+\begin{equation}
+f(A,B,Cin) = \overline{A} \cdot B \cdot Cin + A \cdot \overline{B} \cdot Cin + A \cdot B \cdot \overline{Cin} + A \cdot B \cdot Cin
+\end{equation}
+
+E, para o output de \textbf{S}, implementaremos a função:
+
+\begin{equation}
+g(A,B,Cin) = \overline{A} \cdot \overline{B} \cdot Cin + \overline{A} \cdot B \cdot \overline{Cin} + A \cdot \overline{B} \cdot \overline{Cin} + A \cdot B \cdot Cin
+\end{equation}
+
+Seria possível tentarmos minimizar as funções acima, mas, visto que utilizaremos
+um multiplexador para a construção do circuito, tal otimização torna-se
+desnecessária.
+
+Agora que dispomos de todas as informações necessárias para a construção do
+circuito lógico, resta-nos apenas montar o circuito com as portas lógicas, fios
+e multiplexadores necessários.
+
+A implementação do circuito requisitado no enunciado pode ser visualizada na
+figura~\ref{fig:2_1_Circuit.png}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Exp06/Images/2_1_Circuit.png}
+  \caption{Circuito final do somador montado a partir de mapeamento de portas
+    lógicas}\label{fig:2_1_Circuit.png}
+\end{figure}
+
+Por fim, com o circuito implementado e devidamente demonstrado, passaremos a
+apresentar o comportamento efetivo do circuito para todos os possíveis valores
+de input de \textbf{A}, \textbf{B} e \textbf{Cin}. O diagrama da simulação
+funcional do circuito acima pode ser visto na
+figura~\ref{fig:2_1_Functional_Foto.jpg}, e o diagrama da simulação de tempo do
+circuito, na figura~\ref{fig:2_1_Timing_Foto.jpg}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Exp06/Images/2_1_Functional_Foto.jpg}
+  \caption{Diagrama Funcional do Somador}\label{fig:2_1_Functional_Foto.jpg}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Exp06/Images/2_1_Timing_Foto.jpg}
+  \caption{Diagrama de Tempo do Somador}\label{fig:2_1_Timing_Foto.jpg}
+\end{figure}
 
 % 2.2
 \subsection{Elaboração de Somador Completo apenas com Verilog}\label{sec:2.2}
 
-\textbf{***** TODO *****}
+Para este tópico, que devemos elaborar um somador usando apenas a descrição em
+verilog, vemos quão mais fácil é o desenvolvimento de circuitos lógicos mais
+complexos valendo-se de uma linguagem de descrição de hardware adequada.
+
+Para conseguirmos elaborar o somador, basta escrevermos a descrição de um módulo
+com o seguinte código:
+
+\begin{center}
+    \begin{lstlisting}[style={verilog-style}]
+    module full_adder(
+        input A,
+        input B,
+        input Cin,
+        output Cout,
+        output S
+        );
+
+        assign {Cout,S} = A + B + Cin;
+    endmodule
+    \end{lstlisting}
+    \label{code:full_adder}
+\end{center}
+
+Com esse código, temos a certeza que a implementação final será a de um somador
+totalmente funcional, pois isso é garantido pela linguagem de descrição de
+hardware \emph{SystemVerilog}.
+
+Para avaliarmos os diagramas funcional e de tempo do circuito descrito acima,
+podemos analizar respectivamente as figuras~\ref{fig:2_2_Functional_Foto.jpg}
+e~\ref{fig:2_2_Timing_Foto.jpg}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Exp06/Images/2_2_Functional_Foto.jpg}
+  \caption{Diagrama Funcional do Somador implementado com \emph{SystemVerilog}}\label{fig:2_2_Functional_Foto.jpg}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Exp06/Images/2_2_Timing_Foto.jpg}
+  \caption{Diagrama de Tempo do Somador implementado com \emph{SystemVerilog}}\label{fig:2_2_Timing_Foto.jpg}
+\end{figure}
+
 
 % 2.3
-\subsection{Obtendo as funções booleanas para o decodificador}\label{sec:2.3}
+\subsection{Obtendo as funções booleanas para o decodificador com multiplexador}\label{sec:2.3}
 
-\textbf{***** TODO *****}
+Para o respectivo experimento utiliza-se uma implementação de decodificador com base no demultiplexador apresentado. Sendo em SystemVerilog expresso por:
 
-\section{Análise dos Resultados}
-\label{sec:resultados}
+\begin{center}
+    \begin{lstlisting}[style={verilog-style}]
+    module decod16(
+        input [3:0] Escolha,
+        output [15:0] Saida
+        );
 
-\textbf{***** TODO *****}
+        assign Saida[0] = Escolha==4'd0? 1'b1 : 1'b0;
+        assign Saida[1] = Escolha==4'd1? 1'b1 : 1'b0;
+        assign Saida[2] = Escolha==4'd2? 1'b1 : 1'b0;
+        ...
+        assign Saida[14] = Escolha==4'd14? 1'b1 : 1'b0;
+        assign Saida[15] = Escolha==4'd15? 1'b1 : 1'b0;
+    endmodule
+    \end{lstlisting}
+    \label{code:full_adder}
+\end{center}
 
-\subsection{Análise em \ref{sec:2.1} e \ref{sec:2.2}}\label{sec:analise2.1}
+Temos que a função analisada trata-se de:
 
-\textbf{***** TODO *****}
+$f(A,B,C,D,E,F,G)=FG+A.B.C.D.\overline{E}.\overline{F}.G+\overline{A}.\overline{B}.\overline{C}.\overline{D}.\overline{E}.\overline{F}.G+A.\overline{B}.\overline{C}.E.F.\overline{G}+\overline{A}.B.C.D.\overline{E}.F.\overline{G}+A.B.C.D.E.\overline{F}.\overline{G}+A.\overline{B}.\overline{C}.D.E.\overline{F}.\overline{G}$
 
-\subsection{Análise em \ref{sec:2.3}}\label{sec:analise2.4}
+A princípio define-se \textbf{A, B, C} e \textbf{D} como sendo os bits que irão compor o decodificador e \textbf{E, F, G} para o multiplexador. Também temos que \textbf{A} será o bit mais significativo e \textbf{G} o menos significativo.
 
-\textbf{***** TODO *****}
+Analisando somente os locais que possuem saída $1$, sua tabela verdade será descrita por:
 
-\section{Conclusão}
-\label{sec:Conclusao}
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para $f(A,B,C,D,E,F,G)$}
+    \begin{tabular}{|c|c|c|c|c|c|c||c|}\hline
+    \multicolumn{7}{|c||}{Entradas} & \multicolumn{1}{|c|}{Saídas} \\\hline
+    \textbf{A} & \textbf{B} & \textbf{C} & \textbf{D} & \textbf{E} & \textbf{F} & \textbf{G} & \textbf{S} \\\hline
+    0 & 0 & 0 & 0 & 0 & 0 & 1 & 1 \\\hline
+    0 & 1 & 1 & 1 & 0 & 1 & 0 & 1 \\\hline
+    1 & 0 & 0 & 1 & 1 & 0 & 0 & 1 \\\hline
+    1 & 0 & 1 & * & 1 & 1 & 0 & 1 \\\hline
+    1 & 1 & 1 & 1 & 0 & 0 & 1 & 1 \\\hline
+    1 & 1 & 1 & 1 & 1 & 0 & 0 & 1 \\\hline
+    * & * & * & * & * & 1 & 1 & 1 \\\hline
+    \end{tabular}\label{tab:truth_table_full_adder}
+\end{table}
 
-\textbf{***** TODO *****}
+Deve-se atentar ao fato de que pelo uso da expressão \textbf{FG} temos que para todas as combinações que possuem $F=1$ e $G=1$ o resultado será $1$, utilizando o processo de soma de produtos. Assim, temos que o circuito será descrito através da ferramenta Quartus II como:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Exp06/Images/2_3_Circuit.png}
+  \caption{Decodificador e Multiplexador p/ Min Termos}\label{fig:2_3_Circuit.png}
+\end{figure}
+
+Simulando obtem-se em seu diagrama funcional:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Exp06/Images/2_3_Functional_Foto.jpg}
+  \caption{Simulação Funcional 2.3}\label{fig:2_3_Functional_Foto.jpg}
+\end{figure}
+
+Observa-se que de fato para $F=1$ e $G=1$ temos que saída resulta em $1$, como previsto, além dos casos adicionais que compõe a função.
+
+Simulando obtém-se para seu diagrama com análise de tempo:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.9\textwidth]{Exp06/Images/2_3_Timing.jpg}
+  \caption{Simulação Temporal 2.3}\label{fig:2_3_Timing_Foto.jpg}
+\end{figure}
+
+Observa-se que diferentemente dos experimentos prévios apesar de não haver Hazards de maneira tão evidente tem-se atrasos nos resultados a serem obtidos.
+
+\section{Análise dos Resultados}\label{sec:resultados}
+
+\subsection{Análise em~\ref{sec:2.1} e~\ref{sec:2.2}}\label{sec:analise2.1}
+
+Dos experimentos \emph{2.1} e \emph{2.2} podemos fazer duas observações
+interessantes e pertinentes.
+
+A primeira observação é que o circuito criado em \emph{2.1} é praticamente o
+mesmo que o feito em \emph{2.2}, hava vista que os diagramas
+em~\ref{fig:2_1_Timing_Foto.jpg} e~\ref{fig:2_2_Timing_Foto.jpg} são iguais. E,
+uma vez que \emph{2.1} e \emph{2.2} são iguais, vemos como uma linguagem de
+descrição de hardware como o \emph{SystemVerilog} pode ser uma ferramenta útil,
+pois o tempo de desenvolvimento dos dois circuitos é muito diferente. Enquanto
+em um o programador precisa se preocupar em ligar corretamente todos os fios e
+portas lógicas, no outro o programador só precisa especificar o comportamento
+esperado do sistema, aumentando muito a produtividade no desenvolvimendo de
+novos circuitos.
+
+Outra observação pertinente de se fazer é que em ambos os circuitos há presença
+de \emph{hazards}, que são ocasionados pelo fato de que os circuitos não serem
+ideias (eles apresentam atrasos, fade-ins, fade-outs, etc.), e, dessa forma, é
+importante notar que há momentos que os canais de saída do circuito final (os
+pinos de \textbf{S} e \textbf{Cout}) apresentarão, nessa configuração, um
+resultado errado durante um curto período de tempo.
+
+
+\subsection{Análise em~\ref{sec:2.3}}\label{sec:analise2.4}
+
+Apesar do experimento \ref{sec:2.3} não possuir Hazards evidentes como os outros observados, deve-se atentar ao tempo de propagação. Para visualização do experimento utilizou-se um período de $5ns$, para uma análise funcional não temos muitos problemas na adoção deste período, contudo, é errôneo a adoção de um período tão pequeno em projetos práticos, este problema é extremamente evidente na simulação temporal onde temos que a cada novo estado a saída capta o resultado anterior, tal fato é o que justifica uma longa indefinição inicial.
+
+Para este relatório apesar de errônea esta adoção, escolheu-se para a visualiazação de todos os resultados possíveis e também sermos capazes de analisar o respectivo erro e abordá-lo.
+
+\section{Conclusão}\label{sec:Conclusao}
+
+O presente relatório foi capaz de além da utilização de multiplexadores, demultiplexadores e decodificadores para a geração de variados tipos de circuitos, como também pudemos ser capazes de analisar os erros associados a suas composições e a importância de ser definido um tempo de mudança ideal para circuitos, caso contrário poderá ser grande o erro obtido nos resultados.
+
+Importante mencionar que circuitos como ``\emph{half-adder}'' e `` \emph{full-adder}'' são de extrema importância para a computação, por serem estes elementos que compõe componentes eletrônicos como processadores, pois, com eles somos capazes de contar tempo passado, ciclos realizados, deslocamento entre instruções, assim como também operações de soma no geral, porém, não limita-se a somente as possibilidades mencionadas.
+
 
 \nocite{*}
 \bibliographystyle{sbc}
@@ -233,8 +496,6 @@ tal multiplexador é representado em~\ref{code:mux8}.
 
 Respostas:
 
-\textbf{***** TODO *****}
-
 \begin{table}[H]
       \begin{tabular}{|c|c|} \hline
       \textbf{Questão} & \textbf{Resposta}\\
@@ -244,12 +505,12 @@ Respostas:
       3  & F \\ \hline
       4  & V \\ \hline
       5  & F \\ \hline
-      6  & - \\ \hline
-      7  & - \\ \hline
-      8  & - \\ \hline
-      9  & - \\ \hline
-      10 & - \\ \hline
-      11 & - \\ \hline
+      6  & V \\ \hline
+      7  & V \\ \hline
+      8  & F \\ \hline
+      9  & V \\ \hline
+      10 & F \\ \hline
+      11 & V \\ \hline
       \end{tabular}
 \end{table}
 
