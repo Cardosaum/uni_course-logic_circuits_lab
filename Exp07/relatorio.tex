@@ -109,12 +109,19 @@ Latches e Flip-Flops: RS e JK}
 
 A princípio diversas formas de descrever a memória ao longo da história da computação foram utilizadas, sendo que uma destas envolve o uso de portas lógicas(semicondutores).
 
-Com o uso de portas lógicas pode haver outras maneiras além da que será descrita no presente relatório, assim como um mesmo sistema de memória poderá ser descrito com diferentes portas lógicas. Por exemplo, um Latch RS poderá ser descrito tanto com o uso de portas Nand como Nor, contudo, nos experimentos realizados optou-se pelo uso de portas Nand.
+Com o uso de portas lógicas pode haver outras maneiras além da que será descrita
+no presente relatório, assim como um mesmo sistema de memória poderá ser
+descrito com diferentes portas lógicas. Por exemplo, um Latch RS poderá ser
+descrito tanto com o uso de portas \emph{NAND} como \emph{NOR}, contudo, nos
+experimentos realizados optou-se pelo uso de portas \emph{NAND}.
 
 \subsection{Objetivos}\label{sec:Objetivos}
-Apesar da existência de outros sistemas de memória, focou-se na elaboração e análise de Latch RS, Latch RS Engatilhado, Flip Flop RS e Flip Flop JK. 
+Apesar da existência de outros sistemas de memória, focou-se na elaboração e
+análise de Latch RS Simples, Latch RS Engatilhado, Flip Flop RS e Flip Flop JK.
 
-Necessário é perceber que diante das análises de cada circuito de memória, alguns possuem estados proibidos e estes mesmos estados serão explorados mais a adiante.
+É necessário notar que diante das análises de cada circuito de memória, alguns
+possuem estados proibidos e estes mesmos estados serão explorados mais a
+adiante.
 
 \subsection{Materiais}\label{sec:Materiais}
 
@@ -153,8 +160,9 @@ seja semelhante ao diagrama da figura~\ref{fig:diagram_2.1.png}.
   \caption{Latch RS (implementado com \emph{NAND}s)}\label{fig:diagram_2.1.png}
 \end{figure}
 
-\textbf{melhorar o texto}\\
-A tabela verdade do circuito será a seguinte:
+Sabendo que temos como objetivo criar um circuito que tenha como tabela verdade
+uma igual a expressa em~\ref{tab:truth_table_latch_rs}, propomos como solução o
+circuito demonstrado na figura~\ref{fig:Circ-2.1.png}.
 
 \begin{table}[H]
     \centering
@@ -169,26 +177,32 @@ A tabela verdade do circuito será a seguinte:
     \end{tabular}\label{tab:truth_table_latch_rs}
 \end{table}
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{Exp07/Images/Circ-2.1.png}
+  \caption{Latch RS (implementado com \emph{NAND}s)}\label{fig:Circ-2.1.png}
+\end{figure}
+
+É interessante notar que o circuito em~\ref{fig:Circ-2.1.png} não é exatamente
+igual ao do diagrama em~\ref{fig:diagram_2.1.png} pois a passagem dos estados
+$11 \rightarrow 00 \rightarrow 11$ seria difícil de reproduzir manualmente.
+Dessa forma, foi adicionado um input adicional e duas portas \emph{OR} para
+permitir uma transição mais exata entre esses estados.
+
+Para a visualização do funcionamento deste circuito, confira no seguinte link:
 \href{https://youtu.be/RH6w3QnfUhA}{https://youtu.be/RH6w3QnfUhA}
-
-
-\textbf{TODO}
 
 % 2.2
 \subsection{Latch RS engatilhado}\label{sec:2.2}
 
-\href{https://youtu.be/VNXkBLNcpbo}{https://youtu.be/VNXkBLNcpbo}
-
-Utilizando os modelos de circuitos apresentados temos que sua implementação através do software Deeds será:
+Utilizando os modelos de circuitos apresentados temos que sua implementação
+através do software Deeds será:
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{Exp07/Images/Circ-2.2.png}
   \caption{Latch RS Engatilhado (implementado com \emph{NAND}s)}\label{fig:LatchRS-Engatilhado.png}
 \end{figure}
-
-Simulando teremos:
-[\href{link-boladão}{\textbf{link-boladão}}]
 
 Sendo que a tabela verdade utilizada será:
 \begin{table}[H]
@@ -202,17 +216,54 @@ Sendo que a tabela verdade utilizada será:
       1 & 0 & 1 & 0 & 1\\\hline
       1 & 1 & 0 & 1 & 0 \\\hline
       1 & 1 & 1 & 1 & 1 \\\hline
-    \end{tabular}\label{tab:truth_table_latch_rs}
+    \end{tabular}\label{tab:truth_table_latch_rs_triggered}
 \end{table}
 
-A utilização de um gatilho permite definir quando poderá ocorrer o registro de bits ou não, portanto para $T=0$, temos que o estado das saídas não poderá ser modificado, caso contrário temos a situação em que $T=1$, sendo que este caso descrito possuirá o mesmo comportamento ao utilizar um Latch RS comum.
+A utilização de um gatilho permite definir quando poderá ocorrer o registro de
+bits ou não, portanto para $T=0$, temos que o estado das saídas não poderá ser
+modificado, caso contrário temos a situação em que $T=1$, sendo que este caso
+descrito possuirá o mesmo comportamento ao utilizar um Latch RS comum.
+
+Para a visualização do funcionamento deste circuito, confira no seguinte link:
+\href{https://youtu.be/VNXkBLNcpbo}{https://youtu.be/VNXkBLNcpbo}
 
 % 2.3
 \subsection{Flip-flop RS}\label{sec:2.3}
 
-\href{link-boladão}{\textbf{link-boladão}}
+Implementando o circuito através do software Deeds, temos:
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Exp07/Images/Circ-2.3.png}
+  \caption{Flip Flop RS (implementado com \emph{NAND}s)}\label{fig:Flip-Flop-RS.png}
+\end{figure}
 
-\textbf{TODO}
+Simulando tem-se o seguinte comportamento:
+\href{https://youtu.be/qPIkTOfm8uI}{https://youtu.be/qPIkTOfm8uI}
+
+Assim, sua tabela verdade será descrita por:
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para \emph{Flip-flop RS}}
+    \begin{tabular}{|c|c|c||c|c|}\hline
+      \multicolumn{3}{|c||}{Entradas} & \multicolumn{2}{|c|}{Saídas} \\\hline
+      \textbf{C $({TRIGGER})$} & \textbf{A $({RESET})$} & \textbf{B $({SET})$} & \textbf{L0 $(Q_{n+1})$} & \textbf{L1 $(\overline{Q_{n+1}})$} \\\hline
+      0 & X & X & $Q_{n}$ & $\overline{Q_{n}}$ \\\hline
+      Clk_H & 0 & 0 & $Q_{n}$ & $\overline{Q_{n}}$\\\hline
+      Clk_H & 0 & 1 & 0 & 1\\\hline
+      Clk_H & 1 & 0 & 1 & 0 \\\hline
+      Clk_H & 1 & 1 & 1 & 1 \\\hline
+    \end{tabular}\label{tab:truth_table_flipflop_rs}
+\end{table}
+
+Em questão de saídas poderá não parecer perceptível a diferença entre Latches e
+Flip Flops, contudo, um fator imprescindível entre ambos é o fato de que Latches
+para que possam criar sua mudança de estado, basta que nível mude para um que
+possibilita a mudança de estado. Já Flip Flops, possuem a característica de que
+para criar suas mudanças será possível somente nas bordas da onda, ou seja, um
+flip flop sensível a onda de subida somente modificará seu estado no momento em
+que ocorre a transição de nível lógico baixo para alto, assim, define-se que
+Latches são sensível ao estado lógico, diferentemente de flip flops que são
+sensíveis às bordas.
 
 % 2.4
 \subsection{Flip-flop JK}\label{sec:2.4}
