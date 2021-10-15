@@ -107,11 +107,14 @@ Latches e Flip-Flops: RS e JK}
 
 \section{Introdução}\label{sec:Introducao}
 
-\textbf{TODO}
+A princípio diversas formas de descrever a memória ao longo da história da computação foram utilizadas, sendo que uma destas envolve o uso de portas lógicas(semicondutores).
+
+Com o uso de portas lógicas pode haver outras maneiras além da que será descrita no presente relatório, assim como um mesmo sistema de memória poderá ser descrito com diferentes portas lógicas. Por exemplo, um Latch RS poderá ser descrito tanto com o uso de portas Nand como Nor, contudo, nos experimentos realizados optou-se pelo uso de portas Nand.
 
 \subsection{Objetivos}\label{sec:Objetivos}
+Apesar da existência de outros sistemas de memória, focou-se na elaboração e análise de Latch RS, Latch RS Engatilhado, Flip Flop RS e Flip Flop JK. 
 
-\textbf{TODO}
+Necessário é perceber que diante das análises de cada circuito de memória, alguns possuem estados proibidos e estes mesmos estados serão explorados mais a adiante.
 
 \subsection{Materiais}\label{sec:Materiais}
 
@@ -166,17 +169,43 @@ A tabela verdade do circuito será a seguinte:
     \end{tabular}\label{tab:truth_table_latch_rs}
 \end{table}
 
+\href{https://youtu.be/RH6w3QnfUhA}{https://youtu.be/RH6w3QnfUhA}
 
-\href{link-boladão}{\textbf{link-boladão}}
 
 \textbf{TODO}
 
 % 2.2
 \subsection{Latch RS engatilhado}\label{sec:2.2}
 
-\href{link-boladão}{\textbf{link-boladão}}
+\href{https://youtu.be/VNXkBLNcpbo}{https://youtu.be/VNXkBLNcpbo}
 
-\textbf{TODO}
+Utilizando os modelos de circuitos apresentados temos que sua implementação através do software Deeds será:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Exp07/Images/Circ-2.2.png}
+  \caption{Latch RS Engatilhado (implementado com \emph{NAND}s)}\label{fig:LatchRS-Engatilhado.png}
+\end{figure}
+
+Simulando teremos:
+[\href{link-boladão}{\textbf{link-boladão}}]
+
+Sendo que a tabela verdade utilizada será:
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para \emph{Latch RS Engatilhado}}
+    \begin{tabular}{|c|c|c||c|c|}\hline
+      \multicolumn{3}{|c||}{Entradas} & \multicolumn{2}{|c|}{Saídas} \\\hline
+      \textbf{C $({TRIGGER})$} & \textbf{A $({RESET})$} & \textbf{B $({SET})$} & \textbf{L0 $(Q_{n+1})$} & \textbf{L1 $(\overline{Q_{n+1}})$} \\\hline
+      0 & X & X & $Q_{n}$ & $\overline{Q_{n}}$ \\\hline
+      1 & 0 & 0 & $Q_{n}$ & $\overline{Q_{n}}$\\\hline
+      1 & 0 & 1 & 0 & 1\\\hline
+      1 & 1 & 0 & 1 & 0 \\\hline
+      1 & 1 & 1 & 1 & 1 \\\hline
+    \end{tabular}\label{tab:truth_table_latch_rs}
+\end{table}
+
+A utilização de um gatilho permite definir quando poderá ocorrer o registro de bits ou não, portanto para $T=0$, temos que o estado das saídas não poderá ser modificado, caso contrário temos a situação em que $T=1$, sendo que este caso descrito possuirá o mesmo comportamento ao utilizar um Latch RS comum.
 
 % 2.3
 \subsection{Flip-flop RS}\label{sec:2.3}
