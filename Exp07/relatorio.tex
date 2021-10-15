@@ -88,12 +88,20 @@ Latches e Flip-Flops: RS e JK}
 
 \selectlanguage{american}
  \begin{abstract}
-   \textbf{TODO}
+   \textbf{TODO: Esperando aprovação do Ualiton.}
  \end{abstract}
 
 \selectlanguage{brazil}
  \begin{resumo}
-   \textbf{TODO}
+   No presente relatório abordamos a construção de \emph{Latches} e
+   \emph{Flip-flops} de diferentes modelos, explorando suas especificidades,
+   utilidades e limitações inerentes. Tais circuitos, tão amplamente utilizados
+   para a construção de circuitos computacionais atuais, mostram-se de vital
+   importancia para a sociedade moderna, e, portanto, seu estudo minucioso
+   apresenta-se como um imperativo para estudantes de Ciências da Computação.
+   \\
+   \textbf{Aê, parceiro, tu tá de acordo com esse resumo?}\\
+   \textbf{TODO: Esperando aprovação do Ualiton.}\\
  \end{resumo}
 
 
@@ -109,12 +117,20 @@ Latches e Flip-Flops: RS e JK}
 
 Em função da natureza do ensino a distância, os presentes experimentos não foram
 realizados usando-se materiais e equipamentos físicos, mas sim emulados por meio
-do \href{https://www.digitalelectronicsdeeds.com/downloads.html}{Deeds}.
+do software
+\href{https://www.digitalelectronicsdeeds.com/downloads.html}{Deeds}.
 
 A seguir estão enumerados os materiais utilizados:
 \begin{itemize}
     \item Software Deeds
-    \item \textbf{TODO}
+    \item Portas lógicas
+    \begin{itemize}
+      \item \emph{OR}
+      \item \emph{NOT}
+      \item \emph{NAND}s de $2$ e $3$ entradas
+    \end{itemize}
+    \item \emph{Clocks}
+    \item \emph{LED}s
 \end{itemize}
 
 \section{Procedimentos}\label{sec:Procedimentos}
@@ -123,17 +139,56 @@ A seguir estão enumerados os materiais utilizados:
 Passaremos a apresentar os experimentos requeridos.
 
 % 2.1
-\subsection{Elaboração de Somador Completo desenhando o circuito}\label{sec:2.1}
+\subsection{Latch RS simples com \textbf{NAND}s}\label{sec:2.1}
+
+Para esta primeira parte do experimento, desejamos implementar um circuito que
+seja semelhante ao diagrama da figura~\ref{fig:diagram_2.1.png}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{Exp07/Images/diagram_2.1.png}
+  \caption{Latch RS (implementado com \emph{NAND}s)}\label{fig:diagram_2.1.png}
+\end{figure}
+
+\textbf{melhorar o texto}\\
+A tabela verdade do circuito será a seguinte:
+
+\begin{table}[H]
+    \centering
+    \caption{Tabela Verdade para \emph{Latch RS}}
+    \begin{tabular}{|c|c||c|c|}\hline
+      \multicolumn{2}{|c||}{Entradas} & \multicolumn{2}{|c|}{Saídas} \\\hline
+      \textbf{A $(\overline{RESET})$} & \textbf{B $(\overline{SET})$} & \textbf{L0 $(Q)$} & \textbf{L1 $(\overline{Q})$} \\\hline
+      0 & 0 & 1 & 1 \\\hline
+      0 & 1 & 1 & 0 \\\hline
+      1 & 0 & 0 & 1 \\\hline
+      1 & 1 & $Q_{n}$ & $\overline{Q_{n}}$ \\\hline
+    \end{tabular}\label{tab:truth_table_latch_rs}
+\end{table}
+
+
+\href{link-boladão}{\textbf{link-boladão}}
 
 \textbf{TODO}
 
 % 2.2
-\subsection{Elaboração de Somador Completo apenas com Verilog}\label{sec:2.2}
+\subsection{Latch RS engatilhado}\label{sec:2.2}
+
+\href{link-boladão}{\textbf{link-boladão}}
 
 \textbf{TODO}
 
 % 2.3
-\subsection{Obtendo as funções booleanas para o decodificador com multiplexador}\label{sec:2.3}
+\subsection{Flip-flop RS}\label{sec:2.3}
+
+\href{link-boladão}{\textbf{link-boladão}}
+
+\textbf{TODO}
+
+% 2.4
+\subsection{Flip-flop JK}\label{sec:2.4}
+
+\href{link-boladão}{\textbf{link-boladão}}
 
 \textbf{TODO}
 
