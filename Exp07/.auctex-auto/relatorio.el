@@ -58,6 +58,8 @@
     "sec:2.4"
     "sec:resultados"
     "sec:analise2.1"
+    "sec:analise2.2"
+    "sec:analise2.3"
     "sec:analise2.4"
     "sec:Conclusao")
    (LaTeX-add-bibliographies)

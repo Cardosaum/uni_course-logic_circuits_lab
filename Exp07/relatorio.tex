@@ -88,31 +88,33 @@ Latches e Flip-Flops: RS e JK}
 
 \selectlanguage{american}
  \begin{abstract}
-   \textbf{TODO: Esperando aprovação do Ualiton.}
+   The current report explores the construction of different models of
+   \emph{Latches} and \emph{Flip-flops}, showing their specificities, utilities
+   and inherent limitations. Such circuits, so widely used to build up
+   computational circuits, show themselves as vital for the modern society, and,
+   therefore, it's thorough study and understanding becomes of crucial
+   importance for Computer Science students.
  \end{abstract}
 
 \selectlanguage{brazil}
  \begin{resumo}
-   No presente relatório abordamos a construção de \emph{Latches} e
+   O presente relatório aborda a construção de \emph{Latches} e
    \emph{Flip-flops} de diferentes modelos, explorando suas especificidades,
    utilidades e limitações inerentes. Tais circuitos, tão amplamente utilizados
    para a construção de circuitos computacionais atuais, mostram-se de vital
    importancia para a sociedade moderna, e, portanto, seu estudo minucioso
    apresenta-se como um imperativo para estudantes de Ciências da Computação.
-   \\
-   \textbf{Aê, parceiro, tu tá de acordo com esse resumo?}\\
-   \textbf{TODO: Esperando aprovação do Ualiton.}\\
  \end{resumo}
 
 
 \section{Introdução}\label{sec:Introducao}
 
-A princípio diversas formas de descrever a memória ao longo da história da computação foram utilizadas, sendo que uma destas envolve o uso de portas lógicas(semicondutores).
+A princípio existem variados tipos de métodos utilizados para o registro de memória, mas os experimentos realizados visam descrever e utilizar aqueles que surgem do uso de semicondutores.
 
-Com o uso de portas lógicas pode haver outras maneiras além da que será descrita
+Com o uso de portas lógicas podem haver outras maneiras além da que será descrita
 no presente relatório, assim como um mesmo sistema de memória poderá ser
 descrito com diferentes portas lógicas. Por exemplo, um Latch RS poderá ser
-descrito tanto com o uso de portas \emph{NAND} como \emph{NOR}, contudo, nos
+representado tanto com o uso de portas \emph{NAND} como \emph{NOR}, contudo, nos
 experimentos realizados optou-se pelo uso de portas \emph{NAND}.
 
 \subsection{Objetivos}\label{sec:Objetivos}
@@ -248,17 +250,17 @@ Assim, sua tabela verdade será descrita por:
       \multicolumn{3}{|c||}{Entradas} & \multicolumn{2}{|c|}{Saídas} \\\hline
       \textbf{C $({TRIGGER})$} & \textbf{A $({RESET})$} & \textbf{B $({SET})$} & \textbf{L0 $(Q_{n+1})$} & \textbf{L1 $(\overline{Q_{n+1}})$} \\\hline
       0 & X & X & $Q_{n}$ & $\overline{Q_{n}}$ \\\hline
-      Clk_H & 0 & 0 & $Q_{n}$ & $\overline{Q_{n}}$\\\hline
-      Clk_H & 0 & 1 & 0 & 1\\\hline
-      Clk_H & 1 & 0 & 1 & 0 \\\hline
-      Clk_H & 1 & 1 & 1 & 1 \\\hline
+      $Clk_H$ & 0 & 0 & $Q_{n}$ & $\overline{Q_{n}}$\\\hline
+      $Clk_H$ & 0 & 1 & 0 & 1\\\hline
+      $Clk_H$ & 1 & 0 & 1 & 0 \\\hline
+      $Clk_H$ & 1 & 1 & 1 & 1 \\\hline
     \end{tabular}\label{tab:truth_table_flipflop_rs}
 \end{table}
 
 Em questão de saídas poderá não parecer perceptível a diferença entre Latches e
 Flip Flops, contudo, um fator imprescindível entre ambos é o fato de que Latches
-para que possam criar sua mudança de estado, basta que nível mude para um que
-possibilita a mudança de estado. Já Flip Flops, possuem a característica de que
+para que possam criar sua mudança de estado, basta que o nível mude para um que
+possibilite esta mudança. Já Flip Flops, possuem a característica de que
 para criar suas mudanças será possível somente nas bordas da onda, ou seja, um
 flip flop sensível a onda de subida somente modificará seu estado no momento em
 que ocorre a transição de nível lógico baixo para alto, assim, define-se que
@@ -270,17 +272,58 @@ sensíveis às bordas.
 
 \href{link-boladão}{\textbf{link-boladão}}
 
+Temos que seu circuito será descrito no software Deeds como:
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Exp07/Images/Circ-2.4.png}
+  \caption{Flip Flop JK (implementado com \emph{NAND}s)}\label{fig:flip-flop-jk.png}
+\end{figure}
+
+Observe que para sua implementação fez-se necessário o uso de entradas de \emph{PRESET} e \emph{CLEAR}, por não haver estado inicial definido. Contudo, não utilizou-se a entrada de \emph{CLEAR}, mas definiu-se para ser possível a criação de um modelo mais completo.
+
+Analisando os resultados de seu diagrama de onda, temos que para um pico de clock, foi dado 
 \textbf{TODO}
 
 \section{Análise dos Resultados}\label{sec:resultados}
 
+Passaremos a analisar individualmente cada um dos tópicos anteriores, levantando
+observações pertinentes para cada um deles.
+
+\subsection{Análise do tópico~\ref{sec:2.1}}\label{sec:analise2.1}
+
+No tópico~\ref{sec:2.1} podemos fazer uma observação que se repetirá nos
+tópicos~\ref{sec:2.2} e~\ref{sec:2.3}, que é referente a questão de
+\emph{estados proibidos}. Como é possível perceber no
+\href{https://youtu.be/RH6w3QnfUhA}{vídeo} deste experimento, quando há a
+transição do estado $00$ para o estado $11$, o software \emph{Deeds}, que simula
+os circuitos digitais, levanta um erro de ``loop infinito''. Esse comportamento
+ocorre pois, no estado $00$ o circuito entra no \emph{estado proibido} pois, em
+um circuito real, após sair desse estado, a transição se dará de forma não
+determinística, sendo dependente de atrasos causados por fios e portas lógicas
+que compões o \emph{Latch RS} em específico. No caso do simulador \emph{Deeds},
+como não há atrasos de portas lógicas sendo simulado, o programa acaba por
+emular ambos $Q$ e $\overline{Q}$ indo para o estado oposto quando $SET$ e
+$RESET$ são postos em $1$. Dessa forma, haverá uma eterna mudança entre os
+estados $\{Q = 1, \overline{Q} = 1\}$ e $\{Q = 0, \overline{Q} = 0\}$. Dessa
+forma, o programa para a execução levantando o erro de ``loop infinito''.
+
+\subsection{Análise do tópico~\ref{sec:2.2}}\label{sec:analise2.2}
+
+Semelhantemente ao experimento feito em~\ref{sec:2.1}, temos que o \emph{estado
+  proibido} está presente caso \emph{SET} e \emph{RESET} assumam o valor $1$ ao
+mesmo tempo. E, dessa forma, ao mudar ambos para o valor $0$ ao mesmo tempo, o
+circuito entra em estado não determinístico. E, uma vez que o \emph{Deeds} não
+simula atraso aleatório inerente à portas lógicas e cabos usados para construção
+do circuito, o programa entra num estado de ``loop infinito'', alternando entre
+estados de $0$ e $1$. Dessa forma, ele interrompe a execução da emulação
+levantando um erro.
+
+\subsection{Análise do tópico~\ref{sec:2.3}}\label{sec:analise2.3}
+
 \textbf{TODO}
 
-\subsection{Análise dos tópicos~\ref{sec:2.1} e~\ref{sec:2.2}}\label{sec:analise2.1}
-
-\textbf{TODO}
-
-\subsection{Análise dos tópicos~\ref{sec:2.3}}\label{sec:analise2.4}
+\subsection{Análise do tópico~\ref{sec:2.4}}\label{sec:analise2.4}
 
 \textbf{TODO}
 
