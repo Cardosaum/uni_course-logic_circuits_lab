@@ -57,6 +57,8 @@
     "tab:truth_table_flipflop_rs"
     "sec:2.4"
     "fig:flip-flop-jk.png"
+    "fig:flip-flop-jk-q.png"
+    "fig:flip-flop-jk-t.png"
     "sec:resultados"
     "sec:analise2.1"
     "sec:analise2.2"

@@ -272,23 +272,60 @@ sensíveis às bordas.
 % 2.4
 \subsection{Flip-flop JK}\label{sec:2.4}
 
-\href{link-boladão}{\textbf{link-boladão}}
-
 Temos que seu circuito será descrito no software Deeds como:
 
 \begin{figure}[H]
   \centering
-  \includegraphics[width=0.8\textwidth]{Exp07/Images/Circ-2.4.png}
+  \includegraphics[width=0.7\textwidth]{Exp07/Images/Circ-2.4.png}
   \caption{Flip Flop JK (implementado com \emph{NAND}s)}\label{fig:flip-flop-jk.png}
 \end{figure}
 
 Observe que para sua implementação fez-se necessário o uso de entradas de
 \emph{PRESET} e \emph{CLEAR}, por não haver estado inicial definido. Contudo,
 não utilizou-se a entrada de \emph{CLEAR}, mas definiu-se para ser possível a
-criação de um modelo mais completo.
+criação de um modelo mais completo. Simulando obtemos o seguinte funcionamento: 
 
-Analisando os resultados de seu diagrama de onda, temos que para um pico de
-clock, foi dado \textbf{TODO}
+\href{https://youtu.be/QCF_M5kqSQE}{https://youtu.be/QCF_M5kqSQE}
+
+Este mesmo \emph{Flip Flop} poderá ser utilizado como um divisor de frequência
+de maneira que possa diminuir a frequência de um determinado clock. Segue abaixo
+o vídeo que descreve seu comportamento:
+
+\href{https://youtu.be/00iOIssj00k}{https://youtu.be/00iOIssj00k}
+
+Analisando de maneira geral, medindo 1 pulso de $Q$, obtemos:
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.7\textwidth]{Exp07/Images/Simul5_2.4.png}
+  \caption{Medida de Saída em Q}\label{fig:flip-flop-jk-q.png}
+\end{figure}
+
+Analisando 1 pulso de $T$, obtemos:
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.8\textwidth]{Exp07/Images/Simul6_2.4.png}
+  \caption{Medida de Saída em T}\label{fig:flip-flop-jk-t.png}
+\end{figure}
+
+Como 1 pulso nos exemplos utilizados descrevem a metade de um período, temos
+então que seus períodos serão aproximadamente:
+
+    $P_{Q} \approx 200ns$
+    
+    $P_{T} \approx 100ns$
+    
+Logo:
+
+    $F_{Q} \approx \frac{1}{P_{Q}} \approx 0.005(ns^{-1})$
+    
+    $F_{T} \approx \frac{1}{P_{T}} \approx 0.01(ns^{-1})$
+    
+Calculando suas razões:
+    
+    $\frac{F_{Q}}{F_{T}} = 0,5$
+    
+Assim, concluimos que a frequência de Q é metade da de T.
+
 
 \section{Análise dos Resultados}\label{sec:resultados}
 
@@ -326,15 +363,29 @@ levantando um erro.
 
 \subsection{Análise do tópico~\ref{sec:2.3}}\label{sec:analise2.3}
 
-\textbf{TODO}
+A utilização de um Flip Flop e Latch RS possibilitou observar as diferenças
+contrastantes entre Flip Flops e Latches. E pode-se comprovar seus
+comportamentos.
 
 \subsection{Análise do tópico~\ref{sec:2.4}}\label{sec:analise2.4}
 
-\textbf{TODO}
+Com o Flip Flop JK descrito, foi possível não somente a análise de seu
+funcionamento como o esperado assim como também a sua utilização para a criação
+de um divisor de frequência, podendo ser feita uma análise que buscava comprovar
+e evidenciar o comportamento divisor.
+
+Deve-se atentar ao fato de que para aumentar as divisões bastaria criar um
+comportamento em série de vários Flip Flops JK.
 
 \section{Conclusão}\label{sec:Conclusao}
 
-\textbf{TODO}
+Através dos experimentos realizados pudemos descrever parcialmente o
+comportamento de circuitos utilizados para o armazenamento de memória, assim
+como também pudemos analisar o erro associado aos mesmos.
+
+Pode-se observar que circuitos sequencias podem ser utilizados não somente para
+o armazenamento de dados, mas também como controle de pulsos de clock e ainda
+serem empregados em circuitos como de divisores de frequências.
 
 \nocite{*}
 \bibliographystyle{sbc}
@@ -347,14 +398,12 @@ levantando um erro.
 
 Respostas:
 
-\textbf{TODO}
-
 \begin{table}[H]
       \begin{tabular}{|c|c|} \hline
       \textbf{Questão} & \textbf{Resposta}\\
       \hline
       1  & D \\ \hline
-      2  & - \\ \hline
+      2  & A \\ \hline
       3  & B \\ \hline
       4  & D \\ \hline
       5  & C \\ \hline
