@@ -164,9 +164,10 @@ seja semelhante ao diagrama da figura~\ref{fig:diagram_2.1.png}.
   \caption{Latch RS (implementado com \emph{NAND}s)}\label{fig:diagram_2.1.png}
 \end{figure}
 
-Sabendo que temos como objetivo criar um circuito que tenha como tabela verdade
-uma igual a expressa em~\ref{tab:truth_table_latch_rs}, propomos como solução o
-circuito demonstrado na figura~\ref{fig:Circ-2.1.png}.
+Com base em~\cite{cl_latchs_RS_D} sabemos que a tabela verdade para o circuito
+de uma \emph{Latch RS} deve ser igual à expressa na
+tabela~\ref{tab:truth_table_latch_rs}. Assim, temos como proposta de
+implementação o circuito demonstrado em~\ref{fig:Circ-2.1.png}.
 
 \begin{table}[H]
     \centering
@@ -349,6 +350,11 @@ emular ambos $Q$ e $\overline{Q}$ indo para o estado oposto quando $SET$ e
 $RESET$ são postos em $1$. Dessa forma, haverá uma eterna mudança entre os
 estados $\{Q = 1, \overline{Q} = 1\}$ e $\{Q = 0, \overline{Q} = 0\}$. Dessa
 forma, o programa para a execução levantando o erro de ``loop infinito''.
+
+Tal problema não aconteceria com outros circuitos, como por exemplo
+\emph{Latches D}, assim como explicado em~\cite{cl_latchs_RS_D}, nem em
+\emph{Flip-flops D/JK} como mencionado em~\cite{cl_flipflops_RS_D_JK} e nem em
+\emph{Flip-flops T} assim como ensinado em~\cite{cl_flipflop_T_clear_preset}.
 
 \subsection{Análise do tópico~\ref{sec:2.2}}\label{sec:analise2.2}
 
