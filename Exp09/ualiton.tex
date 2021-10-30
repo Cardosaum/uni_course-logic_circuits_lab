@@ -89,9 +89,7 @@ Contadores Assíncronos e Síncronos}
 
 \selectlanguage{american}
  \begin{abstract}
-   The current report aims to project assincronous and sincronous counters,
-   using \emph{Flip-Flops JK}. Though this project we also aims to analyse the
-   error propagation inheritent to \emph{Flip-Flops}
+   \textbf{TODO}
  \end{abstract}
 
 \selectlanguage{brazil}
@@ -246,7 +244,6 @@ O circuito implementado será:
 
 Simulando teremos então:
 \href{google.com}{Linkzão Maroto}
-\textbf{TODO: INSERT LINK}
 \\
 Para a simulação de onda em um clock de $5Mhz$ deste mesmo circuito teremos:
 \begin{figure}[H]
@@ -255,7 +252,7 @@ Para a simulação de onda em um clock de $5Mhz$ deste mesmo circuito teremos:
   \caption{Diagrama de Ondas de um Contador 4 Estágios}\label{fig:2.2.2.png}
 \end{figure}
 
-Fator a ser mencionado é o fato de que existem certos glitches em $C_{0}$, sendo assim, temos que em algumas de suas transições momentaneamente o valor de saída não é o esperado,
+Fator a ser mencionado é o fato de que existem certos glitches em $C_{0}$, sendo assim, temos que em algumas de suas transições momentaneamente o valor de saída não é o esperado, 
 parte dos momentos em que tal erro ocorre são quando $C_{0}=0$, ou seja, todas as saídas utilizadas resultam em 0.\\ \\
 Assim, sua tabela será definida por:
 \begin{table}[H]
@@ -347,125 +344,17 @@ e~\ref{fig:2.1.3.wave.2.2.png} que o intervalos ``$1 \rightarrow 2$'' e
   \caption{Zoom na transição $3 \rightarrow 0$}\label{fig:2.1.3.wave.2.2.png}
 \end{figure}
 
+
 % 2.4
-\subsection{Implementação de um Contador Síncrono}\label{sec:2.4}
+\subsection{TODO: Insert name}\label{sec:2.4}
 
-Para esse tópico, devemos projetar e desenhar um contador síncrono progressivo
-de módulo $6$ que conte conforme a sequência da tabela~\ref{tab:contador_sincrono}, usando apenas
-\emph{Flip-Flops JK pet} e portas \emph{NAND}.
-
-\begin{table}[H]
-    \centering
-    \caption{Sequência de Contagem desejada}
-    \begin{tabular}{|c||c|c|c|}\hline
-      \textbf{Sequência} & \textbf{$Q_{0}$} & \textbf{$Q_{1}$} & \textbf{$Q_{2}$} \\\hline
-      0 & 0 & 0 & 0 \\\hline
-      1 & 1 & 0 & 0 \\\hline
-      2 & 0 & 1 & 1 \\\hline
-      3 & 0 & 1 & 0 \\\hline
-      4 & 1 & 0 & 1 \\\hline
-      5 & 1 & 1 & 1 \\\hline
-    \end{tabular}\label{tab:contador_sincrono}
-\end{table}
-
-Assim, podemos criar uma fórmula lógica para cada uma das variáveis desejadas
-$\{Q_{0}, Q_{1}, Q_{2}\}$. Vamos inicialmente estabelecer que desejamos emular o
-funcionamento de \emph{Flip-Flops T} usando os \emph{Flip-Flops JK pet}
-requisitados. Assim, temos que as saídas emuladas de $\{T_{0}, T_{1}, T_{2}\}$
-devem ser:
-
-\begin{table}[H]
-    \centering
-    \caption{Tabela Verdade para $T_{0}$}
-    \begin{tabular}{|c|c|c||c|}\hline
-      \multicolumn{3}{|c||}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
-      \textbf{$Q_{0}$} & \textbf{$Q_{1}$} & \textbf{$Q_{2}$} & \textbf{$T_{0}$} \\\hline
-      0 & 0 & 0 & 1 \\\hline
-      1 & 0 & 0 & 1 \\\hline
-      0 & 1 & 1 & 0 \\\hline
-      0 & 1 & 0 & 1 \\\hline
-      1 & 0 & 1 & 0 \\\hline
-      1 & 1 & 1 & 1 \\\hline
-    \end{tabular}\label{tab:t0}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \caption{Tabela Verdade para $T_{1}$}
-    \begin{tabular}{|c|c|c||c|}\hline
-      \multicolumn{3}{|c||}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
-      \textbf{$Q_{0}$} & \textbf{$Q_{1}$} & \textbf{$Q_{2}$} & \textbf{$T_{1}$} \\\hline
-      0 & 0 & 0 & 0 \\\hline
-      1 & 0 & 0 & 1 \\\hline
-      0 & 1 & 1 & 0 \\\hline
-      0 & 1 & 0 & 1 \\\hline
-      1 & 0 & 1 & 1 \\\hline
-      1 & 1 & 1 & 1 \\\hline
-    \end{tabular}\label{tab:t1}
-\end{table}
-
-\begin{table}[H]
-    \centering
-    \caption{Tabela Verdade para $T_{2}$}
-    \begin{tabular}{|c|c|c||c|}\hline
-      \multicolumn{3}{|c||}{Entradas} & \multicolumn{1}{|c|}{Saída} \\\hline
-      \textbf{$Q_{0}$} & \textbf{$Q_{1}$} & \textbf{$Q_{2}$} & \textbf{$T_{2}$} \\\hline
-      0 & 0 & 0 & 0 \\\hline
-      1 & 0 & 0 & 1 \\\hline
-      0 & 1 & 1 & 1 \\\hline
-      0 & 1 & 0 & 1 \\\hline
-      1 & 0 & 1 & 0 \\\hline
-      1 & 1 & 1 & 1 \\\hline
-    \end{tabular}\label{tab:t2}
-\end{table}
-
-Portanto, considerando as tabelas vertades~\ref{tab:t0},~\ref{tab:t1}
-e~\ref{tab:t2}, podemos agora fazer uma minimização lógica por mapa de karnaught
-e finalmente chegar às funções desejadas finais.
-
-Os mapas de karnaught para cada umas das funções serão:
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.5\textwidth]{Exp09/images/Q0.png}
-  \caption{Mapa de Karnaught para $T_{0}$}\label{fig:Q0.png}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.5\textwidth]{Exp09/images/Q1.png}
-  \caption{Mapa de Karnaught para $T_{1}$}\label{fig:Q1.png}
-\end{figure}
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.5\textwidth]{Exp09/images/Q2.png}
-  \caption{Mapa de Karnaught para $T_{2}$}\label{fig:Q2.png}
-\end{figure}
-
-Por fim, dispondo das funções finais, só nos resta implementar isso no Deeds, e
-podemos ver o circuito final na figura~\ref{fig:2.1.4_circuit.png}:
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.9\textwidth]{Exp09/images/2.1.4_circuit.png}
-  \caption{Circuito final para o Contador Síncrono}\label{fig:2.1.4_circuit.png}
-\end{figure}
-
-E, como requisitado no enunciado, compartilhamos também a forma de onda do
-circuito, e podemos notar que não existem estados diferentes dos esperados, logo
-concluímos que toda a implementação está de acordo com o padrão esperado. A
-forma de onda do circuito pode ser vista na figura~\ref{fig:2.1.4.wave.png}.
-
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.9\textwidth]{Exp09/images/2.1.4.wave.png}
-  \caption{Circuito final para o Contador Síncrono}\label{fig:2.1.4.wave.png}
-\end{figure}
-
-Para a verificação interativa do funcionamento do circuito, por gentileza acesse
-o seguinte link:
-\href{https://youtu.be/sDWA4cuvzaM}{https://youtu.be/sDWA4cuvzaM}
+\textbf{TODO}\\
+\textbf{TODO: LINK DA PARTE 1:}\\
+\href{}{}
+\textbf{TODO: LINK DA PARTE 2:}\\
+\href{}{}
+\textbf{TODO: LINK DA PARTE 3:}\\
+\href{}{}
 
 \section{Análise dos Resultados}\label{sec:resultados}
 
@@ -474,7 +363,7 @@ observações pertinentes para cada um deles.
 
 \subsection{Análise do tópico~\ref{sec:2.1}}\label{sec:analise2.1}
 
-\textbf{TODO}
+Os resultados obtidos no tópico \ref{sec:2.1} 
 
 \subsection{Análise do tópico~\ref{sec:2.2}}\label{sec:analise2.2}
 
@@ -482,22 +371,11 @@ observações pertinentes para cada um deles.
 
 \subsection{Análise do tópico~\ref{sec:2.3}}\label{sec:analise2.3}
 
-Como pôde-se observar no circuito montado, o contador funciona corretamente.
-Contanto, devido ao tempo de atraso inerente aos sistemas físicos, ocorrem
-estados não desejados nas bordas de transição ``$1 \rightarrow 2$'' e
-``$3 \rightarrow 0$''. Tal problema, devido ao atraso inerente das portas,
-faz-se difícil de corrigir, e é necessário manter em mente que tais estados
-podem afetar o comportamento de sistemas físicos reais implementados.
+\textbf{TODO}
 
 \subsection{Análise do tópico~\ref{sec:2.4}}\label{sec:analise2.4}
 
-O sistema, um pouco mais complexo que os demais, pôde ser corretamente
-implementado. apenas utilizando-se \emph{Flip-Flops JK} e portas \emph{NAND}.
-Tal experimento mostra mais uma vez a universalidade de portas \emph{NAND}, bem
-como a flexibilidade de \emph{Flip-Flops JK}, uma vez que eles foram usados para
-emular o comportamento de \emph{Flip-Flops T}. Também é válido notar que nesse
-circuito não houve a presença de nenhum estado indesejado nas bordas de
-transição, demostrando a robustes da implementação proposta.
+\textbf{TODO}
 
 \section{Conclusão}\label{sec:Conclusao}
 
@@ -551,6 +429,7 @@ Respostas:
       32  & - \\ \hline
       \end{tabular}
 \end{table}
+
 
 
 \end{document}
