@@ -1,0 +1,48 @@
+
+					RESULTADOS:
+addi		0000 	1 x 00 0
+subi		0001 	1 x 00 0
+andi		0010 	1 x 00 0
+ori			0011 	1 x 00 0
+xori		0100 	1 x 00 0
+
+beq			0101 	0 1 11 x 
+bne			0110 	0 1 11 x
+ble			0111 	0 1 11 x
+bleu		1000 	0 0 11 x
+bgt			1001 	0 1 11 x
+bgtu		1010 	0 0 11 x
+
+jal			1011 	1 x 01 1
+jalr		1100 	1 x 10 1
+
+1101		xxxx	x x xx x xx x 
+1110 		xxxx	x x xx x xx x
+1111 		xxxx	x x xx x xx x
+
+Entradas: ABCD
+a: (B'+C+D').(A+B'+C').(A'+B+D)
+b: (A+B)
+c: (C)
+d: (A)
+e: (A+B).(C+D+B')
+f: (A+B).(B+C+D)
+g: (A+B).(A'+B')
+h: (A')
+
+a: A'.(B'+D').(B'+C')
+e: (B'+C+D).(A+B+C')
+f: (A+B).(A+C+D).(A'+C'+D')
+g: (A+B).(A+C+D).(A'+B')
+h: A
+
+NOVO: a: A'B'+B'C'D'+AB+B'CD
+
+-------------------------
+WE: A'.B'+B'.C.D+B.C'.D'
+SU: B+D
+
+
+
+
+

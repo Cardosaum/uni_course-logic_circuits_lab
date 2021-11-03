@@ -1,0 +1,81 @@
+we, op ULA(3), SU, SEL MUL
+
+abc,(d1,d2,d3,d4,...)
+
+a=>we(escrita)
+b=>op ULA (3 bits)
+c=>SU (1 bit) sinalização, 1 se está sinalizado e 0 caso contrário
+d=>Seleção de Multiplexadores (n bits??)
+
+-------------------------------------------------
+	OP ULA:
+		(000 -> adiciona),
+		(001 -> subtrai),
+		(010 -> and),
+		(011 -> or),
+		(100 -> xor)
+
+	OP COMPARADOR:
+		(000 -> igual)
+		(001 -> diferente)
+		(010 -> menor ou igual)
+		(011 -> menor ou igual sem sinal)
+		(100 -> maior)
+		(101 -> maior sem sinal)
+
+Ou seja, comparador e ula dividem os mesmos 3 bits em b, a diferença é qual dos
+resultados será utilizado.
+
+-------------------------------------------------
+addi -> a=1, b=000, c=1, PC=PC+1, ULA/PC
+# 1 000 1 00 0
+subi -> a=1, b=001, c=1, PC=PC+1
+# 1 001 1 00 0
+andi -> a=1, b=010, c=0, PC=PC+1
+# 1 010 0 00 0
+ori  -> a=1, b=011, c=0, PC=PC+1
+# 1 011 0 00 0
+xori -> a=1, b=100, c=0, PC=PC+1
+# 1 100 1 00 0
+
+beq  -> a=0, b=xxx, c=1, PC=PC+Imm ou PC=PC+1
+# 0 xxx 1 11 0
+bne  -> a=0, b=xxx, c=1, PC=PC+Imm ou PC=PC+1
+# 0 xxx 1 11 0
+ble  -> a=0, b=xxx, c=1, PC=PC+Imm ou PC=PC+1
+# 0 xxx 1 11 0
+bleu -> a=0, b=xxx, c=1, PC=PC+Imm ou PC=PC+1
+# 0 xxx 1 11 0
+bgt  -> a=0, b=xxx, c=1, PC=PC+Imm ou PC=PC+1
+# 0 xxx 1 11 0
+bgtu -> a=0, b=xxx, c=1, PC=PC+Imm ou PC=PC+1
+# 0 xxx 1 11 0
+
+Não importam com o valor de b
+jal  -> a=1, b=xxx, c=x, PC = PC+Imm, Rd = PC+1
+# 1 xxx 0 01 1
+
+jalr -> a=1, b=xxx, c=x, PC = Ra+Imm, Rd = PC+1
+# 1 xxx 0 10 1
+
+-------------------------------------------------
+
+PC possui 3 possíveis casos:
+	- PC = PC+1          (00)
+	- PC = PC+Imm        (01)
+	- PC = Ra+Imm        (10)
+	- PC = PC+1 | PC+Imm (11)
+-------------------------------------------------
+Para o caminho de dado:
+	ULA = 0
+	PC  = 1
+
+-------------------------------------------------
+
+Rd possui 2 possíveis casos:
+	- Recebe o valor da ULA
+	- Recebe PC+1
+
+-------------------------------------------------
+
+
