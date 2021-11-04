@@ -16,7 +16,7 @@ listagem = [str(x) for x in list(range(0, 10))]+['a','b','c','d','e','f']
 for i in range(len(listagem)):
     simbolo[listagem[i]] = i
 
-instrucao = ''.join(input().split())
+instrucao = ''.join(input("Digite o codigo hexadecimal sem o uso de '0x': ").split())
 
 imediato = ''
 for elemento in instrucao[0:4]:

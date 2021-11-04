@@ -1,0 +1,45 @@
+Sinalizado:
+	A B
+	1 0 -> B (B>A)
+	0 1 -> A (A>B)
+	0 0 -> X (A Op B)
+	1 1 -> X (A Op B)
+
+-7 e -6
+-7: 1111111111111001
+-6: 1111111111111010
+-5: 1111111111111011
+----------------------------------------------------------------
+
+igual: 0101
+não igual: 0110
+
+A>B:
+	1 0 -> 0
+	1 1 -> Operacao
+	0 0 -> Operacao
+	0 1 -> 1
+
+A<B:
+	1 0 -> 1
+	1 1 -> Operacao
+	0 0 -> Operacao
+	0 1 -> 0
+
+A=B:
+	Analisa se é igual
+
+>=
+
+
+Não sinalizado:
+A>B:
+	Operação
+
+A<B:
+	Operação
+
+A=B:
+	Analisa se é igual
+
+<=
