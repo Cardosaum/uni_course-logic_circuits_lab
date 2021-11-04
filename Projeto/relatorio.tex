@@ -204,11 +204,11 @@ Processa a multiplicação dos números $5$ e $8$. Resultado esperado em R1 = 40
         0x0012 Loop:  & 0x0000 2110 & addi R1,R1,R2,0      & R1 += R2                                              \\\hline
         0x0013        & 0x0001 0770 & addi R7,R7,R0,1      & R7 += 1                                               \\\hline
         0x0014        & 0xFFFE 3706 & bne  R7,R3,Loop      & if (R7 \!= R3) goto Loop                              \\\hline
-        0xWWWW        & 0x0001 0060 & addi R6,R0,R0,1      & R6 = 1                                                \\\hline
-        0xWWWW        & 0x0003 6406 & bne  R4,R6,Ok        & if (R4 \!= R6) goto Ok                                \\\hline
-        0xWWWW        & 0xFFFF 0114 & xori R1,R1,R0,0xFFFF & One's complement for R1                               \\\hline
-        0xWWWW        & 0x0001 0110 & addi R1,R1,R0,1      & Two's complement for R1                               \\\hline
-        0xWWWW Ok:    & 0x0000 0F0C & jalr R0,R15,0        & Retorna resultado em R1                               \\\hline
+        0x0015        & 0x0001 0060 & addi R6,R0,R0,1      & R6 = 1                                                \\\hline
+        0x0016        & 0x0003 6406 & bne  R4,R6,Ok        & if (R4 \!= R6) goto Ok                                \\\hline
+        0x0017        & 0xFFFF 0114 & xori R1,R1,R0,0xFFFF & One's complement for R1                               \\\hline
+        0x0018        & 0x0001 0110 & addi R1,R1,R0,1      & Two's complement for R1                               \\\hline
+        0x0019 Ok:    & 0x0000 0F0C & jalr R0,R15,0        & Retorna resultado em R1                               \\\hline
     \end{tabular}\label{tab:programs:mult}
 \end{table}
 
