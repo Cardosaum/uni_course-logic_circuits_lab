@@ -84,6 +84,17 @@ def hexInstruction(instList, operDict, regDict):
     Ra = "0"
     Rd = "0"
     Opcode = binToHex(operDict[instList[0]])
+<<<<<<< HEAD
+    
+    if instList[0][0] == 'b':
+         # branch
+         Ra = getReg(instList[1])
+         Rb = getReg(instList[2])
+    elif instList[0] == 'jal':
+         # jal
+         Rd = getReg(instList[1])
+    elif instList[0] == 'jalr':
+=======
 
     if instList[0][0] == "b":
         # branch
@@ -93,6 +104,7 @@ def hexInstruction(instList, operDict, regDict):
         # jal
         Rd = getReg(instList[1])
     elif instList[0] == "jalr":
+>>>>>>> 6a3a60f412213f161cb4e5dd013300ba060425e2
         # jalr
         Rd = getReg(instList[1])
         Rd = getReg(instList[2])
