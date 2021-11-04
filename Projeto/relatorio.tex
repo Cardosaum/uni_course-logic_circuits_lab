@@ -154,24 +154,62 @@ Passaremos a apresentar os experimentos requeridos.
 
 \section{Execução de Programas no ZeptoProcessador-III}\label{sec:programs}
 
-\subsection{Multiplicação de Números Sem Sinal}\label{sec:programs:1}
+\subsection{Multiplicação de Números sem Sinal}\label{sec:programs:multu}
+
+Processa a multiplicação dos números $5$ e $8$. Resultado esperado em R1 = 40.
 
 \begin{table}[H]
     \centering
-    \caption{\textbf{L0} e \textbf{L1} em função de \textbf{A}}
+    \caption{Código para o programa \textbf{Multu}}
     \begin{tabular}{|l|l|l|l|}\hline
         \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário} \\\hline
         0x0000       & 0x0000 0010 & addi R1,R0,R0,0 & R1 = 0 ;; Resultado           \\\hline
-        0x0001       & 0xXXXX 0020 & addi R2,R0,R0,X & R2 = X                        \\\hline
-        0x0002       & 0xYYYY 0030 & addi R3,R0,R0,Y & R3 = Y                        \\\hline
+        0x0001       & 0x0008 0020 & addi R2,R0,R0,8 & R2 = 8                        \\\hline
+        0x0002       & 0x0005 0030 & addi R3,R0,R0,5 & R3 = 5                        \\\hline
         0x0003       & 0x0002 00FB & jal R15,Proc    & R15 = 0x0004; PC=Proc         \\\hline
         0x0004 Fim:  & 0x0000 1105 & beq R1,R1,0     & j Fim ;; mostra R1            \\\hline
         0x0005 Proc: & 0x0000 0040 & addi R4,R0,R0,0 & R4 = 0 ;; instantiate counter \\\hline
         0x0006 Loop: & 0x0000 2110 & addi R1,R1,R2,0 & R1 += R2                      \\\hline
-        0x0007       & 0x0001 0040 & addi R4,R0,R0,1 & R4 += 1                       \\\hline
+        0x0007       & 0x0001 0440 & addi R4,R4,R0,1 & R4 += 1                       \\\hline
         0x0008       & 0xFFFE 3406 & bne  R4,R3,Loop & if (R4 \!= R3) goto Loop      \\\hline
         0x0009       & 0x0000 0F0C & jalr R0,R15,0   & Retorna resultado em R1       \\\hline
-    \end{tabular}\label{tab:atraso_de_propagação:L0_L1}
+    \end{tabular}\label{tab:programs:multu}
+\end{table}
+
+\subsection{Multiplicação de Números com Sinal}\label{sec:programs:mult}
+
+\begin{table}[H]
+    \centering
+    \caption{Código para o programa \textbf{Mult}}
+    \begin{tabular}{|l|l|l|l|}\hline
+        \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário}                 \\\hline
+        0x0000        & 0x0000 0010 & addi R1,R0,R0,0      & R1 = 0 ;; Resultado                                   \\\hline
+        0x0001        & 0x000X 0020 & addi R2,R0,R0,X      & R2 = X                                                \\\hline
+        0x0002        & 0x000Y 0030 & addi R3,R0,R0,Y      & R3 = Y                                                \\\hline
+        0x0003        & 0x0002 00FB & jal  R15,Proc        & R15 = 0x0004; PC=Proc                                 \\\hline
+        0x0004 Fim:   & 0x0000 1105 & beq  R1,R1,0         & j Fim ;; mostra R1                                    \\\hline
+        0x0005 Proc:  & 0x0000 0040 & addi R4,R0,R0,0      & R4 = 0 ;; counter (how many negative numbers?)        \\\hline
+        0x0006        & 0x8000 0050 & addi R5,R0,R0,0x8000 & R5 is a mask to find if number is ODD or EVEN         \\\hline
+        0x0007        & 0xFFFF 5262 & andi R6,R2,R5,0xFFFF & if (R6 == 0x08000) ODD else EVEN                      \\\hline
+        0x0008        & 0x0004 5606 & bne  R6,R5,R2end     & R6 is a result of a mask; if (R6 == R5) ODD else EVEN \\\hline
+        0x0009        & 0x0001 4040 & addi R4,R0,R4,1      & Increment count of odd numbers                        \\\hline
+        0x000A        & 0xFFFF 0224 & xori R2,R2,R0,0xFFFF & One's compelemnt for R2                               \\\hline
+        0x000B        & 0x0001 0220 & addi R2,R2,R0,1      & Two's compelemnt for R2                               \\\hline
+        0x000C R2end: & 0xFFFF 5362 & andi R6,R3,R5,0xFFFF & if (R6 == 0x08000) ODD else EVEN                      \\\hline
+        0x000D        & 0x0004 5606 & bne  R6,R5,R3end     & R6 is a result of a mask; if (R6 == R5) ODD else EVEN \\\hline
+        0x000E        & 0x0001 0440 & addi R4,R4,R0,1      & Increment count of odd numbers                        \\\hline
+        0x000F        & 0xFFFF 0334 & xori R3,R3,R0,0xFFFF & One's compelemnt for R3                               \\\hline
+        0x0010        & 0x0001 0330 & addi R3,R3,R0,1      & Two's compelemnt for R3                               \\\hline
+        0x0011 R3end: & 0x0000 0040 & addi R4,R0,R0,0      & R4 = 0 ;; initialize loop counter                     \\\hline
+        0x0012 Loop:  & 0x0000 2110 & addi R1,R1,R2,0      & R1 += R2                                              \\\hline
+        0x0013        & 0x0001 0440 & addi R4,R4,R0,1      & R4 += 1                                               \\\hline
+        0x0014        & 0xFFFE 3406 & bne  R4,R3,Loop      & if (R4 \!= R3) goto Loop                              \\\hline
+        0xWWWW        & 0x0001 0060 & addi R6,R0,R0,1      & R6 = 1                                                \\\hline
+        0xWWWW        & 0x0003 6406 & bne  R4,R6,Ok        & if (R4 \!= R6) goto Ok                                \\\hline
+        0xWWWW        & 0xFFFF 0114 & xori R1,R1,R0,0xFFFF & One's complement for R1                               \\\hline
+        0xWWWW        & 0x0001 0110 & addi R1,R1,R0,1      & Two's complement for R1                               \\\hline
+        0xWWWW Ok:    & 0x0000 0F0C & jalr R0,R15,0        & Retorna resultado em R1                               \\\hline
+    \end{tabular}\label{tab:programs:mult}
 \end{table}
 
 
