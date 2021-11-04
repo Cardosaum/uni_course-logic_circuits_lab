@@ -184,8 +184,8 @@ Processa a multiplicação dos números $5$ e $8$. Resultado esperado em R1 = 40
     \begin{tabular}{|l|l|l|l|}\hline
         \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário}                 \\\hline
         0x0000        & 0x0000 0010 & addi R1,R0,R0,0      & R1 = 0 ;; Resultado                                   \\\hline
-        0x0001        & 0x000X 0020 & addi R2,R0,R0,X      & R2 = X                                                \\\hline
-        0x0002        & 0x000Y 0030 & addi R3,R0,R0,Y      & R3 = Y                                                \\\hline
+        0x0001        & 0xFFFE 0020 & addi R2,R0,R0,X      & R2 = -2                                               \\\hline
+        0x0002        & 0x0005 0030 & addi R3,R0,R0,Y      & R3 = 5                                                \\\hline
         0x0003        & 0x0002 00FB & jal  R15,Proc        & R15 = 0x0004; PC=Proc                                 \\\hline
         0x0004 Fim:   & 0x0000 1105 & beq  R1,R1,0         & j Fim ;; mostra R1                                    \\\hline
         0x0005 Proc:  & 0x0000 0040 & addi R4,R0,R0,0      & R4 = 0 ;; counter (how many negative numbers?)        \\\hline
