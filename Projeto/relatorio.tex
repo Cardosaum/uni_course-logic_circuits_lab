@@ -152,6 +152,29 @@ Passaremos a apresentar os experimentos requeridos.
 
 \textbf{TODO}
 
+\section{Execução de Programas no ZeptoProcessador-III}\label{sec:programs}
+
+\subsection{Multiplicação de Números Sem Sinal}\label{sec:programs:1}
+
+\begin{table}[H]
+    \centering
+    \caption{\textbf{L0} e \textbf{L1} em função de \textbf{A}}
+    \begin{tabular}{|l|l|l|l|}\hline
+        \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário} \\\hline
+        0x0000       & 0x0000 0010 & addi R1,R0,R0,0 & R1 = 0 ;; Resultado           \\\hline
+        0x0001       & 0xXXXX 0020 & addi R2,R0,R0,X & R2 = X                        \\\hline
+        0x0002       & 0xYYYY 0030 & addi R3,R0,R0,Y & R3 = Y                        \\\hline
+        0x0003       & 0x0002 00FB & jal R15,Proc    & R15 = 0x0004; PC=Proc         \\\hline
+        0x0004 Fim:  & 0x0000 1105 & beq R1,R1,0     & j Fim ;; mostra R1            \\\hline
+        0x0005 Proc: & 0x0000 0040 & addi R4,R0,R0,0 & R4 = 0 ;; instantiate counter \\\hline
+        0x0006 Loop: & 0x0000 2110 & addi R1,R1,R2,0 & R1 += R2                      \\\hline
+        0x0007       & 0x0001 0040 & addi R4,R0,R0,1 & R4 += 1                       \\\hline
+        0x0008       & 0xFFFE 3406 & bne  R4,R3,Loop & if (R4 \!= R3) goto Loop      \\\hline
+        0x0009       & 0x0000 0F0C & jalr R0,R15,0   & Retorna resultado em R1       \\\hline
+    \end{tabular}\label{tab:atraso_de_propagação:L0_L1}
+\end{table}
+
+
 \section{Análise dos Resultados}\label{sec:resultados}
 
 Passaremos a analisar individualmente cada um dos tópicos anteriores, levantando
