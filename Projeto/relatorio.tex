@@ -212,6 +212,35 @@ Processa a multiplicação dos números $5$ e $8$. Resultado esperado em R1 = 40
     \end{tabular}\label{tab:programs:mult}
 \end{table}
 
+\subsection{Divisão de Números sem Sinal}\label{sec:programs:divu}
+
+Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
+
+\begin{table}[H]
+    \centering
+    \caption{Código para o programa \textbf{Divu}}
+    \begin{tabular}{|l|l|l|l|}\hline
+        \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário} \\\hline
+        0x0000       & 0x0000 0010 & addi R1,R0,R0,0 & R1 = 0 ;; Resultado           \\\hline
+        0x0001       & 0x0008 0020 & addi R2,R0,R0,8 & R2 = 8                        \\\hline
+        0x0002       & 0x0005 0030 & addi R3,R0,R0,5 & R3 = 5                        \\\hline
+        0x0003       & 0x0002 00FB & jal R15,Proc    & R15 = 0x0004; PC=Proc         \\\hline
+        0x0004 Fim:  & 0x0000 1105 & beq R1,R1,0     & j Fim ;; mostra R1            \\\hline
+        0x0005 Proc: & 0x0000 0040 & addi R4,R0,R0,0 & R4 = 0 ;; store the quotient  \\\hline
+        0x0006       & 0xZZZZ ZZZZ & bleu R3,R2,Loop & Make sure R2 >= R3            \\\hline
+        0x0006       & 0xZZZZ ZZZZ & addi R5,R3,R0,0 & R5 = R3                       \\\hline
+        0x0006       & 0xZZZZ ZZZZ & addi R3,R2,R0,0 & R3 = R2                       \\\hline
+        0x0006       & 0xZZZZ ZZZZ & addi R3,R5,R0,0 & R3 = R5                       \\\hline
+        0x0006 Loop: & 0xZZZZ ZZZZ & subi R2,R2,R3,0 & R2 -= R3                      \\\hline
+        0xZZZZ       & 0xZZZZ ZZZZ & addi R4,R4,R0,1 & R4 += 1                       \\\hline
+        0xZZZZ       & 0xZZZZ ZZZZ & bgtu R2,R3,Loop & if (R2 > R3) goto Loop        \\\hline
+        0xZZZZ       & 0xZZZZ ZZZZ & bne  R2,R3,End  & if (R2 \!= R3) goto End       \\\hline
+        0xZZZZ       & 0xZZZZ ZZZZ & addi R4,R4,R0,1 & R4 += 1                       \\\hline
+        0xZZZZ       & 0xZZZZ ZZZZ & addi R2,R0,R0,0 & R2 = 0                        \\\hline
+        0xZZZZ End:  & 0xZZZZ ZZZZ & addi R1,R4,R0,0 & R1 = R4 ;; get the quotient   \\\hline
+        0xZZZZ       & 0xZZZZ ZZZZ & jalr R0,R15,0   & Retorna resultado em R1       \\\hline
+    \end{tabular}\label{tab:programs:divu}
+\end{table}
 
 \section{Análise dos Resultados}\label{sec:resultados}
 
