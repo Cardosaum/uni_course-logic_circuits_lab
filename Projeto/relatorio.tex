@@ -94,6 +94,10 @@ ZeptoProcessador-III de 16 Bits}
 
 \selectlanguage{brazil}
  \begin{resumo}
+   O presente relatório apresentará uma descrição detalhada de todos os
+   processos que abrangem a construção de um processador, um dos circuitos
+   lógicos mais importantes na atualidade.
+
    \textbf{TODO}
  \end{resumo}
 
@@ -118,29 +122,77 @@ A seguir estão enumerados os materiais utilizados:
     \item Software Deeds
     \item Portas lógicas
     \begin{itemize}
-      \item \emph{NAND}s de $2$ entradas
-      \item \emph{NOR}s de $2$ entradas
-      \item \emph{Flip-flops JK-net}s
-      \item \emph{Display de saída de 8 Segmentos}
-      \item \emph{Display de saída de 1 bit}
+      \item Portas Lógicas \emph{AND}
+      \item Portas Lógicas \emph{NAND}
+      \item Portas Lógicas \emph{NOR}
+      \item Portas Lógicas \emph{OR}
     \end{itemize}
     \item \emph{Clocks}
+    \item Display de saída de 1 bit
+    \item Display de saída de 8 Segmentos
+    \item Memórias \emph{ROM}
+    \item Multiplexadores
+    \item Unidades Lógico-Aritméticas - \emph{ULA}s
 \end{itemize}
 
 \section{Procedimentos}\label{sec:Procedimentos}
 % \setcounter{subsection}{-1}
 
-Passaremos a apresentar os experimentos requeridos.
+Como o processador é um circuito complexo, optou-se por abordar a implementação
+de cada bloco lógico de forma separada, e, posteriormente, mostrar como esses
+blocos individuais podem ser integrados para resultar em um circuito funcional.
+Começaremos demonstrando a montagem do circuito do principal registrador do
+processador, o registrador \emph{PC}.
 
 % 2.1
-\subsection{\textbf{TODO: Insert Section Title}}\label{sec:2.1}
+\subsection{Montagem do Circuito do Processador \emph{PC}}\label{sec:2.1}
 
-\textbf{TODO}
+Todo processador deve possuir um registrador principal que sirva de ``maestro''
+do circuito como um todo. Este processador, também chamado de processador de
+instruções, tem a funcionalidade de armazenar a instrução que está atualmente
+sendo decodificada e/ou executada. Como o processador ZeptoProcessador-III é bem
+simples, precisamos de apenas um registrador desse tipo para obtermos os
+resultados esperados. Entretanto, em processadores mais modernos e complexos
+(vide~\cite{Instruction_register}), vários processadores de instrução podem ser
+acoplados para formarem uma \emph{pipeline} de instruções, onde cada parte da
+\emph{pipeline} é responsável por parte do processo de decodificação, preparação
+ou execução das instruções passadas.
+
+Como é possível observar pela
+imagem~\ref{fig:circuit__instruction_register.png}, o registrador de instruções
+(no centro da imagem), tem como input o resultado do último ciclo de instruções.
+Além disso, está diretamente ligado ao sinal de clock que sincroniza todos os
+componentes do processador, e também a um sinal de reset (na imagem com o nome
+de \emph{Start}). Seu output é utilizado como entrada para a memória de
+instruções (para obter a próxima intrução que deve ser processada), e também
+utilizada em um somador (aqui não mostrado devido à distância entre o
+registrador e o somador), para calcular o próximo endereço de instrução a ser
+processado.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/circuit__instruction_register.png}
+    \caption{Zoom no Registrador de Instruções}\label{fig:circuit__instruction_register.png}
+\end{figure}
+
+O processador ZeptoProcessador-III segue a mesma ideia de execução do
+processador \emph{MIPS} apresentado na figura~\ref{fig:circuit__MIPS.png}
+(fonte:~\cite{Digital_Design}). Então é possível ver todas as ligações
+relevantes relacionadas ao registrador de instruções.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/circuit__MIPS.png}
+    \caption{Overview esquemático do processador \emph{MIPS}}\label{fig:circuit__MIPS.png}
+\end{figure}
 
 % 2.2
-\subsection{\textbf{TODO: Insert Section Title}}\label{sec:2.2}
+\subsection{Montagem do Circuito da Memória de Instruções}\label{sec:2.2}
 
-\textbf{TODO}
+Como pudemos ver no circuito do registrador de instruções, o output daquele
+circuito se ligava à memória de instruções. Tal componente de um processador
+server para armazenar as instruções que um usuário do processador deseja que
+este execute. Dessa forma, o processador se torna \emph{programável}.
 
 % 2.3
 \subsection{\textbf{TODO: Insert Section Title}}\label{sec:2.3}
