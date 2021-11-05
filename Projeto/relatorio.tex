@@ -239,6 +239,51 @@ Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
     \end{tabular}\label{tab:programs:divu}
 \end{table}
 
+\subsection{Divisão de Números com Sinal}\label{sec:programs:div}
+
+Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
+
+\begin{table}[H]
+    \centering
+    \caption{Código para o programa \textbf{Div}}
+    \begin{tabular}{|l|l|l|l|}\hline
+        \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário} \\\hline
+        0x0000         & 0x0000 0010 & addi R1,R0,R0,0      & R1 = 0 ;; Resultado                           \\\hline
+        0x0001         & 0x0040 0020 & addi R2,R0,R0,64     & R2 = 64                                       \\\hline
+        0x0002         & 0x000C 0030 & addi R3,R0,R0,12     & R3 = 12                                       \\\hline
+        0x0003         & 0x0002 00FB & jal  R15,Proc        & R15 = 0x0004; PC=Proc                         \\\hline
+        0x0004 Fim:    & 0x0000 1105 & beq  R1,R1,0         & j Fim ;; mostra R1                            \\\hline
+        0x0005 Proc:   & 0x0000 0040 & addi R4,R0,R0,0      & R4 = 0 ;; store the quotient                  \\\hline
+        0x0005         & 0xZZZZ ZZZZ & addi R10,R2,R0,0     & R10 = R2 ;; store for later use               \\\hline
+        0x0005         & 0xZZZZ ZZZZ & addi R8,R0,R0,0      & R8 = 0 ;; counter how many negative values    \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R5,R0,R0,0x8000 & R5 = 0x8000 ;; mask to find negative numbers  \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & andi R6,R2,R5,0xFFFF & Find if R2 is negative or not                 \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & bne  R6,R5,R2end     & if (R6 \!= R5) goto R2end                     \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R8,R8,R0,1      & R8 += 1                                       \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & xori R2,R2,R0,0xFFFF & One's complement for R2                       \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R2,R2,R0,1      & Two's complement for R2                       \\\hline
+        0xZZZZ R2end:  & 0xZZZZ ZZZZ & andi R7,R3,R5,0xFFFF & Find if R3 is negative or not                 \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & bne  R7,R5,R3end     & if (R7 \!= R5) goto R3end                     \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R8,R8,R0,1      & R8 += 1                                       \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & xori R3,R3,R0,0xFFFF & One's complement for R3                       \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R3,R3,R0,1      & Two's complement for R3                       \\\hline
+        0xZZZZ R3end:  & 0x0007 230A & bgtu R3,R2,End       & Make sure R2 >= R3                            \\\hline
+        0xZZZZ Loop:   & 0x0000 3221 & subi R2,R2,R3,0      & R2 -= R3                                      \\\hline
+        0xZZZZ         & 0x0001 0440 & addi R4,R4,R0,1      & R4 += 1                                       \\\hline
+        0xZZZZ         & 0xFFFE 320A & bgtu R2,R3,Loop      & if (R2 > R3) goto Loop                        \\\hline
+        0xZZZZ         & 0x0003 3206 & bne  R2,R3,Prog      & if (R2 \!= R3) goto End                       \\\hline
+        0xZZZZ         & 0x0001 0440 & addi R4,R4,R0,1      & R4 += 1                                       \\\hline
+        0xZZZZ         & 0x0000 0020 & addi R2,R0,R0,0      & R2 = 0                                        \\\hline
+        0xZZZZ Prog:   & 0xZZZZ ZZZZ & addi R9,R0,R0,1      & R9 = 1                                        \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & bne  R8,R9,Almost    & if (R8 \!= R9) goto Almost                    \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R4,R4,R0,1      & R4 += 1 ;; add one to the quotient            \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & subi R2,R3,R101      & R4 += 1                                       \\\hline
+        0xZZZZ Almost: & 0xZZZZ ZZZZ & ---------------      & ---------------------------                   \\\hline
+        0xZZZZ End:    & 0x0000 0410 & addi R1,R4,R0,0      & R1 = R4 ;; get the quotient                   \\\hline
+        0xZZZZ         & 0x0000 0F0C & jalr R0,R15,0        & Retorna resultado em R1                       \\\hline
+    \end{tabular}\label{tab:programs:div}
+\end{table}
+
 \subsection{Resto da Divisão de Números sem Sinal}\label{sec:programs:remu}
 
 Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.

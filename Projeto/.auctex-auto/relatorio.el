@@ -57,6 +57,8 @@
     "tab:programs:mult"
     "sec:programs:divu"
     "tab:programs:divu"
+    "sec:programs:div"
+    "tab:programs:div"
     "sec:programs:remu"
     "tab:programs:remu"
     "sec:resultados"
