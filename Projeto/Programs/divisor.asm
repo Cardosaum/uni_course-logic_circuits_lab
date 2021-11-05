@@ -1,16 +1,16 @@
 # Divisao de a/b
 
 # Valor de a e depois torna-se o resto da divisão
-addi r1 r0 r0 -8
+addi r1 r0 r0 12
 
 # Valor de b
-addi r2 r0 r0 10
+addi r2 r0 r0 3
 
 # Estado da divisao
-addi r3 r0 r0 0
+# addi r3 r0 r0 r0
 
 # Valor da divisão
-addi r4 r0 r0 0 
+# addi r4 r0 r0 0 
 
 # Pula se r1 for positivo para A_POSITIVO
 bgt r1 r0 3
