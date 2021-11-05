@@ -189,15 +189,92 @@ relevantes relacionadas ao registrador de instruções.
 % 2.2
 \subsection{Montagem do Circuito da Memória de Instruções}\label{sec:2.2}
 
-Como pudemos ver no circuito do registrador de instruções, o output daquele
-circuito se ligava à memória de instruções. Tal componente de um processador
-server para armazenar as instruções que um usuário do processador deseja que
-este execute. Dessa forma, o processador se torna \emph{programável}.
+Como foi possível observar no circuito do registrador de instruções, o output
+daquele circuito se ligava à memória de instruções. Tal componente de um
+processador server para armazenar as instruções que um usuário do processador
+deseja que este execute. Dessa forma, o processador se torna \emph{programável}.
+
+No ZeptoProcessador-III, a memória de instruções é implementada utilizando-se a
+memória ROM. Ela é uma memória somente de leitura, de rápido acesso. Tal tipo de
+memória foi muito utilizada por exemplo em cartuchos de \emph{video-games},
+\emph{CD}s e afins (para maiores informações sobre essa tecnologia,
+consultar~\cite{ROM_memory})
+
+Sua implementação no circuito integrado do processador é dada conforme a
+imagem~\ref{fig:circuit__ROM_memory.png}. Pela figura, é possível observar que
+existem duas memórias ROM separadas, que recebem como input o endereço produzido
+pelo registrador de instruções. O uso de duas memórias ROM separadas se dá
+devido ao fato de que, segundo as especificações do ZeptoProcessador-III, a
+memória de instruções deve ser capaz de armazenar instruções de $32$
+\emph{bits}. Entretanto, como a maior memória ROM disponível no \emph{Deeds} é
+de $16$ \emph{bits}, foi utilizado uma memória ROM para armazenar os $16$
+\emph{bits} menos significativos, e outra ROM para os outros $16$ \emph{bits}
+mais significativos.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/circuit__ROM_memory.png}
+    \caption{Overview da Memória de Instruções}\label{fig:circuit__ROM_memory.png}
+\end{figure}
 
 % 2.3
-\subsection{\textbf{TODO: Insert Section Title}}\label{sec:2.3}
+\subsection{Montagem do Circuito do Banco de Registradores}\label{sec:2.3}
 
-\textbf{TODO}
+O próximo bloco de circuito lógico necessário para um processador funcional é o
+\emph{Banco de Registradores}. Tal circuito possibilita o armazenamento de dados
+durante a operação do processador, servindo como memória para manipulação de
+variáveis e controle de estados.
+
+O ZeptoProcessador-III possui como especificação um banco de registradores
+contendo $16$ registradores de $16$ \emph{bits} cada. Além disso,
+esquematicamente o banco de registradores funciona da sequinte forma: $3$ canais
+de input sinalizam respectivamente o endereço de leitura dos registradores
+\emph{Ra}, \emph{Rb} e o endereço de escrita do registrador \emph{Rd}. O banco
+de registradores também possui um canal com $16$ \emph{bits} que corresponde aos
+dados de escrita, o sinal de \emph{clock}, um sinal para informar se o banco de
+registradores deve escrever os dados de escrita no registrador \emph{Rd}, um
+sinal de \emph{reset} (que faz com que todos os registradores no banco assumam o
+valor $0$), e por fim também possui dois canais de saída de dados \emph{Sa} e
+\emph{Sb} que são os dados de leitura dos registradores nos endereços \emph{Ra}
+e \emph{Rb}, respectivamente. A figura~\ref{fig:diagram__register_file.png}
+(fonte:~\cite{Diagram_Register_file}) mostra esquematicamente como opera um
+banco de registradores.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/diagram__register_file.png}
+    \caption{Esquema do funcionamento de um Banco de Registradores}\label{fig:diagram__register_file.png}
+\end{figure}
+
+E, finalmente, na figura~\ref{fig:circuit__register_file.png} é possível ver
+como foi organizado o banco de registradores do ZeptoProcessador-III. Por ser um
+circuito muito grande, as figuras~\ref{fig:circuit__register_file_1.png}
+e~\ref{fig:circuit__register_file_2.png} mostram, respectivamente, mais
+detalhadamente os circuito dos registradores e dos selecionadores de canais
+valendo-se de multiplexadores. Novamente, por uma limitação dos blocos
+pré-existentes no \emph{Deeds}, a seleção de canais foi feita com dois
+multiplexadores de $8$ canais e posteriormente com um multiplexador de $2$
+canais devido a ausência de um multiplexador que contenha diretamente $16$
+canais.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/circuit__register_file.png}
+    \caption{Montagem do Banco de Registradores}\label{fig:circuit__register_file.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/circuit__register_file_1.png}
+    \caption{Zoom nos registradores do banco}\label{fig:circuit__register_file_1.png}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/circuit__register_file_2.png}
+    \caption{Zoom no seletor de canais}\label{fig:circuit__register_file_2.png}
+\end{figure}
+
 
 % 2.4
 \subsection{\textbf{TODO: Insert Section Title}}\label{sec:2.4}
@@ -208,7 +285,15 @@ este execute. Dessa forma, o processador se torna \emph{programável}.
 
 \subsection{Multiplicação de Números sem Sinal}\label{sec:programs:multu}
 
-Processa a multiplicação dos números $5$ e $8$. Resultado esperado em R1 = 40.
+Para o primeiro programa proposto no projeto, faremos um que multiplique dois
+números sem sinal, e retorne o valor da multiplicação no registrador \emph{R1}.
+Os valores de input para o programa serão carregados nos registradores \emph{R2}
+e \emph{R3}, com valores de $8$ e $5$, respectivamente. O resultado esperado da
+multiplicação será $8 \cdot 5 = 40$, que, em hexadecimal, corresponde a
+$0x0028$.
+
+O código do programa, e seus respectivos comentários, podem ser encontrados na
+tabela~\ref{tab:programs:multu}.
 
 \begin{table}[H]
     \centering
@@ -228,43 +313,93 @@ Processa a multiplicação dos números $5$ e $8$. Resultado esperado em R1 = 40
     \end{tabular}\label{tab:programs:multu}
 \end{table}
 
+Para a demonstração do programa funcionando, por favor conferir o vídeo no link:
+\href{https://youtu.be/NygIUTYyUNY}{https://youtu.be/NygIUTYyUNY}
+
+E, como requisitado, o diagrama de onda do programa pode ser visto na
+figura~\ref{fig:program__multu_wave.png}. O processador conseguiu executar o
+presente programa na máxima frequência de $4.35MHz$. Qualquer outra frequência
+mais rápida que essa resulta em falha no funcionamento, e toda frequência menor
+que essa resulta em um resultado sub-ótimo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/program__multu_wave.png}
+    \caption{Diagrama de onda para o programa Multu}\label{fig:program__multu_wave.png}
+\end{figure}
+
 \subsection{Multiplicação de Números com Sinal}\label{sec:programs:mult}
+
+Agora, para o programa de multiplicação de números com sinal, o programa
+proposto realiza a multiplicação de dois números com sinal, e retorna o valor da
+multiplicação no registrador \emph{R1}. Os valores de input para o programa
+serão carregados nos registradores \emph{R2} e \emph{R3}, com valores de $-2$ e
+$5$, respectivamente. O resultado esperado da multiplicação será
+$-2 \cdot 5 = -10$, que, em hexadecimal, corresponde a $0xFFF6$.
+
+O código do programa, e seus respectivos comentários, podem ser encontrados na
+tabela~\ref{tab:programs:mult}.
 
 \begin{table}[H]
     \centering
     \caption{Código para o programa \textbf{Mult}}
     \begin{tabular}{|l|l|l|l|}\hline
-        \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário}                 \\\hline
-        0x0000        & 0x0000 0010 & addi R1,R0,R0,0      & R1 = 0 ;; Resultado                                   \\\hline
-        0x0001        & 0xFFFE 0020 & addi R2,R0,R0,-2     & R2 = -2                                               \\\hline
-        0x0002        & 0x0005 0030 & addi R3,R0,R0,5      & R3 = 5                                                \\\hline
-        0x0003        & 0x0002 00FB & jal  R15,Proc        & R15 = 0x0004; PC=Proc                                 \\\hline
-        0x0004 Fim:   & 0x0000 1105 & beq  R1,R1,0         & j Fim ;; mostra R1                                    \\\hline
-        0x0005 Proc:  & 0x0000 0040 & addi R4,R0,R0,0      & R4 = 0 ;; counter (how many negative numbers?)        \\\hline
-        0x0006        & 0x8000 0050 & addi R5,R0,R0,0x8000 & R5 is a mask to find if number is ODD or EVEN         \\\hline
-        0x0007        & 0xFFFF 5262 & andi R6,R2,R5,0xFFFF & if (R6 == 0x08000) ODD else EVEN                      \\\hline
-        0x0008        & 0x0004 5606 & bne  R6,R5,R2end     & R6 is a result of a mask; if (R6 == R5) ODD else EVEN \\\hline
-        0x0009        & 0x0001 4040 & addi R4,R0,R4,1      & Increment count of odd numbers                        \\\hline
-        0x000A        & 0xFFFF 0224 & xori R2,R2,R0,0xFFFF & One's compelemnt for R2                               \\\hline
-        0x000B        & 0x0001 0220 & addi R2,R2,R0,1      & Two's compelemnt for R2                               \\\hline
-        0x000C R2end: & 0xFFFF 5362 & andi R6,R3,R5,0xFFFF & if (R6 == 0x08000) ODD else EVEN                      \\\hline
-        0x000D        & 0x0004 5606 & bne  R6,R5,R3end     & R6 is a result of a mask; if (R6 == R5) ODD else EVEN \\\hline
-        0x000E        & 0x0001 0440 & addi R4,R4,R0,1      & Increment count of odd numbers                        \\\hline
-        0x000F        & 0xFFFF 0334 & xori R3,R3,R0,0xFFFF & One's compelemnt for R3                               \\\hline
-        0x0010        & 0x0001 0330 & addi R3,R3,R0,1      & Two's compelemnt for R3                               \\\hline
-        0x0011 R3end: & 0x0000 0070 & addi R7,R0,R0,0      & R7 = 0 ;; initialize loop counter                     \\\hline
-        0x0012 Loop:  & 0x0000 2110 & addi R1,R1,R2,0      & R1 += R2                                              \\\hline
-        0x0013        & 0x0001 0770 & addi R7,R7,R0,1      & R7 += 1                                               \\\hline
-        0x0014        & 0xFFFE 3706 & bne  R7,R3,Loop      & if (R7 \!= R3) goto Loop                              \\\hline
-        0x0015        & 0x0001 0060 & addi R6,R0,R0,1      & R6 = 1                                                \\\hline
-        0x0016        & 0x0003 6406 & bne  R4,R6,Ok        & if (R4 \!= R6) goto Ok                                \\\hline
-        0x0017        & 0xFFFF 0114 & xori R1,R1,R0,0xFFFF & One's complement for R1                               \\\hline
-        0x0018        & 0x0001 0110 & addi R1,R1,R0,1      & Two's complement for R1                               \\\hline
-        0x0019 Ok:    & 0x0000 0F0C & jalr R0,R15,0        & Retorna resultado em R1                               \\\hline
+        \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário}\\\hline
+        0x0000        & 0x0000 0010 & addi R1,R0,R0,0      & R1 = 0 ;; Resultado            \\\hline
+        0x0001        & 0xFFFE 0020 & addi R2,R0,R0,-2     & R2 = -2                        \\\hline
+        0x0002        & 0x0005 0030 & addi R3,R0,R0,5      & R3 = 5                         \\\hline
+        0x0003        & 0x0002 00FB & jal  R15,Proc        & R15 = 0x0004; PC=Proc          \\\hline
+        0x0004 Fim:   & 0x0000 1105 & beq  R1,R1,0         & j Fim ;; mostra R1             \\\hline
+        0x0005 Proc:  & 0x0000 0040 & addi R4,R0,R0,0      & R4 = 0 ;; counter              \\\hline
+        0x0006        & 0x8000 0050 & addi R5,R0,R0,0x8000 & R5 (is a mask)                 \\\hline
+        0x0007        & 0xFFFF 5262 & andi R6,R2,R5,0xFFFF & R6 == 0x08000 ?                \\\hline
+        0x0008        & 0x0004 5606 & bne  R6,R5,R2end     & R6 is a result of a mask       \\\hline
+        0x0009        & 0x0001 4040 & addi R4,R0,R4,1      & Increment count of odd numbers \\\hline
+        0x000A        & 0xFFFF 0224 & xori R2,R2,R0,0xFFFF & One's compelemnt for R2        \\\hline
+        0x000B        & 0x0001 0220 & addi R2,R2,R0,1      & Two's compelemnt for R2        \\\hline
+        0x000C R2end: & 0xFFFF 5362 & andi R6,R3,R5,0xFFFF & R6 == 0x08000 ?                \\\hline
+        0x000D        & 0x0004 5606 & bne  R6,R5,R3end     & R6 is a result of a mask       \\\hline
+        0x000E        & 0x0001 0440 & addi R4,R4,R0,1      & Increment count of odd numbers \\\hline
+        0x000F        & 0xFFFF 0334 & xori R3,R3,R0,0xFFFF & One's compelemnt for R3        \\\hline
+        0x0010        & 0x0001 0330 & addi R3,R3,R0,1      & Two's compelemnt for R3        \\\hline
+        0x0011 R3end: & 0x0000 0070 & addi R7,R0,R0,0      & R7 = 0 ;; loop counter         \\\hline
+        0x0012 Loop:  & 0x0000 2110 & addi R1,R1,R2,0      & R1 += R2                       \\\hline
+        0x0013        & 0x0001 0770 & addi R7,R7,R0,1      & R7 += 1                        \\\hline
+        0x0014        & 0xFFFE 3706 & bne  R7,R3,Loop      & if (R7 \!= R3) goto Loop       \\\hline
+        0x0015        & 0x0001 0060 & addi R6,R0,R0,1      & R6 = 1                         \\\hline
+        0x0016        & 0x0003 6406 & bne  R4,R6,Ok        & if (R4 \!= R6) goto Ok         \\\hline
+        0x0017        & 0xFFFF 0114 & xori R1,R1,R0,0xFFFF & One's complement for R1        \\\hline
+        0x0018        & 0x0001 0110 & addi R1,R1,R0,1      & Two's complement for R1        \\\hline
+        0x0019 Ok:    & 0x0000 0F0C & jalr R0,R15,0        & Retorna resultado em R1        \\\hline
     \end{tabular}\label{tab:programs:mult}
 \end{table}
 
+Para a demonstração do programa funcionando, por favor conferir o vídeo no link:
+\href{https://youtu.be/IQj2BHXhxUk}{https://youtu.be/IQj2BHXhxUk}
+
+E, como requisitado, o diagrama de onda do programa pode ser visto na
+figura~\ref{fig:program__mult_wave.png}. O processador conseguiu executar o
+presente programa na máxima frequência de $4.35MHz$. Qualquer outra frequência
+mais rápida que essa resulta em falha no funcionamento, e toda frequência menor
+que essa resulta em um resultado sub-ótimo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/program__mult_wave.png}
+    \caption{Diagrama de onda para o programa Mult}\label{fig:program__mult_wave.png}
+\end{figure}
+
 \subsection{Divisão de Números sem Sinal}\label{sec:programs:divu}
+
+Agora, para o programa de divisão de números sem sinal, o programa proposto
+realiza a divisão de um número pelo outro, ambos representados sem sinal, e
+retorna o valor da divisão no registrador \emph{R1}. Os valores de input para o
+programa serão carregados nos registradores \emph{R2} e \emph{R3}, com valores
+de $60$ e $12$, respectivamente. O resultado esperado da multiplicação será
+$\frac{60}{12} = 5$, que, em hexadecimal, corresponde a $0x0005$.
+
+O código do programa, e seus respectivos comentários, podem ser encontrados na
+tabela~\ref{tab:programs:divu}.
 
 Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
 
@@ -279,7 +414,7 @@ Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
         0x0003       & 0x0002 00FB & jal R15,Proc     & R15 = 0x0004; PC=Proc         \\\hline
         0x0004 Fim:  & 0x0000 1105 & beq R1,R1,0      & j Fim ;; mostra R1            \\\hline
         0x0005 Proc: & 0x0000 0040 & addi R4,R0,R0,0  & R4 = 0 ;; store the quotient  \\\hline
-        0x0006       & 0x0007 230A & bgtu R3,R2,End   & Make sure R2 >= R3            \\\hline
+        0x0006       & 0x0007 230A & bgtu R3,R2,End   & Make sure R2 $>=$ R3           \\\hline
         0x0007 Loop: & 0x0000 3221 & subi R2,R2,R3,0  & R2 -= R3                      \\\hline
         0x0008       & 0x0001 0440 & addi R4,R4,R0,1  & R4 += 1                       \\\hline
         0x0009       & 0xFFFE 320A & bgtu R2,R3,Loop  & if (R2 > R3) goto Loop        \\\hline
@@ -290,6 +425,22 @@ Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
         0x000E       & 0x0000 0F0C & jalr R0,R15,0    & Retorna resultado em R1       \\\hline
     \end{tabular}\label{tab:programs:divu}
 \end{table}
+
+% Para a demonstração do programa funcionando, por favor conferir o vídeo no link:
+% \href{}{}
+
+% E, como requisitado, o diagrama de onda do programa pode ser visto na
+% figura~\ref{fig:program__mult_wave.png}. O processador conseguiu executar o
+% presente programa na máxima frequência de $4.35MHz$. Qualquer outra frequência
+% mais rápida que essa resulta em falha no funcionamento, e toda frequência menor
+% que essa resulta em um resultado sub-ótimo.
+
+% \begin{figure}[H]
+%     \centering
+%     \includegraphics[width=.9\textwidth]{Projeto/images/program__mult_wave.png}
+%     \caption{Diagrama de onda para o programa Mult}\label{fig:program__mult_wave.png}
+% \end{figure}
+
 
 \subsection{Divisão de Números com Sinal}\label{sec:programs:div}
 
@@ -319,7 +470,7 @@ Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
         0xZZZZ         & 0xZZZZ ZZZZ & addi R8,R8,R0,1      & R8 += 1                                       \\\hline
         0xZZZZ         & 0xZZZZ ZZZZ & xori R3,R3,R0,0xFFFF & One's complement for R3                       \\\hline
         0xZZZZ         & 0xZZZZ ZZZZ & addi R3,R3,R0,1      & Two's complement for R3                       \\\hline
-        0xZZZZ R3end:  & 0x0007 230A & bgtu R3,R2,End       & Make sure R2 >= R3                            \\\hline
+        0xZZZZ R3end:  & 0x0007 230A & bgtu R3,R2,End       & Make sure R2 $>=$ R3                          \\\hline
         0xZZZZ Loop:   & 0x0000 3221 & subi R2,R2,R3,0      & R2 -= R3                                      \\\hline
         0xZZZZ         & 0x0001 0440 & addi R4,R4,R0,1      & R4 += 1                                       \\\hline
         0xZZZZ         & 0xFFFE 320A & bgtu R2,R3,Loop      & if (R2 > R3) goto Loop                        \\\hline
@@ -351,7 +502,7 @@ Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
         0x0003       & 0x0002 00FB & jal R15,Proc     & R15 = 0x0004; PC=Proc         \\\hline
         0x0004 Fim:  & 0x0000 1105 & beq R1,R1,0      & j Fim ;; mostra R1            \\\hline
         0x0005 Proc: & 0x0000 0040 & addi R4,R0,R0,0  & R4 = 0 ;; store the quotient  \\\hline
-        0x0006       & 0x0007 230A & bgtu R3,R2,End   & Make sure R2 >= R3            \\\hline
+        0x0006       & 0x0007 230A & bgtu R3,R2,End   & Make sure R2 $>=$ R3          \\\hline
         0x0007 Loop: & 0x0000 3221 & subi R2,R2,R3,0  & R2 -= R3                      \\\hline
         0x0008       & 0x0001 0440 & addi R4,R4,R0,1  & R4 += 1                       \\\hline
         0x0009       & 0xFFFE 320A & bgtu R2,R3,Loop  & if (R2 > R3) goto Loop        \\\hline
