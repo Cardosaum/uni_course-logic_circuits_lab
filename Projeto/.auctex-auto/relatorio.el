@@ -66,6 +66,7 @@
     "fig:program__mult_wave.png"
     "sec:programs:divu"
     "tab:programs:divu"
+    "fig:program__divu_wave.png"
     "sec:programs:div"
     "tab:programs:div"
     "sec:programs:remu"
