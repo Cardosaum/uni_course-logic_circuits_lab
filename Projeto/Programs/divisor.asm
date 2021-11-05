@@ -7,7 +7,7 @@ addi r1 r0 r0 12
 addi r2 r0 r0 3
 
 # Estado da divisao
-# addi r3 r0 r0 r0
+# addi r3 r0 r0 0
 
 # Valor da divisão
 # addi r4 r0 r0 0 

@@ -1,5 +1,5 @@
 
-					RESULTADOS:
+					RESULTADOS():
 addi		0000 	1 x 00 0
 subi		0001 	1 x 00 0
 andi		0010 	1 x 00 0
@@ -20,27 +20,7 @@ jalr		1100 	1 x 10 1
 1110 		xxxx	x x xx x xx x
 1111 		xxxx	x x xx x xx x
 
-Entradas: ABCD
-a: (B'+C+D').(A+B'+C').(A'+B+D)
-b: (A+B)
-c: (C)
-d: (A)
-e: (A+B).(C+D+B')
-f: (A+B).(B+C+D)
-g: (A+B).(A'+B')
-h: (A')
 
-a: A'.(B'+D').(B'+C')
-e: (B'+C+D).(A+B+C')
-f: (A+B).(A+C+D).(A'+C'+D')
-g: (A+B).(A+C+D).(A'+B')
-h: A
-
-NOVO: a: A'B'+B'C'D'+AB+B'CD
-
--------------------------
-WE: A'.B'+B'.C.D+B.C'.D'
-SU: B+D
 
 
 
