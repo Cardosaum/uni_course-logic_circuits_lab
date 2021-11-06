@@ -27,6 +27,7 @@
 \usepackage{graphicx}
 \usepackage{array}
 \usepackage{mwe}
+\usepackage{pythonhighlight}
 \usepackage[shortlabels]{enumitem}
 
 \usepackage{xcolor}
@@ -89,16 +90,21 @@ ZeptoProcessador-III de 16 Bits}
 
 \selectlanguage{american}
  \begin{abstract}
-   \textbf{TODO}
+   The present report will show a detailed description of all the needed process
+   to build a processor, one of the most important logic circuits today. Also,
+   the processors' functions will be assessed when submitted to execution of
+   arbitrary code, therefore showing their generality in a wide variety of
+   activities.
  \end{abstract}
 
 \selectlanguage{brazil}
  \begin{resumo}
    O presente relatório apresentará uma descrição detalhada de todos os
    processos que abrangem a construção de um processador, um dos circuitos
-   lógicos mais importantes na atualidade.
-
-   \textbf{TODO}
+   lógicos mais importantes na atualidade. Também será abordado o comportamento
+   do processador quando submetido à execução de códigos arbitrários inseridos
+   pelo usuário, dessa forma demonstrando a generalidade para uso em diversas
+   atividades.
  \end{resumo}
 
 
@@ -395,13 +401,11 @@ Agora, para o programa de divisão de números sem sinal, o programa proposto
 realiza a divisão de um número pelo outro, ambos representados sem sinal, e
 retorna o valor da divisão no registrador \emph{R1}. Os valores de input para o
 programa serão carregados nos registradores \emph{R2} e \emph{R3}, com valores
-de $60$ e $12$, respectivamente. O resultado esperado da multiplicação será
+de $60$ e $12$, respectivamente. O resultado esperado da divisão será
 $\frac{60}{12} = 5$, que, em hexadecimal, corresponde a $0x0005$.
 
 O código do programa, e seus respectivos comentários, podem ser encontrados na
 tabela~\ref{tab:programs:divu}.
-
-Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
 
 \begin{table}[H]
     \centering
@@ -414,10 +418,10 @@ Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
         0x0003       & 0x0002 00FB & jal R15,Proc     & R15 = 0x0004; PC=Proc         \\\hline
         0x0004 Fim:  & 0x0000 1105 & beq R1,R1,0      & j Fim ;; mostra R1            \\\hline
         0x0005 Proc: & 0x0000 0040 & addi R4,R0,R0,0  & R4 = 0 ;; store the quotient  \\\hline
-        0x0006       & 0x0007 230A & bgtu R3,R2,End   & Make sure R2 $>=$ R3           \\\hline
+        0x0006       & 0x0007 230A & bgtu R3,R2,End   & Make sure R2 $>=$ R3          \\\hline
         0x0007 Loop: & 0x0000 3221 & subi R2,R2,R3,0  & R2 -= R3                      \\\hline
         0x0008       & 0x0001 0440 & addi R4,R4,R0,1  & R4 += 1                       \\\hline
-        0x0009       & 0xFFFE 320A & bgtu R2,R3,Loop  & if (R2 > R3) goto Loop        \\\hline
+        0x0009       & 0xFFFE 320A & bgtu R2,R3,Loop  & if (R2 $>$ R3) goto Loop      \\\hline
         0x000A       & 0x0003 3206 & bne  R2,R3,End   & if (R2 \!= R3) goto End       \\\hline
         0x000B       & 0x0001 0440 & addi R4,R4,R0,1  & R4 += 1                       \\\hline
         0x000C       & 0x0000 0020 & addi R2,R0,R0,0  & R2 = 0                        \\\hline
@@ -444,52 +448,82 @@ que essa resulta em um resultado sub-ótimo.
 
 \subsection{Divisão de Números com Sinal}\label{sec:programs:div}
 
-Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
+Agora, para o programa de divisão de números com sinal, o programa proposto
+realiza a divisão de um número pelo outro, ambos representados com sinal, e
+retorna o valor da divisão no registrador \emph{R1}. Os valores de input para o
+programa serão carregados nos registradores \emph{R2} e \emph{R3}, com valores
+de $1337$ e $-42$, respectivamente. O resultado esperado da divisão será
+$\frac{1337}{-42} = -31$, que, em hexadecimal, corresponde a $0xFFE1$. É
+importante fazer a observação de que optamos por seguir o padão ANSI99 para a
+divisão de números negativos. (A mesma divisão, utilizando o algotimo
+implementado na linguagem \emph{Python}, por exemplo, retornaria $-32$).
+
+O código do programa, e seus respectivos comentários, podem ser encontrados na
+tabela~\ref{tab:programs:div}.
 
 \begin{table}[H]
     \centering
     \caption{Código para o programa \textbf{Div}}
     \begin{tabular}{|l|l|l|l|}\hline
+        % R4 = quociente
+        % R2 = resto
+        %  1337  42 = 001F
+        % -1337  42 = FFE1
+        %  1337 -42 = FFE1
         \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário} \\\hline
-        0x0000         & 0x0000 0010 & addi R1,R0,R0,0      & R1 = 0 ;; Resultado                           \\\hline
-        0x0001         & 0x0040 0020 & addi R2,R0,R0,64     & R2 = 64                                       \\\hline
-        0x0002         & 0x000C 0030 & addi R3,R0,R0,12     & R3 = 12                                       \\\hline
-        0x0003         & 0x0002 00FB & jal  R15,Proc        & R15 = 0x0004; PC=Proc                         \\\hline
-        0x0004 Fim:    & 0x0000 1105 & beq  R1,R1,0         & j Fim ;; mostra R1                            \\\hline
-        0x0005 Proc:   & 0x0000 0040 & addi R4,R0,R0,0      & R4 = 0 ;; store the quotient                  \\\hline
-        0x0005         & 0xZZZZ ZZZZ & addi R10,R2,R0,0     & R10 = R2 ;; store for later use               \\\hline
-        0x0005         & 0xZZZZ ZZZZ & addi R8,R0,R0,0      & R8 = 0 ;; counter how many negative values    \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & addi R5,R0,R0,0x8000 & R5 = 0x8000 ;; mask to find negative numbers  \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & andi R6,R2,R5,0xFFFF & Find if R2 is negative or not                 \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & bne  R6,R5,R2end     & if (R6 \!= R5) goto R2end                     \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & addi R8,R8,R0,1      & R8 += 1                                       \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & xori R2,R2,R0,0xFFFF & One's complement for R2                       \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & addi R2,R2,R0,1      & Two's complement for R2                       \\\hline
-        0xZZZZ R2end:  & 0xZZZZ ZZZZ & andi R7,R3,R5,0xFFFF & Find if R3 is negative or not                 \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & bne  R7,R5,R3end     & if (R7 \!= R5) goto R3end                     \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & addi R8,R8,R0,1      & R8 += 1                                       \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & xori R3,R3,R0,0xFFFF & One's complement for R3                       \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & addi R3,R3,R0,1      & Two's complement for R3                       \\\hline
-        0xZZZZ R3end:  & 0x0007 230A & bgtu R3,R2,End       & Make sure R2 $>=$ R3                          \\\hline
-        0xZZZZ Loop:   & 0x0000 3221 & subi R2,R2,R3,0      & R2 -= R3                                      \\\hline
-        0xZZZZ         & 0x0001 0440 & addi R4,R4,R0,1      & R4 += 1                                       \\\hline
-        0xZZZZ         & 0xFFFE 320A & bgtu R2,R3,Loop      & if (R2 > R3) goto Loop                        \\\hline
-        0xZZZZ         & 0x0003 3206 & bne  R2,R3,Prog      & if (R2 \!= R3) goto End                       \\\hline
-        0xZZZZ         & 0x0001 0440 & addi R4,R4,R0,1      & R4 += 1                                       \\\hline
-        0xZZZZ         & 0x0000 0020 & addi R2,R0,R0,0      & R2 = 0                                        \\\hline
-        0xZZZZ Prog:   & 0xZZZZ ZZZZ & addi R9,R0,R0,1      & R9 = 1                                        \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & bne  R8,R9,Almost    & if (R8 \!= R9) goto Almost                    \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & addi R4,R4,R0,1      & R4 += 1 ;; add one to the quotient            \\\hline
-        0xZZZZ         & 0xZZZZ ZZZZ & subi R2,R3,R101      & R4 += 1                                       \\\hline
-        0xZZZZ Almost: & 0xZZZZ ZZZZ & ---------------      & ---------------------------                   \\\hline
-        0xZZZZ End:    & 0x0000 0410 & addi R1,R4,R0,0      & R1 = R4 ;; get the quotient                   \\\hline
-        0xZZZZ         & 0x0000 0F0C & jalr R0,R15,0        & Retorna resultado em R1                       \\\hline
+        0x0000         & 0x0000 0010 & addi R1,R0,R0,0      & R1 = 0 ;; Resultado          \\\hline
+        0x0001         & 0x0539 0020 & addi R2,R0,R0,64     & R2 = 1337                    \\\hline
+        0x0002         & 0xFFD6 0030 & addi R3,R0,R0,12     & R3 = -42                     \\\hline
+        0x0003         & 0x0002 00FB & jal  R15,Proc        & R15 = 0x0004; PC=Proc        \\\hline
+        0x0004 Fim:    & 0x0000 1105 & beq  R1,R1,0         & j Fim ;; mostra R1           \\\hline
+        0x0005 Proc:   & 0x0000 0040 & addi R4,R0,R0,0      & R4 = 0 ;; store the quotient \\\hline
+        0x0006         & 0x0000 0050 & addi R5,R0,R0,0      & R5 = 0 ;; division flag      \\\hline
+        0x0007         & 0x0003 0209 & bgt  R2,R0,Apos      & if (R2 > R0) goto Apos       \\\hline
+        0x0008         & 0x0000 2021 & subi R2,R0,R2,0      & R2 = -R2                     \\\hline
+        0x0009         & 0x0001 0550 & addi R5,R5,R0,1      & R5 += 1                      \\\hline
+        0x000A Apos:   & 0x0003 0309 & bgt  R3,R0,Div       & if (R3 > R0) goto Bpos       \\\hline
+        0x000B         & 0x0000 3031 & subi R3,R0,R3,0      & R3 = -R3                     \\\hline
+        0x000C         & 0x0001 0550 & addi R5,R5,R0,1      & R5 += 1                      \\\hline
+        0x000D Div:    & 0x0000 3221 & subi R2,R2,R3,0      & R2 -= R3                     \\\hline
+        0x000E         & 0x0003 2009 & bgt  R0,R2,Enddiv    & if (R2 > R0) goto Enddiv     \\\hline
+        0x000F         & 0x0001 0440 & addi R4,R4,R0,1      & R4 += 1                      \\\hline
+        0x0010         & 0xFFFD 000B & jal  R0,Div          & goto Div                     \\\hline
+        0x0011 Enddiv: & 0x0000 3220 & addi R2,R2,R3,0      & R2 += R3                     \\\hline
+        0x0012         & 0x0001 0660 & addi R6,R6,R0,1      & R6 = 1                       \\\hline
+        0x0013         & 0x0002 6506 & bne  R5,R6,End       & if (R5 \!= R6) goto End      \\\hline
+        0x0014         & 0x0000 4041 & subi R4,R0,R4,0      & R4 = -R4                     \\\hline
+        0x0015 End:    & 0x0000 0410 & addi R1,R4,R0,0      & R1 = R4 ; save quotient      \\\hline
+        0x0016         & 0x0000 0F0C & jalr R0,R15,0        & Retorna resultado em R1      \\\hline
     \end{tabular}\label{tab:programs:div}
 \end{table}
 
+Para a demonstração do programa funcionando, por favor conferir o vídeo no link:
+\href{https://youtu.be/BimxtoXOGsk}{https://youtu.be/BimxtoXOGsk}
+
+E, como requisitado, o diagrama de onda do programa pode ser visto na
+figura~\ref{fig:program__div_wave.png}. O processador conseguiu executar o
+presente programa na máxima frequência de $4.35MHz$. Qualquer outra frequência
+mais rápida que essa resulta em falha no funcionamento, e toda frequência menor
+que essa resulta em um resultado sub-ótimo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/program__div_wave.png}
+    \caption{Diagrama de onda para o programa Div}\label{fig:program__div_wave.png}
+\end{figure}
+
 \subsection{Resto da Divisão de Números sem Sinal}\label{sec:programs:remu}
 
-Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
+Agora, para o programa que computa do resto da divisão de números sem sinal, o
+programa proposto realiza a divisão de um número pelo outro, ambos representados
+sem sinal, e retorna o valor do resto da divisão no registrador \emph{R1}. Os
+valores de input para o programa serão carregados nos registradores \emph{R2} e
+\emph{R3}, com valores de $64$ e $12$, respectivamente. O resultado esperado do
+resto da divisão será $4$, pois $64 = 12 * 5 + 4$. Como o resultado é dado em
+hexadecimal, esse valor será de $0x0004$.
+
+O código do programa, e seus respectivos comentários, podem ser encontrados na
+tabela~\ref{tab:programs:remu}.
 
 \begin{table}[H]
     \centering
@@ -513,6 +547,154 @@ Processa a divisão $\frac{60}{12}$. Resultado esperado em R1 = 5.
         0x000E       & 0x0000 0F0C & jalr R0,R15,0    & Retorna resultado em R1       \\\hline
     \end{tabular}\label{tab:programs:remu}
 \end{table}
+
+Para a demonstração do programa funcionando, por favor conferir o vídeo no link:
+\href{https://youtu.be/OMpzPPJSW2Q}{https://youtu.be/OMpzPPJSW2Q}
+
+E, como requisitado, o diagrama de onda do programa pode ser visto na
+figura~\ref{fig:program__remu_wave.png}. O processador conseguiu executar o
+presente programa na máxima frequência de $4.35MHz$. Qualquer outra frequência
+mais rápida que essa resulta em falha no funcionamento, e toda frequência menor
+que essa resulta em um resultado sub-ótimo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/program__remu_wave.png}
+    \caption{Diagrama de onda para o programa Remu}\label{fig:program__remu_wave.png}
+\end{figure}
+
+
+\subsection{Resto da Divisão de Números com Sinal}\label{sec:programs:rem}
+
+Agora, para o programa que computa do resto da divisão de números com sinal, o
+programa proposto realiza a divisão de um número pelo outro, ambos representados
+com sinal, e retorna o valor do resto da divisão no registrador \emph{R1}. Os
+valores de input para o programa serão carregados nos registradores \emph{R2} e
+\emph{R3}, com valores de $1337$ e $-42$, respectivamente. O resultado esperado
+do resto da divisão será $35$, pois estamos usando o padrão ANSI99 para
+realizarmos as divisões. Como o resultado é dado em hexadecimal, esse valor será
+de $0x0023$.
+
+O código do programa, e seus respectivos comentários, podem ser encontrados na
+tabela~\ref{tab:programs:rem}.
+
+\begin{table}[H]
+    \centering
+    \caption{Código para o programa \textbf{Rem}}
+    \begin{tabular}{|l|l|l|l|}\hline
+        % R4 = quociente
+        % R2 = resto
+        %  1337  42 = 001F
+        % -1337  42 = FFE1
+        %  1337 -42 = FFE1
+        \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário} \\\hline
+        0x0000         & 0x0000 0010 & addi R1,R0,R0,0      & R1 = 0 ;; Resultado          \\\hline
+        0x0001         & 0x0539 0020 & addi R2,R0,R0,64     & R2 = 1337                    \\\hline
+        0x0002         & 0xFFD6 0030 & addi R3,R0,R0,12     & R3 = -42                     \\\hline
+        0x0003         & 0x0002 00FB & jal  R15,Proc        & R15 = 0x0004; PC=Proc        \\\hline
+        0x0004 Fim:    & 0x0000 1105 & beq  R1,R1,0         & j Fim ;; mostra R1           \\\hline
+        0x0005 Proc:   & 0x0000 0040 & addi R4,R0,R0,0      & R4 = 0 ;; store the quotient \\\hline
+        0x0006         & 0x0000 0050 & addi R5,R0,R0,0      & R5 = 0 ;; division flag      \\\hline
+        0x0007         & 0x0003 0209 & bgt  R2,R0,Apos      & if (R2 > R0) goto Apos       \\\hline
+        0x0008         & 0x0000 2021 & subi R2,R0,R2,0      & R2 = -R2                     \\\hline
+        0x0009         & 0x0001 0550 & addi R5,R5,R0,1      & R5 += 1                      \\\hline
+        0x000A Apos:   & 0x0003 0309 & bgt  R3,R0,Div       & if (R3 > R0) goto Bpos       \\\hline
+        0x000B         & 0x0000 3031 & subi R3,R0,R3,0      & R3 = -R3                     \\\hline
+        0x000C         & 0x0001 0550 & addi R5,R5,R0,1      & R5 += 1                      \\\hline
+        0x000D Div:    & 0x0000 3221 & subi R2,R2,R3,0      & R2 -= R3                     \\\hline
+        0x000E         & 0x0003 2009 & bgt  R0,R2,Enddiv    & if (R2 > R0) goto Enddiv     \\\hline
+        0x000F         & 0x0001 0440 & addi R4,R4,R0,1      & R4 += 1                      \\\hline
+        0x0010         & 0xFFFD 000B & jal  R0,Div          & goto Div                     \\\hline
+        0x0011 Enddiv: & 0x0000 3220 & addi R2,R2,R3,0      & R2 += R3                     \\\hline
+        0x0012         & 0x0001 0660 & addi R6,R6,R0,1      & R6 = 1                       \\\hline
+        0x0013         & 0x0002 6506 & bne  R5,R6,End       & if (R5 \!= R6) goto End      \\\hline
+        0x0014         & 0x0000 4041 & subi R4,R0,R4,0      & R4 = -R4                     \\\hline
+        0x0015 End:    & 0x0000 0210 & addi R1,R2,R0,0      & R1 = R2 ; save remainder     \\\hline
+        0x0016         & 0x0000 0F0C & jalr R0,R15,0        & Retorna resultado em R1      \\\hline
+    \end{tabular}\label{tab:programs:rem}
+\end{table}
+
+Para a demonstração do programa funcionando, por favor conferir o vídeo no link:
+\href{https://youtu.be/-2xW0z4dV00}{https://youtu.be/-2xW0z4dV00}
+
+E, como requisitado, o diagrama de onda do programa pode ser visto na
+figura~\ref{fig:program__rem_wave.png}. O processador conseguiu executar o
+presente programa na máxima frequência de $4.35MHz$. Qualquer outra frequência
+mais rápida que essa resulta em falha no funcionamento, e toda frequência menor
+que essa resulta em um resultado sub-ótimo.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.9\textwidth]{Projeto/images/program__rem_wave.png}
+    \caption{Diagrama de onda para o programa Rem}\label{fig:program__rem_wave.png}
+\end{figure}
+
+\subsection{Encontrando o primeiro primo em um intervalo}\label{sec:programs:prime}
+
+Para essa questão, desejamos encontar o primeiro número primo existente em um
+intervalo. E, caso não haja nenum número primo, retornar zero como resultado.
+Usaremos o código apresentado na seção~\ref{sec:programs:remu} como base para
+encontrarmos se um número é divisor de outro ou não. O código em Assembly
+seguirá o seguinte algoritmo demonstrado em \emph{Python}.
+
+\begin{python}
+def is_prime(n: int) -> bool:
+    for j in range(2, n):
+        if n%j == 0:
+            return False
+    return True
+
+def find_first_prime(x: int, y: int) -> int:
+    for i in range(x, y+1):
+        if is_prime(i):
+            return i
+    return 0
+\end{python}
+
+
+\begin{table}[H]
+    \centering
+    \caption{Código para o programa \textbf{Primo}}
+    \begin{tabular}{|l|l|l|l|}\hline
+        \textbf{Endereço} & \textbf{Código Hexadecimal} & \textbf{Instrução} & \textbf{Comentário} \\\hline
+        0x0000         & 0x0000 0010 & addi R1,R0,R0,0    & R1 = 0 ;; Resultado         \\\hline
+        0x0001         & 0xXXXX 0020 & addi R2,R0,R0,1001 & R2 = 1001                   \\\hline
+        0x0002         & 0xYYYY 0030 & addi R3,R0,R0,9999 & R3 = 9999                   \\\hline
+        0x0003         & 0x0002 00FB & jal  R15,Proc      & R15 = 0x0004; PC=Prod       \\\hline
+        0x0004 Fim:    & 0x0000 1105 & beq  R1,R1,0       & j Fim ;; mostra R1          \\\hline
+        0xZZZZ Proc:   & 0xZZZZ ZZZZ & addi R5,R2,R0,0    & R5 = R2 ;; store for later  \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R6,R3,R0,0    & R6 = R3 ;; store for later  \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R7,R2,R0,0    & R7 = R2 ;; initialize 'i'   \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & subi R7,R7,R0,1    & R7 -= 1                     \\\hline
+        0xZZZZ Loop:   & 0xZZZZ ZZZZ & addi R7,R7,R0,1    & R7 += 1                     \\\hline
+        0xZZZZ Prime:  & 0xZZZZ ZZZZ & addi R3,R0,R0,2    & R3 = 2 ;; initialize 'j'    \\\hline
+        0xZZZZ Ploop:  & 0xZZZZ ZZZZ & addi R2,R8,R0,0    & R2 = R8                     \\\hline % register R8 is 'n' the number to find if is prime or not
+        0xZZZZ         & 0xZZZZ ZZZZ & jal  R14,Mod       & call function modulus       \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & beq  R2,R0,Found   & we found a prime number     \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & beq  R2,R0         & we found a prime number     \\\hline
+        0xZZZZ Mod:    & 0xZZZZ ZZZZ & addi R4,R0,R0,0    & R4 = 0 ;; store the quotient\\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & bgtu R3,R2,Modend  & Make sure R2 $>=$ R3        \\\hline
+        0xZZZZ ModLoop:& 0xZZZZ ZZZZ & subi R2,R2,R3,0    & R2 -= R3                    \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R4,R4,R0,1    & R4 += 1                     \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & bgtu R2,R3,Modloop & if (R2 > R3) goto Modloop   \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & bne  R2,R3,Modend  & if (R2 \!= R3) goto End     \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R4,R4,R0,1    & R4 += 1                     \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & addi R2,R0,R0,0    & R2 = 0                      \\\hline
+        0xZZZZ Modend: & 0xZZZZ ZZZZ & jalr R0,R14,0      & return from function        \\\hline
+        0xZZZZ Found:  & 0xZZZZ ZZZZ & addi R1,R8,R0,0    & save found prime number     \\\hline
+        0xZZZZ         & 0xZZZZ ZZZZ & jalr R0,R15,0      & Retorna resultado em R1     \\\hline
+    \end{tabular}\label{tab:programs:primo}
+\end{table}
+
+
+
+\subsection{Maior frequência do ZeptoProcessador-III}\label{sec:programs:frequency}
+
+Como requisitado no enunciado do projeto, abordaremos agora a questão da
+frequência máxima de operação do ZeptoProcessador-III. O resultado encontrado
+para a maior frequência operação correra do ZeptoProcessador-III foi de
+$4.35MHz$ (um comprimento de onda de $230nS$). O limitante para uma maior
+frequência de operação é \textbf{TODOOOOOOOOOOOOOOOOOOOOOOOOO: UALITON HELP}
 
 \section{Análise dos Resultados}\label{sec:resultados}
 
