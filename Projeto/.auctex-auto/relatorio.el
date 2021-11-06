@@ -58,6 +58,12 @@
     "fig:circuit__register_file_1.png"
     "fig:circuit__register_file_2.png"
     "sec:2.4"
+    "fig:circuit__ula.png"
+    "sec:2.5"
+    "fig:circuit__comparator.png"
+    "sec:2.6"
+    "fig:circuit__control.png"
+    "fig:circuit__signals.png"
     "sec:programs"
     "sec:programs:multu"
     "tab:programs:multu"
@@ -79,6 +85,7 @@
     "fig:program__rem_wave.png"
     "sec:programs:prime"
     "tab:programs:primo"
+    "fig:program__primo_wave.png"
     "sec:programs:frequency"
     "sec:Conclusao")
    (LaTeX-add-bibliographies)
