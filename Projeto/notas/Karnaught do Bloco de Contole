@@ -1,5 +1,6 @@
 
-					RESULTADOS:
+					RESULTADOS
+					(WE,SU,PC(1,0),ULA/PC):
 addi		0000 	1 x 00 0
 subi		0001 	1 x 00 0
 andi		0010 	1 x 00 0
@@ -16,33 +17,74 @@ bgtu		1010 	0 0 11 x
 jal			1011 	1 x 01 1
 jalr		1100 	1 x 10 1
 
-1101		xxxx	x x xx x xx x 
-1110 		xxxx	x x xx x xx x
-1111 		xxxx	x x xx x xx x
+1101		xxxx	x x xx x
+1110 		xxxx	x x xx x
+1111 		xxxx	x x xx x
 
-Entradas: ABCD
-a: (B'+C+D').(A+B'+C').(A'+B+D)
-b: (A+B)
-c: (C)
-d: (A)
-e: (A+B).(C+D+B')
-f: (A+B).(B+C+D)
-g: (A+B).(A'+B')
-h: (A')
+------------------------------------------------------
+WE     -> Write Enable;
 
-a: A'.(B'+D').(B'+C')
-e: (B'+C+D).(A+B+C')
-f: (A+B).(A+C+D).(A'+C'+D')
-g: (A+B).(A+C+D).(A'+B')
-h: A
+SU     -> Sinalização (Ele não será necessário, porque
+o comparador é construido utilizando o próprio Opcode);
 
-NOVO: a: A'B'+B'C'D'+AB+B'CD
+PC     -> Diz o que ocorrerá com aquele PC para aquela instrução;
 
--------------------------
-WE: A'.B'+B'.C.D+B.C'.D'
-SU: B+D
+ULA/PC -> Diz se o registrador de destino vai receber PC+1 ou um resultado da ULA.
+
+Para PC fez-se o seguinte mapeamento:
+	PC => 00 - PC = PC+1
+	PC => 01 - PC = PC+Imm
+	PC => 10 - PC = Ra+Imm
+	PC => 11 - PC = PC+1 || PC = PC+Imm
+
+Sendo que denotaremos por PC[1] o bit mais significativo e PC[0] o menos significativo.
+------------------------------------------------------
+
+Para cada Opcode tem-se 4 bits a3,a2,a1,a0, sendo assim, considera-se A=a3, B=a2, C=a1, D=a0, para a formulação dos mapas de karnaught, portanto, será:
+
+Para WE:
+    |CD|
+ |AB|    00 01 11 10 
+     00   1  1  1  0
+     01   1  0  x  0
+     11   1  0  x  1
+     10   1  0  x  0
+
+f(A,B,C,D) = A'.B' + A'.B + B'.C.D
+
+Para PC[1]:
+    |CD|
+ |AB|    00 01 11 10 
+     00   0  0  1  1
+     01   0  1  x  1
+     11   0  1  x  0
+     10   0  1  x  1
+
+Observe que neste caso basta analisar os casos que resultam em 0, formando assim um produto de somas.
+
+f(A,B,C,D) = (A+B).(A+C+D).(B+C'+D')
 
 
+Para PC[0]:
+    |CD|
+ |AB|    00 01 11 10 
+     00   0  0  0  1
+     01   0  1  x  1
+     11   0  1  x  1
+     10   0  1  x  1
 
+Semelhante ao anterior, pode-se utiliza o produto de somas, mas neste caso pode-se tornar toda a coluna de don't cares em 11 iguais a 0, assim, temos um termo A'+B'
 
+f(A,B,C,D) = (A+B).(A+C+D).(A'+B')
+
+Para ULA/PC (UP):
+    |CD|
+ |AB|    00 01 11 10 
+     00   0  0  1  0
+     01   0  x  x  x
+     11   0  x  x  1
+     10   0  x  x  x
+
+Nesse caso basta utilizar a primeira e segunda coluna iguais a 0, assim obtemos:
+f(A,B,C,D) = A
 
