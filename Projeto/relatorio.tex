@@ -110,11 +110,23 @@ ZeptoProcessador-III de 16 Bits}
 
 \section{Introdução}\label{sec:Introducao}
 
-\textbf{TODO}
+Na atualidade, com o advento dos computadores, um dos circuitos mais improtantes
+para a sociedade moderna se tornou os processadores. Tais circuitos
+apresentam-se como um dos mais complexos na área de circuitos lógicos. Para o
+presente relatório, entretanto, abordaremos a construção de um relativamente
+simples, contendo apenas um registrador de instruções, uma memória de instruções
+que armazena instruções de $32$ \emph{bits}, e um banco de registradores de $16$
+registradores contendo $16$ bits cada.
 
 \subsection{Objetivos}\label{sec:Objetivos}
 
-\textbf{TODO}
+Temos como objetivo neste projeto final desenvolvermos um processador (chamado
+\emph{ZeptoProcessador-III}), com as características de ser um processador de
+$16$ \emph{bits}, com memória de instruções própria, suportando instruções de
+$32$ \emph{bits}. O processador terá um conjunto de $13$ instruções, a saber:
+\{\emph{add}, \emph{subi}, \emph{andi}, \emph{ori}, \emph{xori}, \emph{beq},
+\emph{bne}, \emph{ble}, \emph{bleu}, \emph{bgt}, \emph{bgtu}, \emph{jal} e
+\emph{jalr}\}
 
 \subsection{Materiais}\label{sec:Materiais}
 
@@ -693,31 +705,54 @@ def find_first_prime(x: int, y: int) -> int:
 Como requisitado no enunciado do projeto, abordaremos agora a questão da
 frequência máxima de operação do ZeptoProcessador-III. O resultado encontrado
 para a maior frequência operação correra do ZeptoProcessador-III foi de
-$4.35MHz$ (um comprimento de onda de $230nS$). O limitante para uma maior
-frequência de operação é \textbf{TODOOOOOOOOOOOOOOOOOOOOOOOOO: UALITON HELP}
+$4.35MHz$ (um comprimento de onda de $230nS$).
 
-\section{Análise dos Resultados}\label{sec:resultados}
+O limitante para uma maior frequência de operação é o tempo para a obtenção dos
+resultados da operação atual sendo processada, pois, para completar um ciclo de
+instrução, pode ser levado um tempo ``X''. Entretanto, caso a frequência
+ultrapasse as limitações do processador teremos que antes mesmo da finalização
+de uma instrução outra já estará sendo executada. Isso acarretará em um estado
+inconsistente do circuito lógico do processador e, por consequência, em um
+funcionamento incorreto do mesmo.
 
-Passaremos a analisar individualmente cada um dos tópicos anteriores, levantando
-observações pertinentes para cada um deles.
+% \section{Análise dos Resultados}\label{sec:resultados}
 
-\subsection{Análise do tópico~\ref{sec:2.1}}\label{sec:analise2.1}
+% Passaremos a analisar individualmente cada um dos tópicos anteriores, levantando
+% observações pertinentes para cada um deles.
 
-\textbf{TODO}
+% \subsection{Análise do tópico~\ref{sec:2.1}}\label{sec:analise2.1}
 
-\subsection{Análise do tópico~\ref{sec:2.2}}\label{sec:analise2.2}
+% \textbf{TODO}
 
-\textbf{TODO}
+% \subsection{Análise do tópico~\ref{sec:2.2}}\label{sec:analise2.2}
 
-\subsection{Análise do tópico~\ref{sec:2.3}}\label{sec:analise2.3}
+% \textbf{TODO}
 
-\textbf{TODO}
+% \subsection{Análise do tópico~\ref{sec:2.3}}\label{sec:analise2.3}
 
-\subsection{Análise do tópico~\ref{sec:2.4}}\label{sec:analise2.4}
+% \textbf{TODO}
 
-\textbf{TODO}
+% \subsection{Análise do tópico~\ref{sec:2.4}}\label{sec:analise2.4}
+
+% \textbf{TODO}
 
 \section{Conclusão}\label{sec:Conclusao}
+
+Com esse projeto pudemos ver todo o processo para desenvolvimento de um
+processador, mesmo que um simples. O circuito lógico necessário para tal
+construção provou-se complexo, como mencionado no início desse relatório. Por
+meio da utilização de portas lógicas pudtemos desenvolver abstrações mais
+complexas, como multiplexadores, somadores, \emph{Flip-flops}, e, subindo no
+nível de abstrações, finalmente pudemos implementar registradores de instrução,
+uma memória de instrução suficientemente grande para comportar $32$ \emph{bits}
+de instrução, um bando de registradores de $16$ \emph{bits}, e toda uma lógica
+para interpretação de códigos de operação para funcionamento do processador
+condicionado ao código inserido pelo usuário.
+
+Como pudemos constatar na seção~\ref{sec:programs:frequency}, o
+ZeptoProcessador-III é limitado a uma frequência máxima de operação de
+$4.35MHz$, demonstrando com o atraso de portas lógicas acabam se somando e
+impactando na velocidade do circuito final.
 
 \textbf{TODO}
 
